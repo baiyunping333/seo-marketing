@@ -24,22 +24,29 @@ namespace KeywordExtractor
         {
             InitializeComponent();
             webBrowser.Navigated += new NavigatedEventHandler(webBrowser_Navigated);
-            webBrowser.Loaded += new RoutedEventHandler(webBrowser_Loaded);
+            webBrowser.LoadCompleted += new LoadCompletedEventHandler(webBrowser_LoadCompleted);
+        }
+
+        void webBrowser_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            var doc = webBrowser.Document as HTMLDocument;
+            if (doc != null)
+            {
+                var jquery = doc.createElement("script") as IHTMLScriptElement;
+                var script = doc.createElement("script") as IHTMLScriptElement;
+                var body = doc.body as IHTMLDOMNode;
+                jquery.src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js";
+                script.text = "$(function(){$('#kw').val('test');$('#su').click();});";
+                body.appendChild(jquery as IHTMLDOMNode);
+                body.appendChild(script as IHTMLDOMNode);
+
+                tbCode.Text = doc.documentElement.outerHTML;
+            }
         }
 
         void webBrowser_Navigated(object sender, NavigationEventArgs e)
         {
             tbAddress.Text = e.Uri.ToString();
-        }
-
-        void webBrowser_Loaded(object sender, RoutedEventArgs e)
-        {
-            var doc = webBrowser.Document as HTMLDocument;
-            if (doc != null)
-            {
-                tbCode.Text = doc.documentElement.outerHTML;
-            }
-
         }
 
         protected void Navigate()
