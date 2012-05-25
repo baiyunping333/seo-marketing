@@ -22,8 +22,13 @@
             </TabItem>
             <TabItem Header="脚本">
                 <Grid>
-                    <TextBox AcceptsReturn="True" Name="tbScript" Margin="0,0,0,30"></TextBox>
-                    <Button Name="btnScript" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="注入" Width="60" Click="btnScript_Click"></Button>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox AcceptsReturn="True" Name="tbScript" Margin="0,0,0,30" ></TextBox>
+                    <Button Name="btnScript" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="注入" Width="60" Click="btnScript_Click" Grid.Column="1"></Button>
+                    <TextBox Name="tbResult" Grid.Column="1"  Margin="0,0,0,30" IsReadOnly="True" IsReadOnlyCaretVisible="True"></TextBox>
                 </Grid>
             </TabItem>
         </TabControl>
