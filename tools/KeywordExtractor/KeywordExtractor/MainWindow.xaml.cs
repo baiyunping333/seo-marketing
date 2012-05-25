@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using mshtml;
+using System.IO;
+using Microsoft.Win32;
 
 namespace KeywordExtractor
 {
@@ -20,6 +22,8 @@ namespace KeywordExtractor
     /// </summary>
     public partial class MainWindow : Window
     {
+        private IHTMLScriptElement script = null; 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -27,16 +31,16 @@ namespace KeywordExtractor
             webBrowser.LoadCompleted += new LoadCompletedEventHandler(webBrowser_LoadCompleted);
         }
 
-        void webBrowser_LoadCompleted(object sender, NavigationEventArgs e)
+        private void webBrowser_LoadCompleted(object sender, NavigationEventArgs e)
         {
             var doc = webBrowser.Document as HTMLDocument;
             if (doc != null)
             {
                 var jquery = doc.createElement("script") as IHTMLScriptElement;
-                var script = doc.createElement("script") as IHTMLScriptElement;
+                script = doc.createElement("script") as IHTMLScriptElement;
                 var body = doc.body as IHTMLDOMNode;
+
                 jquery.src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js";
-                script.text = "$(function(){$('#kw').val('test');$('#su').click();});";
                 body.appendChild(jquery as IHTMLDOMNode);
                 body.appendChild(script as IHTMLDOMNode);
 
@@ -44,7 +48,13 @@ namespace KeywordExtractor
             }
         }
 
-        void webBrowser_Navigated(object sender, NavigationEventArgs e)
+        private void inject()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.DefaultExt = "js";
+        }
+
+        private void webBrowser_Navigated(object sender, NavigationEventArgs e)
         {
             tbAddress.Text = e.Uri.ToString();
         }
@@ -53,7 +63,7 @@ namespace KeywordExtractor
         {
             string url = tbAddress.Text;
 
-            if (!url.StartsWith("http://") || !url.StartsWith("https://"))
+            if (!(url.StartsWith("http://") || url.StartsWith("https://")))
             {
                 url = "http://" + url;
             }
@@ -78,6 +88,14 @@ namespace KeywordExtractor
             if (e.Key == Key.Enter)
             {
                 this.Navigate();
+            }
+        }
+
+        private void btnScript_Click(object sender, RoutedEventArgs e)
+        {
+            if (script != null)
+            {
+                script.text = tbScript.Text;
             }
         }
     }

@@ -20,6 +20,12 @@
                     <TextBox AcceptsReturn="True" IsReadOnly="True" IsReadOnlyCaretVisible="True" Name="tbCode"></TextBox>
                 </Grid>
             </TabItem>
+            <TabItem Header="脚本">
+                <Grid>
+                    <TextBox AcceptsReturn="True" Name="tbScript" Margin="0,0,0,30"></TextBox>
+                    <Button Name="btnScript" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="注入" Width="60" Click="btnScript_Click"></Button>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
