@@ -95,7 +95,9 @@ namespace KeywordExtractor
         {
             if (script != null)
             {
-                script.text = tbScript.Text;
+                script.text = "function __Test(){" + tbScript.Text + "}";
+                var result = webBrowser.InvokeScript("__Test");
+                tbResult.Text = result.ToString();
             }
         }
     }
