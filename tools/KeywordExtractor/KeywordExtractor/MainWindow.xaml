@@ -7,8 +7,21 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBox Margin="5,5,40,5" Name="tbAddress" KeyDown="tbAddress_KeyDown"></TextBox>
-        <Button Content="Go" HorizontalAlignment="Right" Width="30" Height="23" Margin="0,0,5,0" Name="btnGo" Click="btnGo_Click" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="ß" FontFamily="Wingdings" Margin="5" Width="25" Name="btnGoBack" Click="btnGoBack_Click"></Button>
+                <Button Content="à" FontFamily="Wingdings" Margin="0,5" Width="25" Name="btnGoForward" Click="btnGoForward_Click"></Button>
+            </StackPanel>
+            <TextBox Margin="5" Name="tbAddress" KeyDown="tbAddress_KeyDown" Grid.Column="1"></TextBox>
+            <Button Content="q" FontFamily="Webdings" HorizontalAlignment="Right" Width="25" Margin="0,5,5,5" Name="btnRefresh" Click="btnRefresh_Click" Grid.Column="2" />
+        </Grid>
+
+
         <TabControl Grid.Row="1" Margin="5">
             <TabItem Header="网页">
                 <Grid>

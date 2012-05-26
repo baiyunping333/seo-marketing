@@ -22,13 +22,15 @@ namespace KeywordExtractor
     /// </summary>
     public partial class MainWindow : Window
     {
-        private IHTMLScriptElement script = null; 
+        private IHTMLScriptElement script = null;
 
         public MainWindow()
         {
             InitializeComponent();
             webBrowser.Navigated += new NavigatedEventHandler(webBrowser_Navigated);
             webBrowser.LoadCompleted += new LoadCompletedEventHandler(webBrowser_LoadCompleted);
+            btnGoBack.IsEnabled = webBrowser.CanGoBack;
+            btnGoForward.IsEnabled = webBrowser.CanGoForward;
         }
 
         private void webBrowser_LoadCompleted(object sender, NavigationEventArgs e)
@@ -57,6 +59,8 @@ namespace KeywordExtractor
         private void webBrowser_Navigated(object sender, NavigationEventArgs e)
         {
             tbAddress.Text = e.Uri.ToString();
+            btnGoBack.IsEnabled = webBrowser.CanGoBack;
+            btnGoForward.IsEnabled = webBrowser.CanGoForward;
         }
 
         protected void Navigate()
@@ -78,9 +82,9 @@ namespace KeywordExtractor
             }
         }
 
-        private void btnGo_Click(object sender, RoutedEventArgs e)
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
-            this.Navigate();
+            webBrowser.Refresh();
         }
 
         private void tbAddress_KeyDown(object sender, KeyEventArgs e)
@@ -95,10 +99,30 @@ namespace KeywordExtractor
         {
             if (script != null)
             {
-                script.text = "function __Test(){" + tbScript.Text + "}";
-                var result = webBrowser.InvokeScript("__Test");
-                tbResult.Text = result.ToString();
+                try
+                {
+                    script.text = "function __Test(){" + tbScript.Text + "}";
+                    var result = webBrowser.InvokeScript("__Test");
+                    if (result != null)
+                    {
+                        tbResult.Text = result.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    tbResult.Text = "脚本执行错误！\r\n" + ex.Message;
+                }
             }
+        }
+
+        private void btnGoBack_Click(object sender, RoutedEventArgs e)
+        {
+            webBrowser.GoBack();
+        }
+
+        private void btnGoForward_Click(object sender, RoutedEventArgs e)
+        {
+            webBrowser.GoForward();
         }
     }
 }
