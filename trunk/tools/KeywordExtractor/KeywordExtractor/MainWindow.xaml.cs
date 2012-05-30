@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using mshtml;
 using System.IO;
 using Microsoft.Win32;
+using System.Text.RegularExpressions;
 
 namespace KeywordExtractor
 {
@@ -23,6 +24,7 @@ namespace KeywordExtractor
     public partial class MainWindow : Window
     {
         private IHTMLScriptElement script = null;
+        private List<InjectionSetting> settings = new List<InjectionSetting>();
 
         public MainWindow()
         {
@@ -31,6 +33,31 @@ namespace KeywordExtractor
             webBrowser.LoadCompleted += new LoadCompletedEventHandler(webBrowser_LoadCompleted);
             btnGoBack.IsEnabled = webBrowser.CanGoBack;
             btnGoForward.IsEnabled = webBrowser.CanGoForward;
+
+            string defaultScript = "alert('脚本注入成功')";
+
+            settings.Add(new InjectionSetting
+            {
+                Name = "网易邮箱登录",
+                UrlPattern = new Regex("http://mail.163.com"),
+                ScriptText = "$('#idInput').val('afei_test001');$('#pwdInput').val('happy_123');$('#loginBtn').click();"
+            });
+
+            settings.Add(new InjectionSetting
+            {
+                Name = "网易邮箱",
+                UrlPattern = new Regex("webmail.mail.163.com/js4"),
+                ScriptText = "var doc = frames[0].document;$('a[title=写信]',doc).click();"
+            });
+
+            settings.Add(new InjectionSetting
+            {
+                Name = "百度首页",
+                UrlPattern = new Regex("www.baidu.com"),
+                ScriptText = defaultScript
+            });
+
+            dgInjection.ItemsSource = settings;
         }
 
         private void webBrowser_LoadCompleted(object sender, NavigationEventArgs e)
@@ -45,6 +72,15 @@ namespace KeywordExtractor
                 jquery.src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js";
                 body.appendChild(jquery as IHTMLDOMNode);
                 body.appendChild(script as IHTMLDOMNode);
+
+                foreach (var setting in settings)
+                {
+                    if (setting.UrlPattern.IsMatch(e.Uri.ToString()))
+                    {
+                        this.InjectScript(setting.ScriptText);
+                        break;
+                    }
+                }
 
                 tbCode.Text = doc.documentElement.outerHTML;
             }
@@ -95,22 +131,22 @@ namespace KeywordExtractor
             }
         }
 
-        private void btnScript_Click(object sender, RoutedEventArgs e)
+        private void InjectScript(string text)
         {
             if (script != null)
             {
                 try
                 {
-                    script.text = "function __Test(){" + tbScript.Text + "}";
-                    var result = webBrowser.InvokeScript("__Test");
+                    script.text = "function __Main(){" + text + "}";
+                    var result = webBrowser.InvokeScript("__Main");
                     if (result != null)
                     {
-                        tbResult.Text = result.ToString();
+                        //tbResult.Text = result.ToString();
                     }
                 }
                 catch (Exception ex)
                 {
-                    tbResult.Text = "脚本执行错误！\r\n" + ex.Message;
+                    //tbResult.Text = "脚本执行错误！\r\n" + ex.Message;
                 }
             }
         }
