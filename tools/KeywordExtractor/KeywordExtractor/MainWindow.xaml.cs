@@ -15,6 +15,7 @@ using mshtml;
 using System.IO;
 using Microsoft.Win32;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace KeywordExtractor
 {
@@ -52,9 +53,17 @@ namespace KeywordExtractor
 
             settings.Add(new InjectionSetting
             {
-                Name = "百度首页",
-                UrlPattern = new Regex("www.baidu.com"),
-                ScriptText = defaultScript
+                UseJquery = false,
+                Name = "麦库记事首页",
+                UrlPattern = new Regex("http://note.sdo.com"),
+                ScriptText = "$('#username').val('wbxfire@gmail.com');$('#password').val('123456ab');setTimeout(function(){$('#loginbtn').click();},1500)"
+            });
+
+            settings.Add(new InjectionSetting
+            {
+                Name = "麦库记事（已进入）",
+                UrlPattern = new Regex("https://note.sdo.com/my"),
+                ScriptText = "window.location.href = 'https://note.sdo.com/my#!note/create/'"
             });
 
             dgInjection.ItemsSource = settings;
@@ -62,29 +71,40 @@ namespace KeywordExtractor
 
         private void webBrowser_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            var doc = webBrowser.Document as HTMLDocument;
-            if (doc != null)
+            try
             {
-                var jquery = doc.createElement("script") as IHTMLScriptElement;
-                script = doc.createElement("script") as IHTMLScriptElement;
-                var body = doc.body as IHTMLDOMNode;
-
-                jquery.src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js";
-                body.appendChild(jquery as IHTMLDOMNode);
-                body.appendChild(script as IHTMLDOMNode);
-
-                foreach (var setting in settings)
+                var doc = webBrowser.Document as HTMLDocument;
+                if (doc != null)
                 {
-                    if (setting.UrlPattern.IsMatch(e.Uri.ToString()))
-                    {
-                        this.InjectScript(setting.ScriptText);
-                        break;
-                    }
-                }
+                    script = doc.createElement("script") as IHTMLScriptElement;
+                    var body = doc.body as IHTMLDOMNode;
 
-                tbCode.Text = doc.documentElement.outerHTML;
+                    body.appendChild(script as IHTMLDOMNode);
+
+                    foreach (var setting in settings)
+                    {
+                        if (setting.UrlPattern.IsMatch(e.Uri.ToString()))
+                        {
+                            if (setting.UseJquery)
+                            {
+                                var jquery = doc.createElement("script") as IHTMLScriptElement;
+                                jquery.src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js";
+                                body.appendChild(jquery as IHTMLDOMNode);
+                            }
+                            this.InjectScript(setting.ScriptText);
+                            break;
+                        }
+                    }
+
+                    tbCode.Text = doc.documentElement.outerHTML;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
+        
 
         private void inject()
         {

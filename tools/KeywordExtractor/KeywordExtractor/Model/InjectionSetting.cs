@@ -11,5 +11,10 @@ namespace KeywordExtractor
         public string Name { get; set; }
         public Regex UrlPattern { get; set; }
         public string ScriptText { get; set; }
+        public bool UseJquery { get; set; }
+        public InjectionSetting()
+        {
+            this.UseJquery = true;
+        }
     }
 }
