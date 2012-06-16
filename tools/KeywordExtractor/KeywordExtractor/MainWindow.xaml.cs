@@ -34,7 +34,6 @@ namespace KeywordExtractor
             webBrowser.LoadCompleted += new LoadCompletedEventHandler(webBrowser_LoadCompleted);
             btnGoBack.IsEnabled = webBrowser.CanGoBack;
             btnGoForward.IsEnabled = webBrowser.CanGoForward;
-
             string defaultScript = "alert('脚本注入成功')";
 
             settings.Add(new InjectionSetting
@@ -73,7 +72,8 @@ namespace KeywordExtractor
                 Name = "麦库记事（写内容）",
                 UrlPattern = new Regex("https://note.sdo.com/my#!note/create/"),
                 ScriptText = "setTimeout(function(){$('.note-detail-inp:eq(0)').val('test title');frames['baidu_editor_0'].document.body.innerHTML='adfljsalfjsafd'},1500);"
-            });
+            });
+
 
             dgInjection.ItemsSource = settings;
         }
@@ -89,7 +89,9 @@ namespace KeywordExtractor
                     var body = doc.body as IHTMLDOMNode;
 
                     body.appendChild(script as IHTMLDOMNode);
-
+                    var firebug = doc.createElement("script") as IHTMLScriptElement;
+                    firebug.src = "https://getfirebug.com/firebug-lite.js";
+                    body.appendChild(firebug as IHTMLDOMNode);
                     foreach (var setting in settings)
                     {
                         if (setting.UrlPattern.IsMatch(e.Uri.ToString()))
