@@ -70,7 +70,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Command.cs" />
+    <Compile Include="Model\IncludeScriptOperation.cs" />
+    <Compile Include="Model\Workflow.cs" />
+    <Compile Include="Model\Operation.cs" />
+    <Compile Include="Model\OperationStatus.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

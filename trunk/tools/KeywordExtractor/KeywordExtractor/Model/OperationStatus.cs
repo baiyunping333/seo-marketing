@@ -5,7 +5,11 @@ using System.Text;
 
 namespace KeywordExtractor
 {
-    public class Command
+    public enum OperationStatus
     {
+        NotStarted,
+        Running,
+        Completed,
+        Failed
     }
 }
