@@ -63,7 +63,7 @@ namespace KeywordExtractor
                 UseJquery = false,
                 Name = "麦库记事（已进入）",
                 UrlPattern = new Regex("https://note.sdo.com/my$"),
-                ScriptText = "setTimeout(function(){window.location.href = 'https://note.sdo.com/my#!note/create/';},1500);"
+                ScriptText = "setTimeout(function(){window.location.href = 'https://note.sdo.com/my#!note/create/';},500);"
             });
 
             settings.Add(new InjectionSetting
@@ -71,7 +71,7 @@ namespace KeywordExtractor
                 UseJquery = false,
                 Name = "麦库记事（写内容）",
                 UrlPattern = new Regex("https://note.sdo.com/my#!note/create/"),
-                ScriptText = "setTimeout(function(){$('.note-detail-inp:eq(0)').val('test title');frames['baidu_editor_0'].document.body.innerHTML='adfljsalfjsafd'},1500);"
+                ScriptText = "setTimeout(function(){$('.note-detail-inp:eq(0)').val('test title');frames['baidu_editor_0'].document.body.innerHTML='adfljsalfjsafd'},500);"
             });
 
 
