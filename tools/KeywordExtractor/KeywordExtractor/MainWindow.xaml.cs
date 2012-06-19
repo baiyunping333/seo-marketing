@@ -16,6 +16,8 @@ using System.IO;
 using Microsoft.Win32;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Runtime.InteropServices;
+using System.Security.Permissions;
 
 namespace KeywordExtractor
 {
@@ -26,10 +28,12 @@ namespace KeywordExtractor
     {
         private IHTMLScriptElement script = null;
         private List<InjectionSetting> settings = new List<InjectionSetting>();
+        public string xxx = "abc";
 
         public MainWindow()
         {
             InitializeComponent();
+            webBrowser.ObjectForScripting = new Workflow();
             webBrowser.Navigated += new NavigatedEventHandler(webBrowser_Navigated);
             webBrowser.LoadCompleted += new LoadCompletedEventHandler(webBrowser_LoadCompleted);
             btnGoBack.IsEnabled = webBrowser.CanGoBack;
@@ -74,7 +78,6 @@ namespace KeywordExtractor
                 ScriptText = "setTimeout(function(){$('.note-detail-inp:eq(0)').val('test title');frames['baidu_editor_0'].document.body.innerHTML='adfljsalfjsafd'},500);"
             });
 
-
             dgInjection.ItemsSource = settings;
         }
 
@@ -115,7 +118,7 @@ namespace KeywordExtractor
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
 
         private void inject()
         {

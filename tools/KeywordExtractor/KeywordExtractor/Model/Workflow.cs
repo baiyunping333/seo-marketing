@@ -2,20 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.Script.Serialization;
 using mshtml;
+using System.Runtime.InteropServices;
 
 namespace KeywordExtractor
 {
+    [ComVisible(true)]
     public class Workflow
     {
         public string Name { get; set; }
+        public List<ScriptReference> ScriptReferences { get; set; }
         public LinkedListNode<Operation> CurrentOperation { get; set; }
         public LinkedList<Operation> Operations { get; set; }
         public HTMLDocument Document { get; set; }
+        public dynamic DataContext { get; set; }
 
         public Workflow()
         {
-            
+            this.Name = "test";
         }
 
         public void AddOperation(Operation op)
@@ -37,6 +42,10 @@ namespace KeywordExtractor
         }
 
         public void Stop()
+        {
+        }
+
+        public void SyncData()
         {
         }
 
