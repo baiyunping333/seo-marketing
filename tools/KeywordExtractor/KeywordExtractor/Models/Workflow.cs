@@ -12,15 +12,15 @@ namespace KeywordExtractor
     public class Workflow
     {
         public string Name { get; set; }
+        public string Url { get; set; }
         public List<ScriptReference> ScriptReferences { get; set; }
         public LinkedListNode<Operation> CurrentOperation { get; set; }
         public LinkedList<Operation> Operations { get; set; }
         public HTMLDocument Document { get; set; }
-        public dynamic DataContext { get; set; }
 
         public Workflow()
         {
-            this.Name = "test";
+            this.Operations = new LinkedList<Operation>();
         }
 
         public void AddOperation(Operation op)

@@ -78,7 +78,7 @@ namespace KeywordExtractor
                 ScriptText = "setTimeout(function(){$('.note-detail-inp:eq(0)').val('test title');frames['baidu_editor_0'].document.body.innerHTML='adfljsalfjsafd'},500);"
             });
 
-            dgInjection.ItemsSource = settings;
+            //dgInjection.ItemsSource = settings;
         }
 
         private void webBrowser_LoadCompleted(object sender, NavigationEventArgs e)

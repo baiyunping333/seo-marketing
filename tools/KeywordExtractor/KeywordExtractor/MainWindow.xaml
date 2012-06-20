@@ -33,28 +33,12 @@
                     <TextBox AcceptsReturn="True" IsReadOnly="True" IsReadOnlyCaretVisible="True" Name="tbCode"></TextBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="脚本">
+            <TabItem Header="工作流">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="333" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal">
-                        <Button Content="新增"></Button>
-                        <Button Content="修改"></Button>
-                        <Button Content="删除"></Button>
-                    </StackPanel>
-                    <DataGrid Grid.Row="1" Name="dgInjection" AutoGenerateColumns="False" IsReadOnly="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="名称" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="正则表达式" Binding="{Binding UrlPattern}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding ElementName=dgInjection, Path=SelectedItem.ScriptText}" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
                 </Grid>
             </TabItem>
         </TabControl>
