@@ -64,6 +64,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\WaitLoadOperation.cs" />
+    <Compile Include="Models\ExecuteScriptOperation.cs" />
+    <Compile Include="Services\DataService.cs" />
+    <Compile Include="WorkflowDialog.xaml.cs">
+      <DependentUpon>WorkflowDialog.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -72,17 +78,21 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\ScriptReference.cs" />
-    <Compile Include="Model\Workflow.cs" />
-    <Compile Include="Model\Operation.cs" />
-    <Compile Include="Model\OperationStatus.cs" />
+    <Compile Include="Models\ScriptReference.cs" />
+    <Compile Include="Models\Workflow.cs" />
+    <Compile Include="Models\Operation.cs" />
+    <Compile Include="Models\OperationStatus.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="WorkflowDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\InjectionSetting.cs" />
+    <Compile Include="Models\InjectionSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
