@@ -7,8 +7,5 @@ namespace KeywordExtractor
 {
     public class ExecuteScriptOperation : Operation
     {
-        public override void Execute()
-        {
-        }
     }
 }

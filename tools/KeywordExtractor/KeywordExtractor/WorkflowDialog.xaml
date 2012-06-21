@@ -27,16 +27,16 @@
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
                 <Label Content="名称" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                <TextBox Grid.Column="1" VerticalAlignment="Center" Margin="5" Text="{Binding Path=Name}" />
+                <TextBox Grid.Column="1" VerticalAlignment="Center" Margin="5" Text="{Binding Path=Model.Name}" />
                 <Label Content="网址" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                <TextBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="5" Text="{Binding Path=Url}" />
+                <TextBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="5" Text="{Binding Path=Model.Url}" />
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Margin="5" Padding="5">
             <GroupBox.Header>
                 <TextBlock Text="操作列表" FontWeight="Bold" FontSize="15" />
             </GroupBox.Header>
-            <DataGrid ItemsSource="{Binding Path=Operations}" Name="dgOperations" IsReadOnly="True" SelectionMode="Single" CanUserResizeRows="False" CanUserSortColumns="False" HorizontalGridLinesBrush="#FFD5DFE5" VerticalGridLinesBrush="#FFD5DFE5" SelectedItem="{Binding Path=SelectedOperation}" AutoGenerateColumns="False">
+            <DataGrid ItemsSource="{Binding Path=Model.Operations}" Name="dgOperations" IsReadOnly="True" SelectionMode="Single" CanUserResizeRows="False" CanUserSortColumns="False" HorizontalGridLinesBrush="#FFD5DFE5" VerticalGridLinesBrush="#FFD5DFE5" SelectedItem="{Binding Path=SelectedOperation}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="名称" Width="120" Binding="{Binding Path=Name}" />
                     <DataGridTextColumn Header="类型" Width="80" Binding="{Binding Path=Type}" />
@@ -53,24 +53,22 @@
             <GroupBox.Header>
                 <TextBlock Text="操作配置" FontWeight="Bold" FontSize="15" />
             </GroupBox.Header>
-            <Grid DataContext="{Binding Path=SelectedOperation}">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="35" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Label Content="名称" HorizontalAlignment="Right" VerticalAlignment="Center" DataContext="{Binding}" />
-                <TextBox Grid.Column="1" VerticalAlignment="Center" Margin="5" Text="{Binding Path=Name}" />
+                <Label Content="名称" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" VerticalAlignment="Center" Margin="5" Text="{Binding Path=SelectedOperation.Name}" />
                 <Label Content="类型" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                <ComboBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="5" SelectedIndex="0">
-                    <ComboBoxItem Content="执行脚本" />
-                </ComboBox>
+                <ComboBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="5" SelectedIndex="0" ItemsSource="{Binding Path=OperationTypes}" SelectedValue="{Binding Path=SelectedOperation.Type}" />
                 <Label Content="参数" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                <TextBox Grid.Column="1" Grid.Row="2" Margin="5" AcceptsReturn="True" Text="{Binding Path=Parameter}" />
+                <TextBox Grid.Column="1" Grid.Row="2" Margin="5" AcceptsReturn="True" Text="{Binding Path=SelectedOperation.Parameter}" />
             </Grid>
         </GroupBox>
         <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal" FlowDirection="RightToLeft">

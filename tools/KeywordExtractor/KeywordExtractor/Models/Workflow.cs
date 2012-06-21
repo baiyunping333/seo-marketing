@@ -1,62 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Script.Serialization;
-using mshtml;
-using System.Runtime.InteropServices;
+using System.Collections.ObjectModel;
+using Microsoft.Practices.Prism.ViewModel;
 
 namespace KeywordExtractor
 {
-    [ComVisible(true)]
-    public class Workflow
+    [Serializable]
+    public class Workflow : NotificationObject
     {
-        public string Name { get; set; }
-        public string Url { get; set; }
-        public List<ScriptReference> ScriptReferences { get; set; }
-        public LinkedListNode<Operation> CurrentOperation { get; set; }
-        public LinkedList<Operation> Operations { get; set; }
-        public HTMLDocument Document { get; set; }
-
-        public Workflow()
+        #region Properties
+        private string _name;
+        public string Name
         {
-            this.Operations = new LinkedList<Operation>();
-        }
-
-        public void AddOperation(Operation op)
-        {
-            this.Operations.AddLast(op);
-        }
-
-        public void Start()
-        {
-            this.ProcessOperation(this.Operations.First);
-        }
-
-        public void Pause()
-        {
-        }
-
-        public void Continue()
-        {
-        }
-
-        public void Stop()
-        {
-        }
-
-        public void SyncData()
-        {
-        }
-
-        private void ProcessOperation(LinkedListNode<Operation> op)
-        {
-            this.CurrentOperation = op;
-            if (op != null)
+            get { return this._name; }
+            set
             {
-                op.Value.Execute();
-                this.ProcessOperation(op.Next);
+                if (this._name != value)
+                {
+                    this._name = value;
+                    this.RaisePropertyChanged("Name");
+                }
             }
         }
+
+        private string _url;
+        public string Url
+        {
+            get { return this._url; }
+            set
+            {
+                if (this._url != value)
+                {
+                    this._url = value;
+                    this.RaisePropertyChanged("Url");
+                }
+            }
+        }
+
+        public ObservableCollection<Operation> Operations { get; set; }
+        #endregion
+
+        #region Constructors
+        public Workflow()
+        {
+            this.Operations = new ObservableCollection<Operation>();
+        }
+        #endregion
     }
 }

@@ -10,40 +10,11 @@ using Microsoft.Win32;
 
 namespace KeywordExtractor
 {
-    [Serializable]
-    public class WorkflowViewModel : NotificationObject
+    public class WorkflowViewModel : ViewModelBase<Workflow>
     {
         #region Properties
-        private string _name;
-        public string Name
-        {
-            get { return this._name; }
-            set
-            {
-                if (this._name != value)
-                {
-                    this._name = value;
-                    this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-
-        private string _url;
-        public string Url
-        {
-            get { return this._url; }
-            set
-            {
-                if (this._url != value)
-                {
-                    this._url = value;
-                    this.RaisePropertyChanged("Url");
-                }
-            }
-        }
-
-        private OperationViewModel _selectedOperation;
-        public OperationViewModel SelectedOperation
+        private Operation _selectedOperation;
+        public Operation SelectedOperation
         {
             get { return this._selectedOperation; }
             set
@@ -62,8 +33,11 @@ namespace KeywordExtractor
             get { return this.SelectedOperation != null; }
         }
 
-        public ObservableCollection<OperationViewModel> Operations { get; set; }
-
+        private string[] _operationTypes = new string[] { "引用脚本", "执行脚本", "等待页面加载" };
+        public string[] OperationTypes
+        {
+            get { return _operationTypes; }
+        }
         #endregion
 
         #region Commands
@@ -82,17 +56,18 @@ namespace KeywordExtractor
         #region Constructors
         public WorkflowViewModel()
         {
-            this.Operations = new ObservableCollection<OperationViewModel>();
+            this.Model = new Workflow();
+
             this.CreateOperationCommand = new DelegateCommand(() =>
             {
-                var op = new OperationViewModel();
-                this.Operations.Add(op);
+                var op = new Operation { Type = this.OperationTypes[0] };
+                this.Model.Operations.Add(op);
                 this.SelectedOperation = op;
             });
 
             this.DeleteOperationCommand = new DelegateCommand(() =>
             {
-                this.Operations.Remove(this.SelectedOperation);
+                this.Model.Operations.Remove(this.SelectedOperation);
                 this.SelectedOperation = null;
             }, () =>
             {
@@ -101,14 +76,14 @@ namespace KeywordExtractor
 
             this.MoveUpOperationCommand = new DelegateCommand(() =>
             {
-                int currentIndex = this.Operations.IndexOf(this.SelectedOperation);
-                this.Operations.Move(currentIndex, currentIndex - 1);
+                int currentIndex = this.Model.Operations.IndexOf(this.SelectedOperation);
+                this.Model.Operations.Move(currentIndex, currentIndex - 1);
                 this.RefreshCommandStatus();
             }, () =>
             {
                 if (this.SelectedOperation != null)
                 {
-                    int currentIndex = this.Operations.IndexOf(this.SelectedOperation);
+                    int currentIndex = this.Model.Operations.IndexOf(this.SelectedOperation);
                     int newIndex = currentIndex - 1;
                     if (newIndex >= 0)
                     {
@@ -120,16 +95,16 @@ namespace KeywordExtractor
 
             this.MoveDownOperationCommand = new DelegateCommand(() =>
             {
-                int currentIndex = this.Operations.IndexOf(this.SelectedOperation);
-                this.Operations.Move(currentIndex, currentIndex + 1);
+                int currentIndex = this.Model.Operations.IndexOf(this.SelectedOperation);
+                this.Model.Operations.Move(currentIndex, currentIndex + 1);
                 this.RefreshCommandStatus();
             }, () =>
             {
                 if (this.SelectedOperation != null)
                 {
-                    int currentIndex = this.Operations.IndexOf(this.SelectedOperation);
+                    int currentIndex = this.Model.Operations.IndexOf(this.SelectedOperation);
                     int newIndex = currentIndex + 1;
-                    if (newIndex < this.Operations.Count)
+                    if (newIndex < this.Model.Operations.Count)
                     {
                         return true;
                     }
@@ -153,8 +128,8 @@ namespace KeywordExtractor
             {
                 using (var file = File.CreateText(dlg.FileName))
                 {
-                    XmlSerializer ser = new XmlSerializer(typeof(WorkflowViewModel));
-                    ser.Serialize(file, this);
+                    XmlSerializer ser = new XmlSerializer(typeof(Workflow));
+                    ser.Serialize(file, this.Model);
                     file.Close();
                 }
             }
