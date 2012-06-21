@@ -78,7 +78,7 @@
     <Compile Include="Models\WaitLoadOperation.cs" />
     <Compile Include="Models\ExecuteScriptOperation.cs" />
     <Compile Include="Services\DataService.cs" />
-    <Compile Include="ViewModels\OperationViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WorkflowViewModel.cs" />
     <Compile Include="WorkflowDialog.xaml.cs">
       <DependentUpon>WorkflowDialog.xaml</DependentUpon>

@@ -23,31 +23,7 @@ namespace KeywordExtractor
         public WorkflowDialog()
         {
             InitializeComponent();
-            wf = new WorkflowViewModel
-            {
-                Name = "麦库记事",
-                Url = "note.sdo.com"
-            };
-
-            this.DataContext = wf;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var op = new OperationViewModel()
-            {
-                Name = "ccc"
-            };
-
-            wf.Operations.Add(op);
-            //dgOperations.ItemsSource = null;
-            //dgOperations.ItemsSource = wf.Operations;
-            dgOperations.SelectedItem = op;
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            wf.Save();
+            this.DataContext = new WorkflowViewModel();
         }
     }
 }

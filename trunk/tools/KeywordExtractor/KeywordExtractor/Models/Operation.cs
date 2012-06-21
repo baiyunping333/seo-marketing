@@ -1,20 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Microsoft.Practices.Prism.ViewModel;
 
 namespace KeywordExtractor
 {
-    public abstract class Operation
+    [Serializable]
+    public class Operation : NotificationObject
     {
-        public string Name { get; set; }
-        public string Parameter { get; set; }
-        public OperationStatus Status { get; set; }
-        public Operation()
+        #region Properties
+        private string _name;
+        public string Name
         {
-            this.Status = OperationStatus.NotStarted;
+            get { return this._name; }
+            set
+            {
+                if (this._name != value)
+                {
+                    this._name = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
         }
 
-        public abstract void Execute();
+        private string _type;
+        public string Type
+        {
+            get { return this._type; }
+            set
+            {
+                if (this._type != value)
+                {
+                    this._type = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+
+        private string _parameter;
+        public string Parameter
+        {
+            get { return this._parameter; }
+            set
+            {
+                if (this._parameter != value)
+                {
+                    this._parameter = value;
+                    this.RaisePropertyChanged("Parameter");
+                }
+            }
+        }
+        #endregion
     }
 }
