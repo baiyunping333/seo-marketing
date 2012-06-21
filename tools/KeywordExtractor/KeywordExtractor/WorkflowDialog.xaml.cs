@@ -18,50 +18,36 @@ namespace KeywordExtractor
     /// </summary>
     public partial class WorkflowDialog : Window
     {
-        private Workflow wf;
+        private WorkflowViewModel wf;
 
         public WorkflowDialog()
         {
             InitializeComponent();
-            wf = new Workflow
+            wf = new WorkflowViewModel
             {
                 Name = "麦库记事",
                 Url = "note.sdo.com"
             };
-            //for (int i = 0; i < 20; i++)
-            {
-                wf.Operations.AddLast(new ExecuteScriptOperation(wf)
-                {
-                    Name = "登录"
-                });
-                wf.Operations.AddLast(new ExecuteScriptOperation(wf)
-                {
-                    Name = "新建笔记"
-                });
-                wf.Operations.AddLast(new ExecuteScriptOperation(wf)
-                {
-                    Name = "填写并保存笔记"
-                });
-                wf.Operations.AddLast(new ExecuteScriptOperation(wf)
-                {
-                    Name = "取回共享链接"
-                });
-            }
 
             this.DataContext = wf;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var op = new ExecuteScriptOperation(wf)
+            var op = new OperationViewModel()
             {
                 Name = "ccc"
             };
 
-            wf.Operations.AddLast(op);
-            dgOperations.ItemsSource = null;
-            dgOperations.ItemsSource = wf.Operations;
+            wf.Operations.Add(op);
+            //dgOperations.ItemsSource = null;
+            //dgOperations.ItemsSource = wf.Operations;
             dgOperations.SelectedItem = op;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            wf.Save();
         }
     }
 }
