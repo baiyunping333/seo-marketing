@@ -112,22 +112,15 @@ namespace KeywordExtractor
                     //var firebug = doc.createElement("script") as IHTMLScriptElement;
                     //firebug.src = "https://getfirebug.com/firebug-lite.js";
                     //body.appendChild(firebug as IHTMLDOMNode);
-                    foreach (var setting in settings)
-                    {
-                        if (setting.UrlPattern.IsMatch(e.Uri.ToString()))
-                        {
-                            if (setting.UseJquery)
-                            {
-                                var jquery = doc.createElement("script") as IHTMLScriptElement;
-                                jquery.src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js";
-                                body.appendChild(jquery as IHTMLDOMNode);
-                            }
-                            NextOperation();
-                            this.ExecuteOperation();
-                            //this.InjectScript(setting.ScriptText);
-                            break;
-                        }
-                    }
+
+                    //var jquery = doc.createElement("script") as IHTMLScriptElement;
+                    //jquery.src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js";
+                    //body.appendChild(jquery as IHTMLDOMNode);
+
+                    NextOperation();
+                    this.ExecuteOperation();
+                    //this.InjectScript(setting.ScriptText);
+
                 }
             }
             catch (Exception ex)
