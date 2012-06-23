@@ -48,6 +48,25 @@ namespace KeywordExtractor
                 }
             }
         }
+
+        private OperationStatus _status;
+        public OperationStatus Status
+        {
+            get { return this._status; }
+            set
+            {
+                if (this._status != value)
+                {
+                    this._status = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
         #endregion
+
+        public Operation()
+        {
+            this.Status = OperationStatus.NotStarted;
+        }
     }
 }

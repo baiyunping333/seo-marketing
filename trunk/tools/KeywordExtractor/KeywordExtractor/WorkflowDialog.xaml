@@ -10,7 +10,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*" />
-            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="60" />
             <ColumnDefinition Width="0.5*" />
         </Grid.ColumnDefinitions>
         <GroupBox Grid.ColumnSpan="3" Margin="5" Padding="5">
@@ -68,7 +68,7 @@
                 <Label Content="类型" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
                 <ComboBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="5" SelectedIndex="0" ItemsSource="{Binding Path=OperationTypes}" SelectedValue="{Binding Path=SelectedOperation.Type}" />
                 <Label Content="参数" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                <TextBox Grid.Column="1" Grid.Row="2" Margin="5" AcceptsReturn="True" Text="{Binding Path=SelectedOperation.Parameter}" />
+                <TextBox Grid.Column="1" Grid.Row="2" Margin="5" AcceptsReturn="True" Text="{Binding Path=SelectedOperation.Parameter}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
             </Grid>
         </GroupBox>
         <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal" FlowDirection="RightToLeft">
