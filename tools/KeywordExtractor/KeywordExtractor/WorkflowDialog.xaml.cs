@@ -18,8 +18,6 @@ namespace KeywordExtractor
     /// </summary>
     public partial class WorkflowDialog : Window
     {
-        private WorkflowViewModel wf;
-
         public WorkflowDialog()
         {
             InitializeComponent();

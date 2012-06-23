@@ -18,6 +18,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
+using System.Xml.Serialization;
 
 namespace KeywordExtractor
 {
@@ -26,14 +27,19 @@ namespace KeywordExtractor
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Workflow wf;
+        private UserData userData = new UserData();
+        private Operation currentOperation;
         private IHTMLScriptElement script = null;
+        private List<string> scriptRefs = new List<string>();
         private List<InjectionSetting> settings = new List<InjectionSetting>();
         public string xxx = "abc";
 
         public MainWindow()
         {
             InitializeComponent();
-            webBrowser.ObjectForScripting = new Workflow();
+            webBrowser.ObjectForScripting = userData;
+            webBrowser.Navigating += new NavigatingCancelEventHandler(webBrowser_Navigating);
             webBrowser.Navigated += new NavigatedEventHandler(webBrowser_Navigated);
             webBrowser.LoadCompleted += new LoadCompletedEventHandler(webBrowser_LoadCompleted);
             btnGoBack.IsEnabled = webBrowser.CanGoBack;
@@ -78,11 +84,22 @@ namespace KeywordExtractor
                 ScriptText = "setTimeout(function(){$('.note-detail-inp:eq(0)').val('test title');frames['baidu_editor_0'].document.body.innerHTML='adfljsalfjsafd'},500);"
             });
 
+            this.dgUserData.ItemsSource = userData.Data;
             //dgInjection.ItemsSource = settings;
+        }
+
+        void webBrowser_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            this.WriteLog("Navigating:" + e.Uri.ToString());
         }
 
         private void webBrowser_LoadCompleted(object sender, NavigationEventArgs e)
         {
+            this.WriteLog("LoadCompleted: " + e.Uri.ToString());
+            if (currentOperation != null && currentOperation.Type == "等待页面加载")
+            {
+                currentOperation.Status = OperationStatus.Completed;
+            }
             try
             {
                 var doc = webBrowser.Document as HTMLDocument;
@@ -92,9 +109,9 @@ namespace KeywordExtractor
                     var body = doc.body as IHTMLDOMNode;
 
                     body.appendChild(script as IHTMLDOMNode);
-                    var firebug = doc.createElement("script") as IHTMLScriptElement;
-                    firebug.src = "https://getfirebug.com/firebug-lite.js";
-                    body.appendChild(firebug as IHTMLDOMNode);
+                    //var firebug = doc.createElement("script") as IHTMLScriptElement;
+                    //firebug.src = "https://getfirebug.com/firebug-lite.js";
+                    //body.appendChild(firebug as IHTMLDOMNode);
                     foreach (var setting in settings)
                     {
                         if (setting.UrlPattern.IsMatch(e.Uri.ToString()))
@@ -105,12 +122,12 @@ namespace KeywordExtractor
                                 jquery.src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js";
                                 body.appendChild(jquery as IHTMLDOMNode);
                             }
-                            this.InjectScript(setting.ScriptText);
+                            NextOperation();
+                            this.ExecuteOperation();
+                            //this.InjectScript(setting.ScriptText);
                             break;
                         }
                     }
-
-                    tbCode.Text = doc.documentElement.outerHTML;
                 }
             }
             catch (Exception ex)
@@ -128,6 +145,7 @@ namespace KeywordExtractor
 
         private void webBrowser_Navigated(object sender, NavigationEventArgs e)
         {
+            this.WriteLog("Navigated: " + e.Uri.ToString());
             tbAddress.Text = e.Uri.ToString();
             btnGoBack.IsEnabled = webBrowser.CanGoBack;
             btnGoForward.IsEnabled = webBrowser.CanGoForward;
@@ -167,21 +185,10 @@ namespace KeywordExtractor
 
         private void InjectScript(string text)
         {
+            this.WriteLog("Executing Script.");
             if (script != null)
             {
-                try
-                {
-                    script.text = "function __Main(){" + text + "}";
-                    var result = webBrowser.InvokeScript("__Main");
-                    if (result != null)
-                    {
-                        //tbResult.Text = result.ToString();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    //tbResult.Text = "脚本执行错误！\r\n" + ex.Message;
-                }
+                script.text = "(function (){ var userData=window.external;" + text + "})()";
             }
         }
 
@@ -193,6 +200,103 @@ namespace KeywordExtractor
         private void btnGoForward_Click(object sender, RoutedEventArgs e)
         {
             webBrowser.GoForward();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.AddExtension = true;
+            dlg.DefaultExt = "xml";
+            dlg.Filter = "XML file|*.xml";
+
+            if (dlg.ShowDialog() == true)
+            {
+                using (var file = File.OpenText(dlg.FileName))
+                {
+                    XmlSerializer ser = new XmlSerializer(typeof(Workflow));
+                    wf = (Workflow)ser.Deserialize(file);
+                    file.Close();
+                }
+            }
+
+            if (wf != null)
+            {
+                dgWorkflow.ItemsSource = wf.Operations;
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (wf != null)
+            {
+                string url = wf.Url;
+                if (!(url.StartsWith("http://") || url.StartsWith("https://")))
+                {
+                    url = "http://" + url;
+                }
+
+                if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
+                {
+                    webBrowser.Navigate(url);
+                }
+                else
+                {
+                    MessageBox.Show("无效的地址", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void ExecuteOperation()
+        {
+            if (this.currentOperation != null)
+            {
+                this.WriteLog(this.currentOperation.Name);
+                if (currentOperation.Type == "引用脚本")
+                {
+                    currentOperation.Status = OperationStatus.Running;
+                    this.scriptRefs.Add(currentOperation.Parameter);
+                    currentOperation.Status = OperationStatus.Completed;
+                    NextOperation();
+                    this.ExecuteOperation();
+                }
+                else if (currentOperation.Type == "执行脚本")
+                {
+                    currentOperation.Status = OperationStatus.Running;
+                    this.InjectScript(currentOperation.Parameter);
+                    currentOperation.Status = OperationStatus.Completed;
+                    NextOperation();
+                    this.ExecuteOperation();
+                }
+                else if (currentOperation.Type == "等待页面加载")
+                {
+                    currentOperation.Status = OperationStatus.Running;
+                }
+            }
+        }
+
+        private void NextOperation()
+        {
+            if (this.currentOperation == null)
+            {
+                this.currentOperation = this.wf.Operations[0];
+            }
+            else
+            {
+                int index = this.wf.Operations.IndexOf(this.currentOperation);
+                if (index >= 0 && index < this.wf.Operations.Count - 1)
+                {
+                    this.currentOperation = this.wf.Operations[index + 1];
+                }
+                else
+                {
+                    this.currentOperation = null;
+                }
+            }
+        }
+
+        private void WriteLog(string text)
+        {
+            this.tbLog.Text = text + "\r\n" + this.tbLog.Text;
         }
     }
 }
