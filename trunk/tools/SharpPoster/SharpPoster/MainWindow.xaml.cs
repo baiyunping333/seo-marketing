@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Text;
+using System.Collections.Generic;
 
 namespace SharpPoster
 {
@@ -14,6 +15,8 @@ namespace SharpPoster
         public MainWindow()
         {
             InitializeComponent();
+            BlueHost.Login("", "");
+            BlueHost.AddSubDomain();
         }
 
         private void tbUrl_KeyDown(object sender, KeyEventArgs e)
