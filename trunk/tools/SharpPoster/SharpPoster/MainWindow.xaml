@@ -8,6 +8,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBox Margin="5" Name="tbUrl" KeyDown="tbUrl_KeyDown" />
-        <TextBox Margin="5" Grid.Row="1" IsReadOnly="True" IsReadOnlyCaretVisible="True" Name="tbResponse" />
+        <TextBox Margin="5,5,5,148" Grid.Row="1" IsReadOnly="True" IsReadOnlyCaretVisible="True" Name="tbResponse" />
+        <Button Content="Button" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="5,134,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
     </Grid>
 </Window>

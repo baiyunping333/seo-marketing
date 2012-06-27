@@ -15,9 +15,10 @@ namespace SharpPoster
         public MainWindow()
         {
             InitializeComponent();
-            BlueHost.Login("", "");
-            BlueHost.AddSubDomain();
+            
         }
+
+
 
         private void tbUrl_KeyDown(object sender, KeyEventArgs e)
         {
@@ -48,5 +49,14 @@ namespace SharpPoster
                 }
             }
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            BlueHost.Login("zhenfeic", "aaAbc123456!");
+            BlueHost.AddSubDomain("zxc334", "zhengfei.com", "zxc334");
+        }
+
+
+
     }
 }
