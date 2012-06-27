@@ -53,7 +53,19 @@ namespace SharpPoster
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             BlueHost.Login("zhenfeic", "aaAbc123456!");
-            BlueHost.AddSubDomain("zxc334", "zhengfei.com", "zxc334");
+            //BlueHost.AddSubDomain("zxc334", "zhenfei.com", "zxc334");
+            Dictionary<string, string> domains = new Dictionary<string, string>();
+            domains.Add("zxkf", "qiaojoe.com");
+            domains.Add("zxrj", "qiaojoe.com");
+            domains.Add("zyqb", "qiaojoe.com");
+            domains.Add("zxc333", "zhenfei.com");
+            domains.Add("zxc125", "zhenfei.com");
+            domains.Add("zxc123", "zhenfei.com");
+            foreach (KeyValuePair<string, string> item in domains)
+            {
+                BlueHost.DeleteDomain(item.Key, item.Value);
+            }
+            //BlueHost.DeleteDomain("t002", "zhenfei.com");
         }
 
 
