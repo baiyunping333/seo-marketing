@@ -15,7 +15,7 @@ namespace SharpPoster
         public MainWindow()
         {
             InitializeComponent();
-            
+            //MessageBox.Show(string.Format("{0:D2}", 2));
         }
 
 
@@ -52,20 +52,42 @@ namespace SharpPoster
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            BlueHost.Login("zhenfeic", "aaAbc123456!");
+            //BlueHost.Login("zhenfeic", "aaAbc123456!");
             //BlueHost.AddSubDomain("zxc334", "zhenfei.com", "zxc334");
+            //domains["too1"] = "zhenfei.com"
+            /*
+              Dictionary<string, string> aa = new Dictionary<string, string> { { "abc", "111" }, { "bbb", "aaa" } };
+             */
             Dictionary<string, string> domains = new Dictionary<string, string>();
-            domains.Add("zxkf", "qiaojoe.com");
-            domains.Add("zxrj", "qiaojoe.com");
-            domains.Add("zyqb", "qiaojoe.com");
-            domains.Add("zxc333", "zhenfei.com");
-            domains.Add("zxc125", "zhenfei.com");
-            domains.Add("zxc123", "zhenfei.com");
+            domains.Add("t001", "qiaojoe.com");
+            domains.Add("sjxl", "qiaojoe.com");
+            domains.Add("qdcp", "qiaojoe.com");
+            domains.Add("qbcp", "qiaojoe.com");
+            domains.Add("mysql", "qiaojoe.com");
+            domains.Add("lsjf", "qiaojoe.com");
+            domains.Add("lsejf", "qiaojoe.com");
+            domains.Add("jfmj", "qiaojoe.com");
+
+            //jf01.qiaojoe.com~jf99.qiaojoe.com
+            for (int i = 1; i <= 99; i++) {
+                domains.Add("jf" + string.Format("{0:D2}", i), "qiaojoe.com");
+            }
+
             foreach (KeyValuePair<string, string> item in domains)
             {
                 BlueHost.DeleteDomain(item.Key, item.Value);
             }
             //BlueHost.DeleteDomain("t002", "zhenfei.com");
+        }
+
+        /*
+         * 1.登录163邮箱
+         * 2.发邮件
+         */
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            BlueHost.NELogin("afei_test001", "happy_123");
+            BlueHost.NEWriteEmail("afei_test001","1290657123@qq.com", "testTitle22222","testContent2222.....");
         }
 
 

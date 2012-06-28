@@ -9,6 +9,7 @@
         </Grid.RowDefinitions>
         <TextBox Margin="5" Name="tbUrl" KeyDown="tbUrl_KeyDown" />
         <TextBox Margin="5,5,5,148" Grid.Row="1" IsReadOnly="True" IsReadOnlyCaretVisible="True" Name="tbResponse" />
-        <Button Content="Button" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="5,134,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
+        <Button Content="Button" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="5,149,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
+        <Button Content="163邮箱操作" Height="23" HorizontalAlignment="Left" Margin="94,149,0,0" Name="button2" VerticalAlignment="Top" Width="75" Grid.Row="1" Click="button2_Click" />
     </Grid>
 </Window>
