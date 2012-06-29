@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace KeywordExtractor
 {
-    public class ExecuteScriptOperation : Operation
+    public class IncludeScriptOperation : Operation
     {
-        public ExecuteScriptOperation(Webflow wf)
+        public IncludeScriptOperation(Webflow wf)
             : base(wf)
         {
 

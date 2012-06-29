@@ -27,7 +27,7 @@ namespace KeywordExtractor
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Workflow wf;
+        private Webflow wf;
         private UserData userData = new UserData();
         private Operation currentOperation;
         private IHTMLScriptElement script = null;
