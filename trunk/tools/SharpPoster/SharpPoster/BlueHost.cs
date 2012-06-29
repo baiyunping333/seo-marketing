@@ -50,12 +50,13 @@ namespace SharpPoster
          * 写邮件
          */
 
-        public static void NEWriteEmail(string from,string to, string subject, string content) 
+        public static string NEWriteEmail(string from,string to, string subject, string content) 
         {
             client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
             client.Headers.Add("Cookie", client.ResponseHeaders["Set-Cookie"]);
-            client.UploadString("https://ssl.mail.163.com/entry/coremail/fcg/ntesdoor2", string.Format("<?xml version=\"1.0\"?><object><string name=\"id\">c:1340811329343</string><object name=\"attrs\"><string name=\"account\">\"{0}\"&lt;{0}@163.com&gt;</string><boolean name=\"showOneRcpt\">false</boolean><array name=\"to\"><string>{1}</string></array><array name=\"cc\"/><array name=\"bcc\"/><string name=\"subject\">{2}</string><boolean name=\"isHtml\">true</boolean><string name=\"content\">&lt;div style='line-height:1.7;color:#000000;font-size:14px;font-family:arial'&gt;{3}&lt;/div&gt;</string><int name=\"priority\">3</int><boolean name=\"saveSentCopy\">true</boolean><boolean name=\"requestReadReceipt\">false</boolean><string name=\"charset\">GBK</string></object><boolean name=\"returnInfo\">false</boolean><string name=\"action\">deliver</string><int name=\"saveSentLimit\">1</int></object>", from, to, subject, content));
+            string res=client.UploadString("http://twebmail.mail.163.com/js4/s?sid=NChZsLNQloQxopSnjFQQaFrxsnBwiUbp&func=mbox:compose&cl_send=2&l=compose&action=deliver", string.Format("<?xml version=\"1.0\"?><object><string name=\"id\">c:1340811329343</string><object name=\"attrs\"><string name=\"account\">\"{0}\"&lt;{0}@163.com&gt;</string><boolean name=\"showOneRcpt\">false</boolean><array name=\"to\"><string>{1}</string></array><array name=\"cc\"/><array name=\"bcc\"/><string name=\"subject\">{2}</string><boolean name=\"isHtml\">true</boolean><string name=\"content\">&lt;div style='line-height:1.7;color:#000000;font-size:14px;font-family:arial'&gt;{3}&lt;/div&gt;</string><int name=\"priority\">3</int><boolean name=\"saveSentCopy\">true</boolean><boolean name=\"requestReadReceipt\">false</boolean><string name=\"charset\">GBK</string></object><boolean name=\"returnInfo\">false</boolean><string name=\"action\">deliver</string><int name=\"saveSentLimit\">1</int></object>", from, to, subject, content));
+            return res;
         }
 
 
