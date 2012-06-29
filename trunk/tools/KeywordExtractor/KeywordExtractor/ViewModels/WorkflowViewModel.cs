@@ -10,7 +10,7 @@ using Microsoft.Win32;
 
 namespace KeywordExtractor
 {
-    public class WorkflowViewModel : ViewModelBase<Workflow>
+    public class WorkflowViewModel : ViewModelBase<ScriptingWebflow>
     {
         #region Properties
         private Operation _selectedOperation;
@@ -56,11 +56,13 @@ namespace KeywordExtractor
         #region Constructors
         public WorkflowViewModel()
         {
-            this.Model = new Workflow();
+            var wf = new ScriptingWebflow();
+
+            this.Model = wf;
 
             this.CreateOperationCommand = new DelegateCommand(() =>
             {
-                var op = new Operation { Type = this.OperationTypes[0] };
+                var op = new ExecuteScriptOperation(wf);
                 this.Model.Operations.Add(op);
                 this.SelectedOperation = op;
             });
@@ -128,7 +130,7 @@ namespace KeywordExtractor
             {
                 using (var file = File.CreateText(dlg.FileName))
                 {
-                    XmlSerializer ser = new XmlSerializer(typeof(Workflow));
+                    XmlSerializer ser = new XmlSerializer(typeof(Webflow));
                     ser.Serialize(file, this.Model);
                     file.Close();
                 }
