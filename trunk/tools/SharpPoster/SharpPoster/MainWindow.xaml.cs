@@ -87,7 +87,7 @@ namespace SharpPoster
         private void button2_Click(object sender, RoutedEventArgs e)
         {
             BlueHost.NELogin("afei_test001", "happy_123");
-            BlueHost.NEWriteEmail("afei_test001","1290657123@qq.com", "testTitle22222","testContent2222.....");
+            BlueHost.NEWriteEmail("afei_test001", "afei_test001@163.com", "testTitle22222", "testContent2222.....");
         }
 
 
