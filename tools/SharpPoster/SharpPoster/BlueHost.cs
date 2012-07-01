@@ -108,21 +108,8 @@ namespace SharpPoster
         {
             client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
-            client.Headers.Add("Referer", "https://note.sdo.com/my");
+            //client.Headers.Add("Referer", "https://note.sdo.com/my");
             string res = client.UploadString("https://cas.sdo.com/dplogin", "username=afei_test001@163.com&password=happy123&appArea=0&appId=306&service=http://passport.note.sdo.com/account/loginresult?type=snda&returnUrl=https%3a%2f%2fnote.sdo.com%2fmy&cururl=http%3a%2f%2fnote.sdo.com%2f&target=top&code=2&pageType=0&saveTime=0&loginCustomerUrl=http://note.sdo.com/&encryptFlag=0&ptname=afei_test001@163.com&ptpwd=happy123");
-            return res;
-        }
-
-        public static string GetLoginResult() {
-            //client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-            client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
-            //client.Headers.Add("Referer", "https://note.sdo.com/my");
-            string res = client.DownloadString("http://passport.note.sdo.com/account/loginresult?type=snda&returnUrl=https%3a%2f%2fnote.sdo.com%2fmy&cururl=http%3a%2f%2fnote.sdo.com%2f&target=top&ticket=ULS97c31f05ba4c4f7eb00a5668725ad81d");
-
-            client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
-            //client.Headers.Add("Referer", "https://note.sdo.com/my");
-            string res = client.DownloadString("http://passport.note.sdo.com/account/loginresult?type=snda&returnUrl=https%3a%2f%2fnote.sdo.com%2fmy&cururl=http%3a%2f%2fnote.sdo.com%2f&target=top&ticket=ULS97c31f05ba4c4f7eb00a5668725ad81d");
-            
             return res;
         }
 
@@ -130,6 +117,9 @@ namespace SharpPoster
         {
             client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+            client.Headers.Add("Origin", "http://login.sdo.com");
+            client.Headers.Add("Host", "cas.sdo.com");
+            //client.Headers.Add("Referer", "http://login.sdo.com/sdo/Login/LoginFrame.php?appId=306&areaId=1&returnURL=http%3a%2f%2fpassport.note.sdo.com%2faccount%2floginresult%3ftype%3dsnda%26returnUrl%3dhttps%253a%252f%252fnote.sdo.com%252fmy%26cururl%3dhttp%253a%252f%252fnote.sdo.com%252f%26target%3dtop&CSSURL=http%3a%2f%2fnote.sdo.com%2fstatic%2fcss%2fpages%2floginframe.login.css&curURL=http%3a%2f%2fnote.sdo.com%2f");
             //client.Headers.Add("Cookie", client.ResponseHeaders["Set-Cookie"]);
             //var obj = client.CookieContainer.GetCookies(new Uri("https://note.sdo.com"));
             //string title=
