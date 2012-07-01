@@ -93,7 +93,7 @@ namespace SharpPoster
         private void button3_Click(object sender, RoutedEventArgs e)
         {
             BlueHost.MaiKuLogin();
-            BlueHost.GetLoginResult();
+            //BlueHost.GetLoginResult();
             BlueHost.WriteShareNote();
         }
 
