@@ -88,12 +88,37 @@ namespace SharpPoster
             return sArray[19].Split('%')[1];
         }
 
-        public static string CSDNLogin(string userName, string passWord)
+        public static string CSDNLogin()
         {
             client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
-            string res = client.UploadString("https://ssl.mail.163.com/entry/coremail/fcg/ntesdoor2", string.Format("df=webmail163&from=web&funcid=loginone&iframe=1&language=-1&net=t&passtype=1&product=mail163&race=-2_-2_-2_db&style=-1&uid=afei_test001@163.com&username={0}&password={1}", userName, passWord));
+            string res = client.UploadString("http://passport.csdn.net/ajax/accounthandler.ashx", "t=log&u=afei_test001&p=happy_123&remember=0&f=http%3A%2F%2Fwww.csdn.net%2F&rand=0.1062355195172131");
             return res;
+        }
+
+
+        /*
+         * MaiKU:https://note.sdo.com/my
+         * afei_test001@163.com|happy123
+         */
+
+        public static string MaiKuLogin()
+        {
+            client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+            string res = client.UploadString("https://cas.sdo.com/dplogin", "username=afei_test001@163.com&password=happy123&appArea=0&appId=306&service=http://passport.note.sdo.com/account/loginresult?type=snda&returnUrl=https%3a%2f%2fnote.sdo.com%2fmy&cururl=http%3a%2f%2fnote.sdo.com%2f&target=top&code=2&pageType=0&saveTime=0&loginCustomerUrl=http://note.sdo.com/&encryptFlag=0&ptname=afei_test001@163.com&ptpwd=happy123");
+            return res;
+        }
+
+        public static string WriteShareNote() {
+            client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+            client.Headers.Add("Cookie", client.ResponseHeaders["Set-Cookie"]);
+            //var obj = client.CookieContainer.GetCookies(new Uri("https://note.sdo.com"));
+            string res = client.UploadString("https://note.sdo.com/note/save", "{\"noteid\":\"\",\"importance\":\"0\",\"title\":\"ttt\",\"categoryid\":\"pYyDa~jZDtUVnM2Mo002oM\",\"tags\":\"\",\"sourceurl\":\"\",\"notecontent\":\"<p>dddd</p>\"}");
+            return res;
+
+
         }
 
 
