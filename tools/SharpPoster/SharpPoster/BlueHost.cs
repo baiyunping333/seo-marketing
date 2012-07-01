@@ -55,7 +55,7 @@ namespace SharpPoster
          * 写邮件
          */
         public static string NEWriteEmail(string from, string to, string subject, string content)
-        {           
+        {
             client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
 
@@ -92,7 +92,9 @@ namespace SharpPoster
         {
             client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
-            string res = client.UploadString("http://passport.csdn.net/ajax/accounthandler.ashx", "t=log&u=afei_test001&p=happy_123&remember=0&f=http%3A%2F%2Fwww.csdn.net%2F&rand=0.1062355195172131");
+            client.Headers.Add("Referer", "http://passport.csdn.net/account/loginbox?callback=logined&hidethird=1&from=http%3a%2f%2fwww.csdn.net%2f");
+
+            string res = client.DownloadString("http://passport.csdn.net/ajax/accounthandler.ashx?" + "t=log&u=afei_test001&p=happy_123&remember=0&f=http%3A%2F%2Fwww.csdn.net%2F&rand=0.1062355195172131");
             return res;
         }
 
@@ -110,7 +112,8 @@ namespace SharpPoster
             return res;
         }
 
-        public static string WriteShareNote() {
+        public static string WriteShareNote()
+        {
             client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
             client.Headers.Add("Cookie", client.ResponseHeaders["Set-Cookie"]);
