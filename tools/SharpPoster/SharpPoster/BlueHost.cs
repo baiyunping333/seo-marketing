@@ -96,6 +96,7 @@ namespace SharpPoster
 
             string res = client.DownloadString("http://passport.csdn.net/ajax/accounthandler.ashx?" + "t=log&u=afei_test001&p=happy_123&remember=0&f=http%3A%2F%2Fwww.csdn.net%2F&rand=0.1062355195172131");
             return res;
+            var obj=client.ResponseHeaders;
         }
 
 
@@ -117,14 +118,32 @@ namespace SharpPoster
         {
             client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
-            client.Headers.Add("Origin", "http://login.sdo.com");
-            client.Headers.Add("Host", "cas.sdo.com");
+            StringBuilder postData = new StringBuilder();
+            postData.Append("{\"noteid\":\"\",\"importance\":\"0\",\"title\":\"title\",\"categoryid\":\"pYyDa~jZDtUVnM2Mo002oN\",\"tags\":\"\",\"sourceurl\":\"\",\"notecontent\":\"<p>content</p>\"}");
+            byte[] sendData = Encoding.UTF8.GetBytes(postData.ToString());
+            client.Headers.Add("ContentLength", sendData.Length.ToString());
+            try
+            {
+                byte[] recData = client.UploadData("https://note.sdo.com/note/save", "POST", sendData);
+                return Encoding.UTF8.GetString(recData);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            
+            
+            
+            //client.Headers.Add("Origin", "http://login.sdo.com");
+            //client.Headers.Add("Host", "cas.sdo.com");
             //client.Headers.Add("Referer", "http://login.sdo.com/sdo/Login/LoginFrame.php?appId=306&areaId=1&returnURL=http%3a%2f%2fpassport.note.sdo.com%2faccount%2floginresult%3ftype%3dsnda%26returnUrl%3dhttps%253a%252f%252fnote.sdo.com%252fmy%26cururl%3dhttp%253a%252f%252fnote.sdo.com%252f%26target%3dtop&CSSURL=http%3a%2f%2fnote.sdo.com%2fstatic%2fcss%2fpages%2floginframe.login.css&curURL=http%3a%2f%2fnote.sdo.com%2f");
             //client.Headers.Add("Cookie", client.ResponseHeaders["Set-Cookie"]);
             //var obj = client.CookieContainer.GetCookies(new Uri("https://note.sdo.com"));
             //string title=
-            string res = client.UploadString("https://note.sdo.com/note/save", "importance=0&title=ttt&categoryid=pYyDa~jZDtUVnM2Mo002oM&notecontent=content");
-            return res;
+            //string data = "?importance=0&" + "categoryid=" + HttpUtility.UrlEncode("pYyDa~jZDtUVnM2Mo002oM") + "&title=" + HttpUtility.UrlEncode("TItle") + "&notecontent=" + HttpUtility.UrlEncode("<p>contetne!!!!</p>");
+            //string res = client.UploadString("https://note.sdo.com/note/save", data);
+            //return res;
 
 
         }
