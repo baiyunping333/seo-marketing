@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScriptingWebflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>QQ漂流瓶</Name>
+  <Url>https://mail.qq.com/cgi-bin/loginpage</Url>
+  <Operations>
+    <Operation xsi:type="ExecuteScriptOperation">
+      <Name>登陆</Name>
+      <Parameter>
+      setTimeout(function(){
+        $('#uin').val('username');
+        $('#p').val('password');
+        $('#btlogin').click();
+      },500);
+        </Parameter>
+      <Status>NotStarted</Status>
+    </Operation>
+    <Operation xsi:type="ExecuteScriptOperation">
+      <Name>进入漂流瓶</Name>
+      <Parameter>
+        setTimeout(function(){
+          var href = $('#my_note a:eq(0)').attr('href');
+          window.location.href = href;
+        },100);
+      </Parameter>
+      <Status>NotStarted</Status>
+    </Operation>
+    <Operation xsi:type="ExecuteScriptOperation">
+      <Name>发送漂流瓶</Name>
+      <Parameter>
+        var mainDoc = window.frames['mainFrame'].document;
+        setTimeout(function(){
+          $('a.btnThrow',mainDoc).click();
+          $('a.select_box[magicid=0]',mainDoc).click();
+        },500);
+        setTimeout(function(){
+          $('#bottle_send textarea', mainDoc).text('test');
+          $('#bottle_send .send_bottom a[ck=send]', mainDoc).click();
+        },1000);
+      </Parameter>
+      <Status>NotStarted</Status>
+    </Operation>
+  </Operations>
+</ScriptingWebflow>

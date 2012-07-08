@@ -36,8 +36,9 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal">
-                        <Button Content="导入工作流模板" Click="Button_Click" />
-                        <Button Content="执行" Click="Button_Click_1" />
+                        <Button Content="新建工作流模板" Name="btnNew" Click="btnNew_Click" />
+                        <Button Content="导入工作流模板" Name="btnImport" Click="btnImport_Click" />
+                        <Button Content="执行" Name="btnExecute" Click="btnExecute_Click" />
                         <Button Content="停止" />
                     </StackPanel>
                     <DataGrid Grid.Row="1" Name="dgWorkflow" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" CanUserResizeRows="False" CanUserSortColumns="False" HorizontalGridLinesBrush="#FFD5DFE5" VerticalGridLinesBrush="#FFD5DFE5">

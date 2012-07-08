@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace KeywordExtractor
 {
     [Serializable]
-    [XmlInclude(typeof(IncludeScriptOperation))]
+    [XmlInclude(typeof(ExecuteScriptOperation))]
     public abstract class Operation : NotificationObject
     {
         #region Properties
@@ -51,16 +51,11 @@ namespace KeywordExtractor
             }
         }
 
-        public Webflow Webflow { get; private set; }
-
         #endregion
 
-        public Operation(Webflow webflow)
+        public Operation()
         {
-            this.Webflow = webflow;
-            this.Status = OperationStatus.NotStarted;
-        }
 
-        public abstract void Execute();
+        }
     }
 }
