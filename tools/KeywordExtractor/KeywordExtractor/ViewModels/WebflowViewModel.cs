@@ -10,7 +10,7 @@ using Microsoft.Win32;
 
 namespace KeywordExtractor
 {
-    public class WorkflowViewModel : ViewModelBase<ScriptingWebflow>
+    public class WebflowViewModel : ViewModelBase<ScriptingWebflow>
     {
         #region Properties
         private Operation _selectedOperation;
@@ -54,7 +54,7 @@ namespace KeywordExtractor
         #endregion
 
         #region Constructors
-        public WorkflowViewModel()
+        public WebflowViewModel()
         {
             var wf = new ScriptingWebflow();
 
@@ -62,7 +62,7 @@ namespace KeywordExtractor
 
             this.CreateOperationCommand = new DelegateCommand(() =>
             {
-                var op = new ExecuteScriptOperation(wf);
+                var op = new ExecuteScriptOperation();
                 this.Model.Operations.Add(op);
                 this.SelectedOperation = op;
             });

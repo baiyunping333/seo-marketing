@@ -6,12 +6,12 @@
     <Operation xsi:type="ExecuteScriptOperation">
       <Name>登陆</Name>
       <Parameter>
-      setTimeout(function(){
-        $('#uin').val('username');
-        $('#p').val('password');
+        setTimeout(function(){
+        $('#uin').val('2269898162');
+        $('#p').val('tangua981547');
         $('#btlogin').click();
-      },500);
-        </Parameter>
+        },500);
+      </Parameter>
       <Status>NotStarted</Status>
     </Operation>
     <Operation xsi:type="ExecuteScriptOperation">
