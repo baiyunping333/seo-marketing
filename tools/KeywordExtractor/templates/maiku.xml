@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ScriptingWebflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>麦库记事</Name>
+  <Url>http://note.sdo.com</Url>
+  <Operations>
+    <Operation xsi:type="ExecuteScriptOperation">
+      <Name>登录</Name>
+      <Type>执行脚本</Type>
+      <Parameter>
+        $('#username').val('wbxfire@gmail.com');$('#password').val('123456ab');setTimeout(function(){$('#loginbtn').click();},1500);
+      </Parameter>
+      <Status>NotStarted</Status>
+    </Operation>
+    <Operation xsi:type="ExecuteScriptOperation">
+      <Name>创建新笔记</Name>
+      <Type>执行脚本</Type>
+      <Parameter>
+        setTimeout(function(){window.location.href = 'https://note.sdo.com/my#!note/create/';},500);
+      </Parameter>
+      <Status>NotStarted</Status>
+    </Operation>
+    <Operation xsi:type="ExecuteScriptOperation">
+      <Name>填写内容</Name>
+      <Type>执行脚本</Type>
+      <Parameter>
+          setTimeout(function(){
+          $("input:hidden[name='categoryid']").val($(".public-cates li:eq(1)").attr("cateid"));
+          $('.note-detail-inp:eq(0)').val('test title');
+          frames['baidu_editor_0'].document.body.innerHTML='adfljsalfjsafd'},
+          500);
+      </Parameter>
+      <Status>NotStarted</Status>
+    </Operation>
+    <Operation xsi:type="ExecuteScriptOperation">
+      <Name>跳转到共享连接</Name>
+      <Type>执行脚本</Type>
+      <Parameter>
+        setTimeout(function(){
+        $(".note-default-cate:eq(1) a").click();
+        },500);
+      </Parameter>
+      <Status>NotStarted</Status>
+    </Operation>
+    <Operation xsi:type="ExecuteScriptOperation">
+      <Name>取回数据</Name>
+      <Type>执行脚本</Type>
+      <Parameter>
+        function getSiglePubUri() {
+        var publicArr = $(".public-category-address a").attr("href").split("/");
+        publicArr.pop();
+        publicArr.pop();
+        return publicArr.join("/")+"/n/"+$(".note-action a[cpara='list_edit']:eq(0)").attr("href").split("/").pop();
+        }
+        setTimeout(function(){
+        window.external.SetValue("publicUri",getSiglePubUri());
+        },2500);
+      </Parameter>
+      <Status>NotStarted</Status>
+    </Operation>
+  </Operations>
+</ScriptingWebflow>

@@ -96,10 +96,7 @@ namespace KeywordExtractor
         private void webBrowser_LoadCompleted(object sender, NavigationEventArgs e)
         {
             this.WriteLog("LoadCompleted: " + e.Uri.ToString());
-            if (currentOperation != null && currentOperation.Type == "等待页面加载")
-            {
-                currentOperation.Status = OperationStatus.Completed;
-            }
+
             try
             {
                 var doc = webBrowser.Document as HTMLDocument;
@@ -109,13 +106,10 @@ namespace KeywordExtractor
                     var body = doc.body as IHTMLDOMNode;
 
                     body.appendChild(script as IHTMLDOMNode);
-                    //var firebug = doc.createElement("script") as IHTMLScriptElement;
-                    //firebug.src = "https://getfirebug.com/firebug-lite.js";
-                    //body.appendChild(firebug as IHTMLDOMNode);
 
-                    //var jquery = doc.createElement("script") as IHTMLScriptElement;
-                    //jquery.src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js";
-                    //body.appendChild(jquery as IHTMLDOMNode);
+                    var jquery = doc.createElement("script") as IHTMLScriptElement;
+                    jquery.src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js";
+                    body.appendChild(jquery as IHTMLDOMNode);
 
                     NextOperation();
                     this.ExecuteOperation();
@@ -195,75 +189,15 @@ namespace KeywordExtractor
             webBrowser.GoForward();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.AddExtension = true;
-            dlg.DefaultExt = "xml";
-            dlg.Filter = "XML file|*.xml";
-
-            if (dlg.ShowDialog() == true)
-            {
-                using (var file = File.OpenText(dlg.FileName))
-                {
-                    XmlSerializer ser = new XmlSerializer(typeof(Workflow));
-                    wf = (Workflow)ser.Deserialize(file);
-                    file.Close();
-                }
-            }
-
-            if (wf != null)
-            {
-                dgWorkflow.ItemsSource = wf.Operations;
-            }
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (wf != null)
-            {
-                string url = wf.Url;
-                if (!(url.StartsWith("http://") || url.StartsWith("https://")))
-                {
-                    url = "http://" + url;
-                }
-
-                if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
-                {
-                    webBrowser.Navigate(url);
-                }
-                else
-                {
-                    MessageBox.Show("无效的地址", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-        }
-
         private void ExecuteOperation()
         {
             if (this.currentOperation != null)
             {
                 this.WriteLog(this.currentOperation.Name);
-                if (currentOperation.Type == "引用脚本")
-                {
-                    currentOperation.Status = OperationStatus.Running;
-                    this.scriptRefs.Add(currentOperation.Parameter);
-                    currentOperation.Status = OperationStatus.Completed;
-                    NextOperation();
-                    this.ExecuteOperation();
-                }
-                else if (currentOperation.Type == "执行脚本")
-                {
-                    currentOperation.Status = OperationStatus.Running;
-                    this.InjectScript(currentOperation.Parameter);
-                    currentOperation.Status = OperationStatus.Completed;
-                    NextOperation();
-                    this.ExecuteOperation();
-                }
-                else if (currentOperation.Type == "等待页面加载")
-                {
-                    currentOperation.Status = OperationStatus.Running;
-                }
+
+                currentOperation.Status = OperationStatus.Executing;
+                this.InjectScript(currentOperation.Parameter);
+                currentOperation.Status = OperationStatus.Completed;
             }
         }
 
@@ -290,6 +224,61 @@ namespace KeywordExtractor
         private void WriteLog(string text)
         {
             this.tbLog.Text = text + "\r\n" + this.tbLog.Text;
+        }
+
+        private void btnNew_Click(object sender, RoutedEventArgs e)
+        {
+            WorkflowDialog dlg = new WorkflowDialog();
+            dlg.ShowDialog();
+            if (dlg.DataContext != null)
+            {
+                wf = (dlg.DataContext as WebflowViewModel).Model;
+                dgWorkflow.ItemsSource = wf.Operations;
+            }
+        }
+
+        private void btnImport_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.AddExtension = true;
+            dlg.DefaultExt = "xml";
+            dlg.Filter = "XML file|*.xml";
+
+            if (dlg.ShowDialog() == true)
+            {
+                using (var file = File.OpenText(dlg.FileName))
+                {
+                    XmlSerializer ser = new XmlSerializer(typeof(ScriptingWebflow));
+                    wf = (Webflow)ser.Deserialize(file);
+                    file.Close();
+                }
+            }
+
+            if (wf != null)
+            {
+                dgWorkflow.ItemsSource = wf.Operations;
+            }
+        }
+
+        private void btnExecute_Click(object sender, RoutedEventArgs e)
+        {
+            if (wf != null)
+            {
+                string url = wf.Url;
+                if (!(url.StartsWith("http://") || url.StartsWith("https://")))
+                {
+                    url = "http://" + url;
+                }
+
+                if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
+                {
+                    webBrowser.Navigate(url);
+                }
+                else
+                {
+                    MessageBox.Show("无效的地址", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

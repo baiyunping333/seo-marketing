@@ -66,13 +66,14 @@
                 <Label Content="名称" HorizontalAlignment="Right" VerticalAlignment="Center" />
                 <TextBox Grid.Column="1" VerticalAlignment="Center" Margin="5" Text="{Binding Path=SelectedOperation.Name}" />
                 <Label Content="类型" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                <ComboBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="5" SelectedIndex="0" ItemsSource="{Binding Path=OperationTypes}" SelectedValue="{Binding Path=SelectedOperation.Type}" />
+                <ComboBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="5" SelectedIndex="0" ItemsSource="{Binding Path=OperationTypes}" SelectedValue="{Binding Path=SelectedOperation.Type}" IsEnabled="False" />
                 <Label Content="参数" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <TextBox Grid.Column="1" Grid.Row="2" Margin="5" AcceptsReturn="True" Text="{Binding Path=SelectedOperation.Parameter}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
             </Grid>
         </GroupBox>
-        <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button Content="保存" VerticalAlignment="Center" Padding="10,5" Margin="10,0,0,0" Command="{Binding Path=SaveCommand}" />
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+            <Button Content="导出模板" VerticalAlignment="Center" Padding="10,5" Margin="10,0,0,0" Command="{Binding Path=SaveCommand}" />
+            <Button Content="确定" VerticalAlignment="Center" Padding="10,5" Margin="10,0,0,0" Click="Button_Click" />
         </StackPanel>
         
     </Grid>

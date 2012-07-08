@@ -21,7 +21,14 @@ namespace KeywordExtractor
         public WorkflowDialog()
         {
             InitializeComponent();
-            this.DataContext = new WorkflowViewModel();
+
+            var vm = new WebflowViewModel();
+            this.DataContext = new WebflowViewModel();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

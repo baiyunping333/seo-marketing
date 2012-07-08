@@ -75,15 +75,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Webflow\Scripting\ExecuteScriptOperation.cs" />
     <Compile Include="Webflow\Scripting\IncludeScriptOperation.cs" />
     <Compile Include="Webflow\Scripting\ScriptingWebflow.cs" />
     <Compile Include="Models\UserData.cs" />
     <Compile Include="Models\WaitLoadOperation.cs" />
-    <Compile Include="Models\ExecuteScriptOperation.cs" />
     <Compile Include="Services\DataService.cs" />
-    <Compile Include="Services\WorkflowService.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="ViewModels\WorkflowViewModel.cs" />
+    <Compile Include="ViewModels\WebflowViewModel.cs" />
     <Compile Include="WorkflowDialog.xaml.cs">
       <DependentUpon>WorkflowDialog.xaml</DependentUpon>
     </Compile>
