@@ -22,8 +22,8 @@ namespace KeywordExtractor
         {
             InitializeComponent();
 
-            var vm = new WebflowViewModel();
-            this.DataContext = new WebflowViewModel();
+            //var vm = new WebflowViewModel();
+            //this.DataContext = new WebflowViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

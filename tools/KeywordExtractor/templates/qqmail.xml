@@ -7,8 +7,8 @@
       <Name>登陆</Name>
       <Parameter>
         setTimeout(function(){
-        $('#uin').val('2269898162');
-        $('#p').val('tangua981547');
+        $('#uin').val('2269928675');
+        $('#p').val('yanche704640');
         $('#btlogin').click();
         },500);
       </Parameter>
@@ -33,9 +33,33 @@
           $('a.select_box[magicid=0]',mainDoc).click();
         },500);
         setTimeout(function(){
-          $('#bottle_send textarea', mainDoc).text('test');
+          $('#bottle_send textarea', mainDoc).text('test1');
           $('#bottle_send .send_bottom a[ck=send]', mainDoc).click();
         },1000);
+		setTimeout(function(){
+          $('a.btnThrow',mainDoc).click();
+          $('a.select_box[magicid=0]',mainDoc).click();
+        },1500);
+        setTimeout(function(){
+          $('#bottle_send textarea', mainDoc).text('test2');
+          $('#bottle_send .send_bottom a[ck=send]', mainDoc).click();
+        },2000);
+		setTimeout(function(){
+          $('a.btnThrow',mainDoc).click();
+          $('a.select_box[magicid=0]',mainDoc).click();
+        },2500);
+        setTimeout(function(){
+          $('#bottle_send textarea', mainDoc).text('test3');
+          $('#bottle_send .send_bottom a[ck=send]', mainDoc).click();
+        },3000);
+		setTimeout(function(){
+          $('a.btnThrow',mainDoc).click();
+          $('a.select_box[magicid=0]',mainDoc).click();
+        },3500);
+		setTimeout(function(){
+          $('#bottle_send textarea', mainDoc).text('test4');
+          $('#bottle_send .send_bottom a[ck=send]', mainDoc).click();
+        },4000);
       </Parameter>
       <Status>NotStarted</Status>
     </Operation>
