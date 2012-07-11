@@ -10,7 +10,7 @@ using Microsoft.Win32;
 
 namespace KeywordExtractor
 {
-    public class WebflowViewModel : ViewModelBase<ScriptingWebflow>
+    public class WebflowViewModel : ViewModelBase<Webflow>
     {
         #region Properties
         private Operation _selectedOperation;
