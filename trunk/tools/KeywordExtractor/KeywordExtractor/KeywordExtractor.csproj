@@ -66,9 +66,6 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Webflow">
-      <HintPath>..\lib\Webflow.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -129,6 +126,12 @@
   <ItemGroup>
     <Folder Include="Assets\" />
     <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\WebWizard\Webflow\Webflow.csproj">
+      <Project>{52C1A486-1252-44E3-92E4-F2E49F040FA2}</Project>
+      <Name>Webflow</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

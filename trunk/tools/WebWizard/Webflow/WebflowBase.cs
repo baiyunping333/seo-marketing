@@ -21,13 +21,13 @@ namespace Webflow
             }
         }
 
-        public DataContext Context { get; set; }
+        public DataContainer Data { get; set; }
 
         public List<TriggerBase> Triggers { get; set; }
 
         public WebflowBase()
         {
-            this.Context = new DataContext();
+            this.Data = new DataContainer();
             this.Triggers = new List<TriggerBase>();
         }
 

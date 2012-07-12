@@ -28,7 +28,8 @@ namespace KeywordExtractor
             webBrowser.Navigated += new NavigatedEventHandler(webBrowser_Navigated);
             webBrowser.LoadCompleted += new LoadCompletedEventHandler(webBrowser_LoadCompleted);
 
-            webflow = WebflowSamples.Maiku as DocumentWebflow;
+            webflow = WebflowSamples.QQMail as DocumentWebflow;
+            webBrowser.ObjectForScripting = webflow.Data;
         }
 
         private void webBrowser_Navigating(object sender, NavigatingCancelEventArgs e)
