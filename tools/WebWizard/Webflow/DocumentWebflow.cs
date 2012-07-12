@@ -20,15 +20,16 @@ namespace Webflow
 
         public void IncludeScript(string scriptUrl, bool persist = true)
         {
-            if (this.Document != null)
+            if (!persist || !this.persistentScriptUrls.Contains(scriptUrl))
             {
-                if (!persist || !this.persistentScriptUrls.Contains(scriptUrl))
+                this.persistentScriptUrls.Add(scriptUrl);
+
+                if (this.Document != null)
                 {
                     var script = this.Document.createElement("script") as IHTMLScriptElement;
                     var body = this.Document.body as IHTMLDOMNode;
                     script.src = scriptUrl;
                     body.appendChild(script as IHTMLDOMNode);
-                    this.persistentScriptUrls.Add(scriptUrl);
                 }
             }
         }
@@ -43,15 +44,28 @@ namespace Webflow
                 {
                     scriptText = string.Format("setTimeout(function(){{{0}}},{1})", scriptText, delay);
                 }
-                script.text = scriptText;
+                script.text = string.Format("(function(){{var data=window.top.external;{0}}})();", scriptText);
                 body.appendChild(script as IHTMLDOMNode);
+            }
+        }
+
+        public void ChangeContext(string frameId)
+        {
+            if (this.Document != null)
+            {
+                var window = this.Document.parentWindow;
+                var frame = window.frames.item(frameId) as IHTMLWindow2;
+                if (frame != null)
+                {
+                    this.Document = frame.document as HTMLDocument;
+                }
             }
         }
 
         protected void OnDocumentChanged()
         {
-            this.CurrentUrl = this.Document.url;
             this.ResolvePersistentScripts();
+            this.CurrentUrl = this.Document.url;
         }
 
         private void ResolvePersistentScripts()
