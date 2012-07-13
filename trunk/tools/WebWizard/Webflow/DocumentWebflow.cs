@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using mshtml;
+using System.Net;
 
 namespace Webflow
 {
@@ -42,9 +43,9 @@ namespace Webflow
                 var body = this.Document.body as IHTMLDOMNode;
                 if (delay > 0)
                 {
-                    scriptText = string.Format("setTimeout(function(){{{0}}},{1})", scriptText, delay);
+                    scriptText = string.Format("setTimeout(function(){{try{{{0}}}catch(e){{}}}},{1})", scriptText, delay);
                 }
-                script.text = string.Format("(function(){{var data=window.top.external;{0}}})();", scriptText);
+                script.text = string.Format("(function(){{try{{var data=window.top.external;{0}}}catch(e){{}}}})();", scriptText);
                 body.appendChild(script as IHTMLDOMNode);
             }
         }
