@@ -16,7 +16,7 @@ namespace KeywordExtractor
             {
                 DocumentWebflow webflow = new DocumentWebflow();
                 UrlTrigger trigger = new UrlTrigger("note.sdo.com");
-     
+
                 trigger.Operations.Add(new ExecuteScriptOperation(@"
                     $('#username').val('wbxfire@gmail.com');
                     $('#password').val('123456ab');
@@ -67,12 +67,43 @@ namespace KeywordExtractor
 
                 webflow.Triggers.Add(trigger);
 
-//                trigger.Operations.Add(new ExecuteScriptOperation(@"
-//                    var href = $('#my_note a:eq(0)').attr('href');
-//                    window.location.href = href;
-//                ", 1500));
+                //                trigger.Operations.Add(new ExecuteScriptOperation(@"
+                //                    var href = $('#my_note a:eq(0)').attr('href');
+                //                    window.location.href = href;
+                //                ", 1500));
 
-//                webflow.Triggers.Add(trigger);
+                //                webflow.Triggers.Add(trigger);
+
+                return webflow;
+            }
+        }
+
+        public static WebflowBase BlueHost
+        {
+            get
+            {
+                DocumentWebflow webflow = new DocumentWebflow();
+                UrlTrigger trigger = new UrlTrigger("my.bluehost.com/cgi-bin/cplogin$");
+
+                trigger.Operations.Add(new ExecuteScriptOperation(@"
+                    $('input[name=ldomain]').val('zhenfeic');
+                    $('input[name=lpass]').val('aaAbc123456!');
+                    $('input.submitButton').click();
+                ", 1500));
+                webflow.Triggers.Add(trigger);
+
+                trigger = new UrlTrigger("frontend/bluehost/index.html");
+
+                for (var i = 0; i < 3; i++)
+                {
+                    string sub = string.Format("haha{0}", i);
+
+                    trigger.Operations.Add(new HttpRequestOperation(
+                        string.Format("sub={0}&rdomain={1}&docroot={2}", sub, "zhenfei.com", sub),
+                        "https://my.bluehost.com/cgi/dm/subdomain/add", "POST", true));
+                }
+
+                webflow.Triggers.Add(trigger);
 
                 return webflow;
             }

@@ -45,7 +45,8 @@
   <ItemGroup>
     <Compile Include="DataContainer.cs" />
     <Compile Include="DocumentWebflow.cs" />
-    <Compile Include="Operations\ChangeContextOperation.cs" />
+    <Compile Include="Extern\Internet.cs" />
+    <Compile Include="Operations\HttpRequestOperation.cs" />
     <Compile Include="Operations\ExecuteScriptOperation.cs" />
     <Compile Include="Operations\IncludeScriptOperation.cs" />
     <Compile Include="Operations\OperationBase.cs" />

@@ -52,31 +52,31 @@ namespace SharpPoster
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            //BlueHost.Login("zhenfeic", "aaAbc123456!");
-            //BlueHost.AddSubDomain("zxc334", "zhenfei.com", "zxc334");
+            BlueHost.Login("zhenfeic", "aaAbc123456!");
+            BlueHost.AddSubDomain("test231", "zhenfei.com", "test231");
             //domains["too1"] = "zhenfei.com"
             /*
               Dictionary<string, string> aa = new Dictionary<string, string> { { "abc", "111" }, { "bbb", "aaa" } };
              */
-            Dictionary<string, string> domains = new Dictionary<string, string>();
-            domains.Add("t001", "qiaojoe.com");
-            domains.Add("sjxl", "qiaojoe.com");
-            domains.Add("qdcp", "qiaojoe.com");
-            domains.Add("qbcp", "qiaojoe.com");
-            domains.Add("mysql", "qiaojoe.com");
-            domains.Add("lsjf", "qiaojoe.com");
-            domains.Add("lsejf", "qiaojoe.com");
-            domains.Add("jfmj", "qiaojoe.com");
+            //Dictionary<string, string> domains = new Dictionary<string, string>();
+            //domains.Add("t001", "qiaojoe.com");
+            //domains.Add("sjxl", "qiaojoe.com");
+            //domains.Add("qdcp", "qiaojoe.com");
+            //domains.Add("qbcp", "qiaojoe.com");
+            //domains.Add("mysql", "qiaojoe.com");
+            //domains.Add("lsjf", "qiaojoe.com");
+            //domains.Add("lsejf", "qiaojoe.com");
+            //domains.Add("jfmj", "qiaojoe.com");
 
-            //jf01.qiaojoe.com~jf99.qiaojoe.com
-            for (int i = 1; i <= 99; i++) {
-                domains.Add("jf" + string.Format("{0:D2}", i), "qiaojoe.com");
-            }
+            ////jf01.qiaojoe.com~jf99.qiaojoe.com
+            //for (int i = 1; i <= 99; i++) {
+            //    domains.Add("jf" + string.Format("{0:D2}", i), "qiaojoe.com");
+            //}
 
-            foreach (KeyValuePair<string, string> item in domains)
-            {
-                BlueHost.DeleteDomain(item.Key, item.Value);
-            }
+            //foreach (KeyValuePair<string, string> item in domains)
+            //{
+            //    BlueHost.DeleteDomain(item.Key, item.Value);
+            //}
             //BlueHost.DeleteDomain("t002", "zhenfei.com");
         }
 
