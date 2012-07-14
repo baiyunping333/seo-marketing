@@ -27,7 +27,10 @@
             var wf = webflow as DocumentWebflow;
             if (wf != null)
             {
+                wf.WriteLog(string.Format("执行脚本'{0}':...", this.Name));
                 wf.InjectScript(this.Parameter, this.Delay);
+                wf.WriteLog(string.Format("脚本'{0}'执行完毕.", this.Name));
+                this.InvokeCallback(null);
             }
         }
     }

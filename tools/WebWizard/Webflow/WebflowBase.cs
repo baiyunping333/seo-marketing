@@ -16,10 +16,13 @@ namespace Webflow
                 if (this._currentUrl != value)
                 {
                     this._currentUrl = value;
+                    this.Logger.WriteLine(string.Format("当前地址：{0}", this.CurrentUrl));
                     this.OnCurrentUrlChanged();
                 }
             }
         }
+
+        public ILogger Logger { get; set; }
 
         public DataContainer Data { get; set; }
 
@@ -31,15 +34,24 @@ namespace Webflow
             this.Triggers = new List<TriggerBase>();
         }
 
-        protected void OnCurrentUrlChanged()
+        public void WriteLog(string text)
         {
-            foreach (var t in this.Triggers)
+            if (this.Logger != null)
             {
-                if (t is UrlTrigger)
-                {
-                    t.Evaluate(this);
-                }
+                this.Logger.WriteLine(text);
             }
+        }
+
+        public void ClearLog()
+        {
+            if (this.Logger != null)
+            {
+                this.Logger.Clear();
+            }
+        }
+
+        protected virtual void OnCurrentUrlChanged()
+        {
         }
     }
 }

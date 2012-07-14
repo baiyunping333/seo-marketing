@@ -41,21 +41,23 @@ namespace Webflow.Operations
                 client.Headers.Add("user-agent", DefaultUserAgent);
                 client.Headers.Add("Cookie", Internet.GetCookieString(this.Uri));
 
+                wf.WriteLog(string.Format("执行Http请求'{0}':地址({1}),方法({2}),参数({3}),异步({4}),", this.Name, this.Uri.ToString(), this.Method, this.Parameter, this.IsAsync));
                 if (this.IsAsync)
                 {
-                    client.UploadStringCompleted += new UploadStringCompletedEventHandler(client_UploadStringCompleted);
+                    client.UploadStringCompleted += (sender, e) =>
+                    {
+                        wf.WriteLog(string.Format("Http请求'{0}'执行完毕", this.Name));
+                        this.InvokeCallback(e.Result);
+                    };
                     client.UploadStringAsync(this.Uri, this.Parameter);
                 }
                 else
                 {
                     string result = client.UploadString(this.Uri, this.Parameter);
+                    wf.WriteLog(string.Format("Http请求'{0}'执行完毕", this.Name));
+                    this.InvokeCallback(result);
                 }
             }
-        }
-
-        private void client_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
-        {
-            string result = e.Result;
         }
     }
 }

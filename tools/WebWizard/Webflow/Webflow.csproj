@@ -46,6 +46,7 @@
     <Compile Include="DataContainer.cs" />
     <Compile Include="DocumentWebflow.cs" />
     <Compile Include="Extern\Internet.cs" />
+    <Compile Include="ILogger.cs" />
     <Compile Include="Operations\HttpRequestOperation.cs" />
     <Compile Include="Operations\ExecuteScriptOperation.cs" />
     <Compile Include="Operations\IncludeScriptOperation.cs" />

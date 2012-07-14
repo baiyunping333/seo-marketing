@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using mshtml;
 using System.Net;
+using Webflow.Triggers;
 
 namespace Webflow
 {
@@ -50,23 +51,21 @@ namespace Webflow
             }
         }
 
-        public void ChangeContext(string frameId)
-        {
-            if (this.Document != null)
-            {
-                var window = this.Document.parentWindow;
-                var frame = window.frames.item(frameId) as IHTMLWindow2;
-                if (frame != null)
-                {
-                    this.Document = frame.document as HTMLDocument;
-                }
-            }
-        }
-
         protected void OnDocumentChanged()
         {
             this.ResolvePersistentScripts();
             this.CurrentUrl = this.Document.url;
+        }
+
+        protected override void OnCurrentUrlChanged()
+        {
+            foreach (var t in this.Triggers)
+            {
+                if (t is UrlTrigger)
+                {
+                    t.Evaluate(this);
+                }
+            }
         }
 
         private void ResolvePersistentScripts()

@@ -28,18 +28,17 @@ namespace KeywordExtractor
             webBrowser.Navigated += new NavigatedEventHandler(webBrowser_Navigated);
             webBrowser.LoadCompleted += new LoadCompletedEventHandler(webBrowser_LoadCompleted);
 
-            webflow = WebflowSamples.QQMail as DocumentWebflow;
+            webflow = WebflowSamples.BlueHost as DocumentWebflow;
+            webflow.Logger = new TextBoxLogger(this.tbLog);
             webBrowser.ObjectForScripting = webflow.Data;
         }
 
         private void webBrowser_Navigating(object sender, NavigatingCancelEventArgs e)
         {
-            this.WriteLog("Navigating:" + e.Uri.ToString());
         }
 
         private void webBrowser_Navigated(object sender, NavigationEventArgs e)
         {
-            this.WriteLog("Navigated: " + e.Uri.ToString());
             tbAddress.Text = e.Uri.ToString();
             btnGoBack.IsEnabled = webBrowser.CanGoBack;
             btnGoForward.IsEnabled = webBrowser.CanGoForward;
@@ -90,11 +89,6 @@ namespace KeywordExtractor
         private void btnGoForward_Click(object sender, RoutedEventArgs e)
         {
             webBrowser.GoForward();
-        }
-
-        private void WriteLog(string text)
-        {
-            this.tbLog.Text = text + "\r\n" + this.tbLog.Text;
         }
 
         private void btnNew_Click(object sender, RoutedEventArgs e)

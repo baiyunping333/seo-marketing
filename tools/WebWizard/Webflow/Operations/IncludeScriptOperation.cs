@@ -27,7 +27,9 @@
             var wf = webflow as DocumentWebflow;
             if (wf != null)
             {
+                wf.WriteLog(string.Format("引用脚本'{0}':地址({1})", this.Name, this.Parameter));
                 wf.IncludeScript(this.Parameter, this.Persist);
+                this.InvokeCallback(null);
             }
         }
     }
