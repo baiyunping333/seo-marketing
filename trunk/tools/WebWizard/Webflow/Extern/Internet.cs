@@ -7,9 +7,19 @@ namespace Webflow.Extern
 {
     public static class Internet
     {
+        private static readonly int INTERNET_OPTION_END_BROWSER_SESSION = 42;
+
+        [DllImport("wininet.dll", SetLastError = true)]
+        private static extern bool InternetSetOption(IntPtr hInternet, int dwOption, IntPtr lpBuffer, int lpdwBufferLength);
+
         [DllImport("wininet.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern bool InternetGetCookie(
           string url, string name, StringBuilder data, ref int dataSize);
+
+        public static void ClearCookie()
+        {
+            InternetSetOption(IntPtr.Zero, INTERNET_OPTION_END_BROWSER_SESSION, IntPtr.Zero, 0);
+        }
 
         public static string GetCookieString(Uri uri)
         {

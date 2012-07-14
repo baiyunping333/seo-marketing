@@ -1,24 +1,29 @@
-﻿namespace Webflow.Operations
+﻿using System;
+namespace Webflow.Operations
 {
     public class IncludeScriptOperation : OperationBase
     {
+        public string ScriptUrl { get; set; }
         public bool Persist { get; set; }
 
-        public IncludeScriptOperation()
+        public IncludeScriptOperation(string url)
             : base()
         {
+            this.ScriptUrl = url;
             this.Persist = true;
         }
 
-        public IncludeScriptOperation(string param)
-            : base(param)
+        public IncludeScriptOperation(string url, bool persist)
+            : base()
         {
-            this.Persist = true;
+            this.ScriptUrl = url;
+            this.Persist = persist;
         }
 
-        public IncludeScriptOperation(string param, bool persist)
-            : base(param)
+        public IncludeScriptOperation(string name, string url, bool persist, Action<object> callback)
+            : base(name, callback)
         {
+            this.ScriptUrl = url;
             this.Persist = persist;
         }
 
@@ -27,8 +32,10 @@
             var wf = webflow as DocumentWebflow;
             if (wf != null)
             {
-                wf.WriteLog(string.Format("引用脚本'{0}':地址({1})", this.Name, this.Parameter));
-                wf.IncludeScript(this.Parameter, this.Persist);
+                this.Status = OperationStatus.Executing;
+                wf.WriteLog(string.Format("引用脚本'{0}':地址({1})", this.Name, this.ScriptUrl));
+                wf.IncludeScript(this.ScriptUrl, this.Persist);
+                this.Status = OperationStatus.Completed;
                 this.InvokeCallback(null);
             }
         }
