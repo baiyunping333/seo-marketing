@@ -2,6 +2,7 @@
 using mshtml;
 using System.Net;
 using Webflow.Triggers;
+using Webflow.Extern;
 
 namespace Webflow
 {
@@ -18,6 +19,11 @@ namespace Webflow
                 this._document = value;
                 this.OnDocumentChanged();
             }
+        }
+
+        public void ClearCookie()
+        {
+            Internet.ClearCookie();
         }
 
         public void IncludeScript(string scriptUrl, bool persist = true)

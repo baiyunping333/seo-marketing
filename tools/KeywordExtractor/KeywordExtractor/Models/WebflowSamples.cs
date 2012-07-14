@@ -83,6 +83,7 @@ namespace KeywordExtractor
             get
             {
                 DocumentWebflow webflow = new DocumentWebflow();
+                webflow.ClearCookie();
                 UrlTrigger trigger = new UrlTrigger("my.bluehost.com/cgi-bin/cplogin$");
 
                 trigger.Operations.Add(new ExecuteScriptOperation(@"
@@ -94,13 +95,14 @@ namespace KeywordExtractor
 
                 trigger = new UrlTrigger("frontend/bluehost/index.html");
 
-                for (var i = 0; i < 3; i++)
+                for (var i = 0; i < 12; i++)
                 {
-                    string sub = string.Format("haha{0}", i);
+                    string sub = string.Format("cool{0}", i);
 
                     trigger.Operations.Add(new HttpRequestOperation(
+                        "https://my.bluehost.com/cgi/dm/subdomain/add",
                         string.Format("sub={0}&rdomain={1}&docroot={2}", sub, "zhenfei.com", sub),
-                        "https://my.bluehost.com/cgi/dm/subdomain/add", "POST", true));
+                        "POST", true));
                 }
 
                 webflow.Triggers.Add(trigger);
