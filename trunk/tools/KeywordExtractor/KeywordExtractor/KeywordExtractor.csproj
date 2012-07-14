@@ -76,6 +76,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\WebflowSamples.cs" />
+    <Compile Include="TextBoxLogger.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="WorkflowDialog.xaml.cs">
       <DependentUpon>WorkflowDialog.xaml</DependentUpon>
