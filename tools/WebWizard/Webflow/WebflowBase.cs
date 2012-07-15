@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using Webflow.Log;
 using Webflow.Triggers;
+using Webflow.Interop;
 
 namespace Webflow
 {
@@ -16,7 +18,7 @@ namespace Webflow
                 if (this._currentUrl != value)
                 {
                     this._currentUrl = value;
-                    this.Logger.WriteLine(string.Format("当前地址：{0}", this.CurrentUrl));
+                    this.Logger.Log(string.Format("当前地址：{0}", this.CurrentUrl));
                     this.OnCurrentUrlChanged();
                 }
             }
@@ -30,24 +32,9 @@ namespace Webflow
 
         public WebflowBase()
         {
+            this.Logger = new ConsoleLogger();
             this.Data = new DataContainer();
             this.Triggers = new List<TriggerBase>();
-        }
-
-        public void WriteLog(string text)
-        {
-            if (this.Logger != null)
-            {
-                this.Logger.WriteLine(text);
-            }
-        }
-
-        public void ClearLog()
-        {
-            if (this.Logger != null)
-            {
-                this.Logger.Clear();
-            }
         }
 
         protected virtual void OnCurrentUrlChanged()

@@ -33,7 +33,7 @@ namespace Webflow.Operations
             if (wf != null)
             {
                 this.Status = OperationStatus.Executing;
-                wf.WriteLog(string.Format("引用脚本'{0}':地址({1})", this.Name, this.ScriptUrl));
+                wf.Logger.Log(string.Format("引用脚本'{0}':地址({1})", this.Name, this.ScriptUrl));
                 wf.IncludeScript(this.ScriptUrl, this.Persist);
                 this.Status = OperationStatus.Completed;
                 this.InvokeCallback(null);
