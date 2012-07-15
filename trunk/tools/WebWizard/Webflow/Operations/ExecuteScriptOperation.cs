@@ -32,10 +32,10 @@ namespace Webflow.Operations
             if (wf != null)
             {
                 this.Status = OperationStatus.Executing;
-                wf.WriteLog(string.Format("执行脚本'{0}':...", this.Name));
+                wf.Logger.Log(string.Format("执行脚本'{0}':...", this.Name));
                 wf.InjectScript(this.ScriptText, this.Delay);
                 this.Status = OperationStatus.Completed;
-                wf.WriteLog(string.Format("脚本'{0}'执行完毕.", this.Name));
+                wf.Logger.Log(string.Format("脚本'{0}'执行完毕.", this.Name));
                 this.InvokeCallback(null);
             }
         }

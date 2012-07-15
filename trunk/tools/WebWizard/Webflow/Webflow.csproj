@@ -44,10 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataContainer.cs" />
+    <Compile Include="Log\ConsoleLogger.cs" />
+    <Compile Include="Interop\DataContainer.cs" />
     <Compile Include="DocumentWebflow.cs" />
     <Compile Include="Extern\Internet.cs" />
-    <Compile Include="ILogger.cs" />
+    <Compile Include="Log\ILogger.cs" />
+    <Compile Include="Log\LogType.cs" />
     <Compile Include="Operations\HttpRequestOperation.cs" />
     <Compile Include="Operations\ExecuteScriptOperation.cs" />
     <Compile Include="Operations\IncludeScriptOperation.cs" />

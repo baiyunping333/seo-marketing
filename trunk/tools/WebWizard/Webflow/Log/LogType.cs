@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Webflow
+namespace Webflow.Log
 {
-    public interface ILogger
+    public enum LogType
     {
-        void WriteLine(string text);
-        void Clear();
+        Information,
+        Warning,
+        Error
     }
 }

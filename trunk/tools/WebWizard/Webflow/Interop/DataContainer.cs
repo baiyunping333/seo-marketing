@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace Webflow
+namespace Webflow.Interop
 {
     [ComVisible(true)]
     public class DataContainer

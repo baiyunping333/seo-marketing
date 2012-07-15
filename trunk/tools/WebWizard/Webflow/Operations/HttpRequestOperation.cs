@@ -1,10 +1,8 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Net;
 using System.Text;
-using System.IO;
 using Webflow.Extern;
-using System.Security.Cryptography.X509Certificates;
-using System.Net.Security;
 
 namespace Webflow.Operations
 {
@@ -28,6 +26,14 @@ namespace Webflow.Operations
             this.Method = "POST";
         }
 
+        public HttpRequestOperation(string url, NameValueCollection param)
+            : base()
+        {
+            this.Uri = new Uri(url);
+            this.Parameter = this.SerializeParameter(param);
+            this.Method = "POST";
+        }
+
         public HttpRequestOperation(string url, string param, string method, bool async)
             : base()
         {
@@ -37,11 +43,29 @@ namespace Webflow.Operations
             this.IsAsync = async;
         }
 
+        public HttpRequestOperation(string url, NameValueCollection param, string method, bool async)
+            : base()
+        {
+            this.Uri = new Uri(url);
+            this.Parameter = this.SerializeParameter(param);
+            this.Method = method;
+            this.IsAsync = async;
+        }
+
         public HttpRequestOperation(string name, string url, string param, string method, bool async, Action<object> callback)
             : base(name, callback)
         {
             this.Uri = new Uri(url);
             this.Parameter = param;
+            this.Method = method;
+            this.IsAsync = async;
+        }
+
+        public HttpRequestOperation(string name, string url, NameValueCollection param, string method, bool async, Action<object> callback)
+            : base(name, callback)
+        {
+            this.Uri = new Uri(url);
+            this.Parameter = this.SerializeParameter(param);
             this.Method = method;
             this.IsAsync = async;
         }
@@ -56,14 +80,14 @@ namespace Webflow.Operations
                 client.Headers.Add("user-agent", DefaultUserAgent);
                 client.Headers.Add("Cookie", Internet.GetCookieString(this.Uri));
 
-                wf.WriteLog(string.Format("执行Http请求'{0}':地址({1}),方法({2}),参数({3}),异步({4}),", this.Name, this.Uri.ToString(), this.Method, this.Parameter, this.IsAsync));
                 this.Status = OperationStatus.Executing;
+                wf.Logger.Log(string.Format("执行Http请求'{0}':地址({1}),方法({2}),参数({3}),异步({4}),", this.Name, this.Uri.ToString(), this.Method, this.Parameter, this.IsAsync));
 
                 if (this.IsAsync)
                 {
                     client.UploadStringCompleted += (sender, e) =>
                     {
-                        wf.WriteLog(string.Format("Http请求'{0}'执行完毕", this.Name));
+                        wf.Logger.Log(string.Format("Http请求'{0}'执行完毕", this.Name));
                         this.Status = OperationStatus.Completed;
                         this.InvokeCallback(e.Result);
                     };
@@ -73,10 +97,30 @@ namespace Webflow.Operations
                 {
                     string result = client.UploadString(this.Uri, this.Parameter);
                     this.Status = OperationStatus.Completed;
-                    wf.WriteLog(string.Format("Http请求'{0}'执行完毕", this.Name));
+                    wf.Logger.Log(string.Format("Http请求'{0}'执行完毕", this.Name));
                     this.InvokeCallback(result);
                 }
             }
+        }
+
+        private string SerializeParameter(NameValueCollection param)
+        {
+            StringBuilder result = new StringBuilder();
+
+            foreach (var key in param.AllKeys)
+            {
+                result.Append(key);
+                result.Append("=");
+                result.Append(param[key]);
+                result.Append("&");
+            }
+
+            if (result.Length > 0)
+            {
+                result.Remove(result.Length - 1, 1);
+            }
+
+            return result.ToString();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Webflow.Triggers
         {
             if (this.UrlPattern.IsMatch(webflow.CurrentUrl))
             {
-                webflow.WriteLog(string.Format("Url触发器'{0}'", this.UrlPattern.ToString()));
+                webflow.Logger.Log(string.Format("Url触发器'{0}'", this.UrlPattern.ToString()));
                 foreach (var op in this.Operations)
                 {
                     op.Execute(webflow);
