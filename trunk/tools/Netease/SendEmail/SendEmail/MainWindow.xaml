@@ -5,7 +5,10 @@
     <Grid>
         <TabControl Height="302" HorizontalAlignment="Left" Margin="8,5,0,0" Name="tabControl1" VerticalAlignment="Top" Width="165">
             <TabItem Header="tabItem1" Name="tabItem1">
-                <DataGrid AutoGenerateColumns="False" Height="266" Name="dataGrid1" Width="154" />
+                <Grid>
+                    <Button Content="Import" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" Command="{Binding ImportAccountCommand}" />
+                    <DataGrid ItemsSource="{Binding Accounts}" Margin="0,25,0,0" />
+                </Grid>
             </TabItem>
             <TabItem Header="tabItem2" Name="tabItem2">
                 <Grid />
