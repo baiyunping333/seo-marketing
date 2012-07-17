@@ -1,0 +1,16 @@
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\bin\Debug\SendEmail.exe
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\bin\Debug\SendEmail.pdb
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\bin\Debug\Webflow.dll
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\obj\x86\Debug\MainWindow.baml
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\obj\x86\Debug\MainWindow.g.cs
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\obj\x86\Debug\App.g.cs
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\obj\x86\Debug\SendEmail_MarkupCompile.cache
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\obj\x86\Debug\SendEmail.g.resources
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\obj\x86\Debug\SendEmail.Properties.Resources.resources
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\obj\x86\Debug\SendEmail.exe
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\obj\x86\Debug\SendEmail.pdb
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\obj\x86\Debug\AddAccount.baml
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\obj\x86\Debug\AddAccount.g.cs
