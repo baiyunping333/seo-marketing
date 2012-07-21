@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using mshtml;
+using System.IO;
 
 namespace MailRegisterFrm
 {
@@ -24,22 +26,19 @@ namespace MailRegisterFrm
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             HtmlDocument doc = webBrowser1.Document;
+            HTMLDocument comDoc = doc.DomDocument as HTMLDocument;
+            HTMLBody comBody = comDoc.body as HTMLBody;
             doc.GetElementById("unameInp").SetAttribute("value", "afei__002");
             doc.GetElementById("passwInp").SetAttribute("value", "happy123");
             doc.GetElementById("passConfim").SetAttribute("value", "happy123");
 
             HtmlElement vcode = doc.GetElementById("vcode_img");
-            vcode.Style = "position: absolute; z-index: 9999; top: 0px; left: 0px";
-            //抓图
-            var b = new Bitmap(vcode.ClientRectangle.Width, vcode.ClientRectangle.Height);
-            webBrowser1.DrawToBitmap(b, new Rectangle(new Point(), vcode.ClientRectangle.Size));
-            
-            //vcode.Style = "";
-            //pictureBox1.Image = b;
-            b.Save("test.jpg");
-            
-           
-            
+            IHTMLControlRange range = (IHTMLControlRange)comBody.createControlRange();
+            range.add(vcode.DomElement as IHTMLControlElement);
+            range.execCommand("Copy", false, null);
+
+            var image = Clipboard.GetImage();
+            pictureBox1.Image = image; 
         }
 
         void textBox1_KeyUp(object sender, KeyEventArgs e)
