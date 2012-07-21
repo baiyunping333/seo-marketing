@@ -1,0 +1,9 @@
+F:\seo-marketing\tools\Netease\MailRegisterFrm\MailRegisterFrm\bin\Debug\MailRegisterFrm.exe
+F:\seo-marketing\tools\Netease\MailRegisterFrm\MailRegisterFrm\bin\Debug\MailRegisterFrm.pdb
+F:\seo-marketing\tools\Netease\MailRegisterFrm\MailRegisterFrm\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\seo-marketing\tools\Netease\MailRegisterFrm\MailRegisterFrm\obj\x86\Debug\MailRegisterFrm.form_main.resources
+F:\seo-marketing\tools\Netease\MailRegisterFrm\MailRegisterFrm\obj\x86\Debug\MailRegisterFrm.Properties.Resources.resources
+F:\seo-marketing\tools\Netease\MailRegisterFrm\MailRegisterFrm\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\seo-marketing\tools\Netease\MailRegisterFrm\MailRegisterFrm\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\seo-marketing\tools\Netease\MailRegisterFrm\MailRegisterFrm\obj\x86\Debug\MailRegisterFrm.exe
+F:\seo-marketing\tools\Netease\MailRegisterFrm\MailRegisterFrm\obj\x86\Debug\MailRegisterFrm.pdb
