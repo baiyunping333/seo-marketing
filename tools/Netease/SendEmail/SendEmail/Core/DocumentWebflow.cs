@@ -14,6 +14,8 @@ using SendEmail.Core;
 using System.IO;
 using Microsoft.Win32;
 using Webflow;
+using Webflow.Triggers;
+using Webflow.Operations;
 
 namespace SendEmail.Core
 {
@@ -23,6 +25,30 @@ namespace SendEmail.Core
         {
             MessageBox.Show("Init!");
         }
+
+        public string Login(string username ,string password) 
+        {
+            string res="1234";
+            DocumentWebflow docWeb = new DocumentWebflow();
+            docWeb.ClearCookie();
+            UrlTrigger trigger = new UrlTrigger("my.bluehost.com/cgi-bin/cplogin$");
+            
+            trigger.Operations.Add(new HttpRequestOperation(
+            "https://my.bluehost.com/cgi/dm/subdomain/add",
+            string.Format("sub={0}&rdomain={1}&docroot={2}", "dsfasdf", "zhenfei.com", "sdfsdfs"),
+            "POST", true));
+
+            docWeb.Triggers.Add(trigger);
+            
+            return res;
+        }
+
+        public string SendMail(string from, string to, string title, string content) 
+        {
+            string res = "124";
+            return res;
+        }
+
 
         //获取发信帐号信息
         public Dictionary<string, string> GetSenderInfo() { 
