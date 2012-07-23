@@ -19,11 +19,12 @@ namespace SendEmail.ViewModels
         public ObservableCollection<ReceiveAccounts> ReceiveAccounts { get; set; }
 
         public ICommand ImportAccountCommand { get; set; }
-        public ICommand WebBrowserInit { get; set; }
+   
 
         public MainWindowViewModel()
         {
             this.Accounts = new ObservableCollection<Account>();
+            this.ReceiveAccounts = new ObservableCollection<ReceiveAccounts>();
             this.ImportAccountCommand = new DelegateCommand<string>((isLeft) =>
             {
                 //string isleftTab = isLeft as string;
@@ -77,10 +78,7 @@ namespace SendEmail.ViewModels
                 
             });
 
-            this.WebBrowserInit = new DelegateCommand(() =>
-            {
 
-            });
 
             /*
             //Sample Data
