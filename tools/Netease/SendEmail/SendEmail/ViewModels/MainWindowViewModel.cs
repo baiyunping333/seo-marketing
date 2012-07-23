@@ -9,12 +9,14 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
 using SendEmail.Core;
 using System.IO;
+using System.Windows;
 
 namespace SendEmail.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase<Account>
     {
         public ObservableCollection<Account> Accounts { get; set; }
+        public ObservableCollection<ReceiveAccounts> ReceiveAccounts { get; set; }
 
         public ICommand ImportAccountCommand { get; set; }
         public ICommand WebBrowserInit { get; set; }
@@ -22,31 +24,62 @@ namespace SendEmail.ViewModels
         public MainWindowViewModel()
         {
             this.Accounts = new ObservableCollection<Account>();
-            this.ImportAccountCommand = new DelegateCommand(() =>
+            this.ImportAccountCommand = new DelegateCommand<string>((isLeft) =>
             {
-                OpenFileDialog dlg = new OpenFileDialog();
-
-                if (dlg.ShowDialog() == true)
+                //string isleftTab = isLeft as string;
+                MessageBox.Show(isLeft);
+                if (isLeft == "left")
                 {
-                    string fname = dlg.FileName;
-                    string[] infos = new string[2];
+                    OpenFileDialog dlg = new OpenFileDialog();
 
-
-                    //文本操作===>读Txt start====
-                    StreamReader sReader = File.OpenText(fname);
-                    string str;
-                    int i = 0;
-                    while ((str = sReader.ReadLine()) != null)
+                    if (dlg.ShowDialog() == true)
                     {
-                        ++i;
-                        infos = str.Split('|');
-                        this.Accounts.Add(new Account {ID=i.ToString(), UserName = infos[0], Password = infos[1] });
+                        string fname = dlg.FileName;
+                        string[] infos = new string[2];
 
+
+                        //文本操作===>读Txt start====
+                        StreamReader sReader = File.OpenText(fname);
+                        string str;
+                        int i = 0;
+                        while ((str = sReader.ReadLine()) != null)
+                        {
+                            ++i;
+                            infos = str.Split('|');
+                            this.Accounts.Add(new Account { ID = i.ToString(), UserName = infos[0], Password = infos[1] });
+
+                        }
                     }
                 }
-                this.WebBrowserInit = new DelegateCommand(() => { 
+                else {
+
+                    OpenFileDialog dlg = new OpenFileDialog();
+
+                    if (dlg.ShowDialog() == true)
+                    {
+                        string fname = dlg.FileName;
+                        string[] infos = new string[2];
+
+
+                        //文本操作===>读Txt start====
+                        StreamReader sReader = File.OpenText(fname);
+                        string str;
+                        int i = 0;
+                        while ((str = sReader.ReadLine()) != null)
+                        {
+                            ++i;
+                            this.ReceiveAccounts.Add(new ReceiveAccounts { ID = i.ToString(), UserName = str });
+
+                        }
+                    }
                     
-                });
+                }
+                
+            });
+
+            this.WebBrowserInit = new DelegateCommand(() =>
+            {
+
             });
 
             /*

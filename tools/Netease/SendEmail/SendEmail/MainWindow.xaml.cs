@@ -25,17 +25,9 @@ namespace SendEmail
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
-            webB.Initialized += new EventHandler(webB_Initialized);
-        }
-
-        void webB_Initialized(object sender, EventArgs e)
-        {
-            MessageBox.Show("go to url!");
-        }
-
-        void webB_LoadCompleted(object sender, NavigationEventArgs e)
-        {
             
         }
+
+
     }
 }
