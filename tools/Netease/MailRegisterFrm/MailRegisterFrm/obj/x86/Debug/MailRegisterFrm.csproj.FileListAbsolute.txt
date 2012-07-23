@@ -16,3 +16,4 @@ E:\svn\seo-marketing\trunk\tools\Netease\MailRegisterFrm\MailRegisterFrm\obj\x86
 E:\svn\seo-marketing\trunk\tools\Netease\MailRegisterFrm\MailRegisterFrm\obj\x86\Debug\MailRegisterFrm.Properties.Resources.resources
 E:\svn\seo-marketing\trunk\tools\Netease\MailRegisterFrm\MailRegisterFrm\obj\x86\Debug\GenerateResource.read.1.tlog
 E:\svn\seo-marketing\trunk\tools\Netease\MailRegisterFrm\MailRegisterFrm\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\seo-marketing\tools\Netease\MailRegisterFrm\MailRegisterFrm\bin\Debug\MailRegisterFrm.exe.config
