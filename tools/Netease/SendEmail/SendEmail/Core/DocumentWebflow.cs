@@ -16,37 +16,61 @@ using Microsoft.Win32;
 using Webflow;
 using Webflow.Triggers;
 using Webflow.Operations;
+using System.Text.RegularExpressions;
+using System.Net;
+using System.Web;
+using System.Text;
 
 namespace SendEmail.Core
 {
     class NetEaseWebflow : DocumentWebflow
     {
-        public NetEaseWebflow()
-        {
-            MessageBox.Show("Init!");
+        private string result;
+        public string getSessionId(string loginStr) {
+            loginStr = "index.jsp?sid=NCHSFNTQtROyopYnJFQQoDMSolGPSTQp\" name=";
+            string pattern = @"index.jsp?sid=(.*)";
+            var MatchCollectionmc = Regex.Matches(loginStr, pattern);
+            
+            return loginStr;
         }
-
         public string Login(string username ,string password) 
         {
-            string res="1234";
             DocumentWebflow docWeb = new DocumentWebflow();
             docWeb.ClearCookie();
-            UrlTrigger trigger = new UrlTrigger("my.bluehost.com/cgi-bin/cplogin$");
-            
-            trigger.Operations.Add(new HttpRequestOperation(
-            "https://my.bluehost.com/cgi/dm/subdomain/add",
-            string.Format("sub={0}&rdomain={1}&docroot={2}", "dsfasdf", "zhenfei.com", "sdfsdfs"),
-            "POST", true));
 
-            docWeb.Triggers.Add(trigger);
+
+            HttpRequestOperation dp = new HttpRequestOperation(
+            "login163",
+            "https://ssl.mail.163.com/entry/coremail/fcg/ntesdoor2?df=webmail163&from=web&funcid=loginone&iframe=1&language=-1&net=t&passtype=1&product=mail163&race=-2_-2_-2_db&style=-1&uid=afei_test001@163.com",
+            "savelogin=0&url2=http%3A%2F%2Fmail.163.com%2Ferrorpage%2Ferr_163.htm&username=afei_test001&password=happy_123",
+            "POST", false, (o) => {
+                //MessageBox.Show(o.ToString());
+                this.result = o.ToString();
+            });
+            dp.Execute(docWeb);
             
-            return res;
+            //this.txtRes.Text = this.result;
+            return this.result;
         }
 
         public string SendMail(string from, string to, string title, string content) 
         {
-            string res = "124";
-            return res;
+            DocumentWebflow docWeb = new DocumentWebflow();
+            
+            //docWeb.ClearCookie();
+            HttpRequestOperation dp = new HttpRequestOperation(
+            "SendMail163",
+            "http://twebmail.mail.163.com/js4/s?sid=NCHSFNTQtROyopYnJFQQoDMSolGPSTQp&func=mbox:compose&cl_send=2&l=compose&action=deliver",
+            //String.Format("var={0}",mailContent),
+            "POST", false, (o) =>
+            {
+                //MessageBox.Show(o.ToString());
+                this.result = o.ToString();
+            });
+            dp.Execute(docWeb);
+
+            //this.txtRes.Text = this.result;
+            return this.result;
         }
 
 
