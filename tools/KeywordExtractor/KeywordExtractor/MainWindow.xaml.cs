@@ -10,6 +10,7 @@ using Webflow;
 using Webflow.Operations;
 using Webflow.Triggers;
 using System.Text.RegularExpressions;
+using Awesomium.Core;
 
 namespace KeywordExtractor
 {
@@ -24,29 +25,37 @@ namespace KeywordExtractor
         {
             InitializeComponent();
 
-            webBrowser.Navigating += new NavigatingCancelEventHandler(webBrowser_Navigating);
-            webBrowser.Navigated += new NavigatedEventHandler(webBrowser_Navigated);
-            webBrowser.LoadCompleted += new LoadCompletedEventHandler(webBrowser_LoadCompleted);
+            webBrowser.BeginNavigation += new Awesomium.Core.BeginNavigationEventHandler(webBrowser_BeginNavigation);
+            webBrowser.DomReady += new EventHandler(webBrowser_DomReady);
+            webBrowser.LoadCompleted += new EventHandler(webBrowser_LoadCompleted);
 
             webflow = WebflowSamples.BlueHost as DocumentWebflow;
             webflow.Logger = new TextBoxLogger(this.tbLog);
-            webBrowser.ObjectForScripting = webflow.Data;
         }
 
-        private void webBrowser_Navigating(object sender, NavigatingCancelEventArgs e)
+        private void webBrowser_BeginNavigation(object sender, Awesomium.Core.BeginNavigationEventArgs e)
         {
+            //throw new NotImplementedException();
         }
 
-        private void webBrowser_Navigated(object sender, NavigationEventArgs e)
+        private void webBrowser_DomReady(object sender, EventArgs e)
         {
-            tbAddress.Text = e.Uri.ToString();
-            btnGoBack.IsEnabled = webBrowser.CanGoBack;
-            btnGoForward.IsEnabled = webBrowser.CanGoForward;
+            tbAddress.Text = webBrowser.Source.ToString();
         }
 
-        private void webBrowser_LoadCompleted(object sender, NavigationEventArgs e)
+        private void webBrowser_LoadCompleted(object sender, EventArgs e)
         {
-            webflow.Document = webBrowser.Document as HTMLDocument;
+            if (webBrowser.Source.Host == "note.sdo.com")
+            {
+                webBrowser.ExecuteJavascript(@"
+
+                    $('#username').val('wbxfire@gmail.com');
+                    $('#password').val('123456ab');
+                    $('#loginbtn').click();
+
+                ");
+            }
+            //throw new NotImplementedException();
         }
 
         protected void Navigate()
@@ -60,7 +69,7 @@ namespace KeywordExtractor
 
             if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
             {
-                webBrowser.Navigate(url);
+                webBrowser.LoadURL(url);
             }
             else
             {
@@ -70,7 +79,7 @@ namespace KeywordExtractor
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
-            webBrowser.Refresh();
+
         }
 
         private void tbAddress_KeyDown(object sender, KeyEventArgs e)
@@ -126,7 +135,7 @@ namespace KeywordExtractor
         }
 
         private void btnExecute_Click(object sender, RoutedEventArgs e)
-        {    
+        {
             //if (wf != null)
             //{
             //    string url = wf.Url;
