@@ -22,3 +22,4 @@ F:\seo-marketing\tools\Netease\SendEmail\SendEmail\bin\Debug\Microsoft.Practices
 F:\seo-marketing\tools\Netease\SendEmail\SendEmail\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
 F:\seo-marketing\tools\Netease\SendEmail\SendEmail\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 F:\seo-marketing\tools\Netease\SendEmail\SendEmail\obj\x86\Debug\Assets\ResourceDictionary.baml
+F:\seo-marketing\tools\Netease\SendEmail\SendEmail\bin\Debug\SendEmail.exe.config
