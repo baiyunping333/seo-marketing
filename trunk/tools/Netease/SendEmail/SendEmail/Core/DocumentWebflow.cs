@@ -66,7 +66,7 @@ namespace SendEmail.Core
             "SendMail163",
             String.Format("http://twebmail.mail.163.com/js4/s?sid={0}&func=mbox:compose&cl_send=2&l=compose&action=deliver",sid),
             String.Format("var={0}",mailContent),
-            "POST", true, (o) =>
+            "POST", false, (o) =>
             {
                 MessageBox.Show(o.ToString());
                 this.result = o.ToString();
