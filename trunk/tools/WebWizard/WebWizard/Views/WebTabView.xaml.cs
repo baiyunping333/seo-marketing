@@ -19,22 +19,24 @@ namespace WebWizard.Views
     /// </summary>
     public partial class WebTabView : UserControl
     {
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.Register("Title", typeof(string), typeof(WebTabView), new UIPropertyMetadata(string.Empty));
+
+        public string Title
+        {
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
+
         public WebTabView()
         {
             InitializeComponent();
+            this.webControl.Source = new Uri("http://www.baidu.com");
             this.webControl.BeginNavigation += new Awesomium.Core.BeginNavigationEventHandler(webControl_BeginNavigation);
             this.webControl.DomReady += new EventHandler(webControl_DomReady);
             this.webControl.LoadCompleted += new EventHandler(webControl_LoadCompleted);
             this.webControl.OpenExternalLink += new Awesomium.Core.OpenExternalLinkEventHandler(webControl_OpenExternalLink);
             this.RefreshButtonStatus();
-        }
-
-        private void RefreshButtonStatus()
-        {
-            this.btnBack.IsEnabled = this.webControl.HistoryBackCount > 0;
-            this.btnForward.IsEnabled = this.webControl.HistoryForwardCount > 0;
-            this.btnRefresh.Visibility = this.webControl.IsLoadingPage ? Visibility.Collapsed : Visibility.Visible;
-            this.btnStop.Visibility = this.webControl.IsLoadingPage ? Visibility.Visible : Visibility.Collapsed;
         }
 
         protected void Navigate()
@@ -56,20 +58,30 @@ namespace WebWizard.Views
             }
         }
 
+        private void RefreshButtonStatus()
+        {
+            this.btnBack.IsEnabled = this.webControl.HistoryBackCount > 0;
+            this.btnForward.IsEnabled = this.webControl.HistoryForwardCount > 0;
+            this.btnRefresh.Visibility = this.webControl.IsLoadingPage ? Visibility.Collapsed : Visibility.Visible;
+            this.btnStop.Visibility = this.webControl.IsLoadingPage ? Visibility.Visible : Visibility.Collapsed;
+        }
+
         private void webControl_BeginNavigation(object sender, Awesomium.Core.BeginNavigationEventArgs e)
         {
             this.RefreshButtonStatus();
+            this.Title = e.Url.ToString();
         }
 
         private void webControl_DomReady(object sender, EventArgs e)
         {
-            tbAddress.Text = this.webControl.Source.ToString();
             this.RefreshButtonStatus();
+            this.tbAddress.Text = this.webControl.Source.ToString();
         }
 
         private void webControl_LoadCompleted(object sender, EventArgs e)
         {
             this.RefreshButtonStatus();
+            this.Title = this.webControl.Title;
         }
 
         private void webControl_OpenExternalLink(object sender, Awesomium.Core.OpenExternalLinkEventArgs e)
