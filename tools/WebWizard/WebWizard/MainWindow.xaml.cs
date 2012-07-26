@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WebWizard.ViewModels;
 
 namespace WebWizard
 {
@@ -20,6 +21,7 @@ namespace WebWizard
 		public MainWindow()
 		{
 			this.InitializeComponent();
+            this.DataContext = new MainWindowViewModel();
 		}
 	}
 }

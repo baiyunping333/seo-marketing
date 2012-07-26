@@ -9,14 +9,16 @@
 	x:Name="Window"
 	Title="MainWindow"
 	Width="800" Height="600">
-	<Grid x:Name="LayoutRoot">
+	<Grid x:Name="LayoutRoot" Grid.Row="3">
 		<Grid.RowDefinitions>
 			<RowDefinition />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="200" />
 		</Grid.RowDefinitions>
-		<my:WebTabView />
-		<GridSplitter HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Center" Height="5" Background="#FFE0E0E0"/>
-		<local:ControlPanel Grid.Row="2" />
+		<TabControl ItemsSource="{Binding AllTabs}">
+			<TabControl.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Title}"/>
+				</DataTemplate>
+			</TabControl.ItemTemplate>
+		</TabControl>		
     </Grid>
 </Window>
