@@ -20,7 +20,6 @@ namespace WebWizard
 		public MainWindow()
 		{
 			this.InitializeComponent();
-			// Insert code required on object creation below this point.
 		}
 	}
 }
