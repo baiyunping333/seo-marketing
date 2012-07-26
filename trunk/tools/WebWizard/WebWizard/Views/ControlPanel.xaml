@@ -1,0 +1,40 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="WebWizard.ControlPanel"
+	x:Name="UserControl"
+	d:DesignWidth="800" d:DesignHeight="200">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition />
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<Border Background="#FFE0E0E0" BorderThickness="0,1">
+			<Border.BorderBrush>
+				<SolidColorBrush Color="{DynamicResource CommonBorderColor}"/>
+			</Border.BorderBrush>
+			<Grid>
+				<StackPanel Height="30"></StackPanel>
+			</Grid>
+		</Border>
+		<Border Grid.Row="2" BorderThickness="0,1,0,0" >
+			<Border.BorderBrush>
+				<SolidColorBrush Color="{DynamicResource CommonBorderColor}"/>
+			</Border.BorderBrush>
+			<StatusBar Height="20" >
+				<StatusBarItem Content="Console"/>
+				<Separator>
+					<Separator.Background>
+						<SolidColorBrush Color="{DynamicResource CommonBorderColor}"/>
+					</Separator.Background>
+				</Separator>
+				<StatusBarItem Content="Inspector"/>
+			</StatusBar>
+		</Border>
+	</Grid>
+</UserControl>

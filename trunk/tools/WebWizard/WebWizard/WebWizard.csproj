@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ExpressionBlendVersion>4.0.20525.0</ExpressionBlendVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5843aec9-81e8-49e9-8cdd-506808a077c4}</ProjectGuid>
+    <ProjectGuid>{5843AEC9-81E8-49E9-8CDD-506808A077C4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <DefaultClrNameSpace>WebWizard</DefaultClrNameSpace>
@@ -27,6 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,9 +38,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Awesomium.Core, Version=1.6.6.0, Culture=neutral, PublicKeyToken=e1a0d7c8071a5214" />
+    <Reference Include="Awesomium.Windows.Controls, Version=1.6.6.0, Culture=neutral, PublicKeyToken=7a34e179b8b61c39" />
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism">
+      <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Interactivity">
+      <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -57,6 +75,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\ControlPanel.xaml.cs">
+      <DependentUpon>ControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WebTabView.xaml.cs">
+      <DependentUpon>WebTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WebTabViewModel.cs" />
+    <Page Include="Assets\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Assets\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,9 +102,13 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Simple Styles.xaml">
+    <Page Include="Views\ControlPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WebTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +119,409 @@
     <None Include="Application.ico">
       <Visible>false</Visible>
     </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icons\glyphicons_000_glass.png" />
+    <Resource Include="Assets\icons\glyphicons_001_leaf.png" />
+    <Resource Include="Assets\icons\glyphicons_002_dog.png" />
+    <Resource Include="Assets\icons\glyphicons_003_user.png" />
+    <Resource Include="Assets\icons\glyphicons_004_girl.png" />
+    <Resource Include="Assets\icons\glyphicons_005_car.png" />
+    <Resource Include="Assets\icons\glyphicons_006_user_add.png" />
+    <Resource Include="Assets\icons\glyphicons_007_user_remove.png" />
+    <Resource Include="Assets\icons\glyphicons_008_film.png" />
+    <Resource Include="Assets\icons\glyphicons_009_magic.png" />
+    <Resource Include="Assets\icons\glyphicons_010_envelope.png" />
+    <Resource Include="Assets\icons\glyphicons_011_camera.png" />
+    <Resource Include="Assets\icons\glyphicons_012_heart.png" />
+    <Resource Include="Assets\icons\glyphicons_013_beach_umbrella.png" />
+    <Resource Include="Assets\icons\glyphicons_014_train.png" />
+    <Resource Include="Assets\icons\glyphicons_015_print.png" />
+    <Resource Include="Assets\icons\glyphicons_016_bin.png" />
+    <Resource Include="Assets\icons\glyphicons_017_music.png" />
+    <Resource Include="Assets\icons\glyphicons_018_note.png" />
+    <Resource Include="Assets\icons\glyphicons_019_cogwheel.png" />
+    <Resource Include="Assets\icons\glyphicons_020_home.png" />
+    <Resource Include="Assets\icons\glyphicons_021_snowflake.png" />
+    <Resource Include="Assets\icons\glyphicons_022_fire.png" />
+    <Resource Include="Assets\icons\glyphicons_023_cogwheels.png" />
+    <Resource Include="Assets\icons\glyphicons_024_parents.png" />
+    <Resource Include="Assets\icons\glyphicons_025_binoculars.png" />
+    <Resource Include="Assets\icons\glyphicons_026_road.png" />
+    <Resource Include="Assets\icons\glyphicons_027_search.png" />
+    <Resource Include="Assets\icons\glyphicons_028_cars.png" />
+    <Resource Include="Assets\icons\glyphicons_029_notes_2.png" />
+    <Resource Include="Assets\icons\glyphicons_030_pencil.png" />
+    <Resource Include="Assets\icons\glyphicons_031_bus.png" />
+    <Resource Include="Assets\icons\glyphicons_032_wifi_alt.png" />
+    <Resource Include="Assets\icons\glyphicons_033_luggage.png" />
+    <Resource Include="Assets\icons\glyphicons_034_old_man.png" />
+    <Resource Include="Assets\icons\glyphicons_035_woman.png" />
+    <Resource Include="Assets\icons\glyphicons_036_file.png" />
+    <Resource Include="Assets\icons\glyphicons_037_credit.png" />
+    <Resource Include="Assets\icons\glyphicons_038_airplane.png" />
+    <Resource Include="Assets\icons\glyphicons_039_notes.png" />
+    <Resource Include="Assets\icons\glyphicons_040_stats.png" />
+    <Resource Include="Assets\icons\glyphicons_041_charts.png" />
+    <Resource Include="Assets\icons\glyphicons_042_pie_chart.png" />
+    <Resource Include="Assets\icons\glyphicons_043_group.png" />
+    <Resource Include="Assets\icons\glyphicons_044_keys.png" />
+    <Resource Include="Assets\icons\glyphicons_045_calendar.png" />
+    <Resource Include="Assets\icons\glyphicons_046_router.png" />
+    <Resource Include="Assets\icons\glyphicons_047_camera_small.png" />
+    <Resource Include="Assets\icons\glyphicons_048_dislikes.png" />
+    <Resource Include="Assets\icons\glyphicons_049_star.png" />
+    <Resource Include="Assets\icons\glyphicons_050_link.png" />
+    <Resource Include="Assets\icons\glyphicons_051_eye_open.png" />
+    <Resource Include="Assets\icons\glyphicons_052_eye_close.png" />
+    <Resource Include="Assets\icons\glyphicons_053_alarm.png" />
+    <Resource Include="Assets\icons\glyphicons_054_clock.png" />
+    <Resource Include="Assets\icons\glyphicons_055_stopwatch.png" />
+    <Resource Include="Assets\icons\glyphicons_056_projector.png" />
+    <Resource Include="Assets\icons\glyphicons_057_history.png" />
+    <Resource Include="Assets\icons\glyphicons_058_truck.png" />
+    <Resource Include="Assets\icons\glyphicons_059_cargo.png" />
+    <Resource Include="Assets\icons\glyphicons_060_compass.png" />
+    <Resource Include="Assets\icons\glyphicons_061_keynote.png" />
+    <Resource Include="Assets\icons\glyphicons_062_attach.png" />
+    <Resource Include="Assets\icons\glyphicons_063_power.png" />
+    <Resource Include="Assets\icons\glyphicons_064_lightbulb.png" />
+    <Resource Include="Assets\icons\glyphicons_065_tag.png" />
+    <Resource Include="Assets\icons\glyphicons_066_tags.png" />
+    <Resource Include="Assets\icons\glyphicons_067_cleaning.png" />
+    <Resource Include="Assets\icons\glyphicons_068_ruller.png" />
+    <Resource Include="Assets\icons\glyphicons_069_gift.png" />
+    <Resource Include="Assets\icons\glyphicons_070_umbrella.png" />
+    <Resource Include="Assets\icons\glyphicons_071_book.png" />
+    <Resource Include="Assets\icons\glyphicons_072_bookmark.png" />
+    <Resource Include="Assets\icons\glyphicons_073_signal.png" />
+    <Resource Include="Assets\icons\glyphicons_074_cup.png" />
+    <Resource Include="Assets\icons\glyphicons_075_stroller.png" />
+    <Resource Include="Assets\icons\glyphicons_076_headphones.png" />
+    <Resource Include="Assets\icons\glyphicons_077_headset.png" />
+    <Resource Include="Assets\icons\glyphicons_078_warning_sign.png" />
+    <Resource Include="Assets\icons\glyphicons_079_signal.png" />
+    <Resource Include="Assets\icons\glyphicons_080_retweet.png" />
+    <Resource Include="Assets\icons\glyphicons_081_refresh.png" />
+    <Resource Include="Assets\icons\glyphicons_082_roundabout.png" />
+    <Resource Include="Assets\icons\glyphicons_083_random.png" />
+    <Resource Include="Assets\icons\glyphicons_084_heat.png" />
+    <Resource Include="Assets\icons\glyphicons_085_repeat.png" />
+    <Resource Include="Assets\icons\glyphicons_086_display.png" />
+    <Resource Include="Assets\icons\glyphicons_087_log_book.png" />
+    <Resource Include="Assets\icons\glyphicons_088_adress_book.png" />
+    <Resource Include="Assets\icons\glyphicons_089_magnet.png" />
+    <Resource Include="Assets\icons\glyphicons_090_table.png" />
+    <Resource Include="Assets\icons\glyphicons_091_adjust.png" />
+    <Resource Include="Assets\icons\glyphicons_092_tint.png" />
+    <Resource Include="Assets\icons\glyphicons_093_crop.png" />
+    <Resource Include="Assets\icons\glyphicons_094_vector_path_square.png" />
+    <Resource Include="Assets\icons\glyphicons_095_vector_path_circle.png" />
+    <Resource Include="Assets\icons\glyphicons_096_vector_path_polygon.png" />
+    <Resource Include="Assets\icons\glyphicons_097_vector_path_line.png" />
+    <Resource Include="Assets\icons\glyphicons_098_vector_path_curve.png" />
+    <Resource Include="Assets\icons\glyphicons_099_vector_path_all.png" />
+    <Resource Include="Assets\icons\glyphicons_100_font.png" />
+    <Resource Include="Assets\icons\glyphicons_101_italic.png" />
+    <Resource Include="Assets\icons\glyphicons_102_bold.png" />
+    <Resource Include="Assets\icons\glyphicons_103_text_underline.png" />
+    <Resource Include="Assets\icons\glyphicons_104_text_strike.png" />
+    <Resource Include="Assets\icons\glyphicons_105_text_height.png" />
+    <Resource Include="Assets\icons\glyphicons_106_text_width.png" />
+    <Resource Include="Assets\icons\glyphicons_107_text_resize.png" />
+    <Resource Include="Assets\icons\glyphicons_108_left_indent.png" />
+    <Resource Include="Assets\icons\glyphicons_109_right_indent.png" />
+    <Resource Include="Assets\icons\glyphicons_110_align_left.png" />
+    <Resource Include="Assets\icons\glyphicons_111_align_center.png" />
+    <Resource Include="Assets\icons\glyphicons_112_align_right.png" />
+    <Resource Include="Assets\icons\glyphicons_113_justify.png" />
+    <Resource Include="Assets\icons\glyphicons_114_list.png" />
+    <Resource Include="Assets\icons\glyphicons_115_text_smaller.png" />
+    <Resource Include="Assets\icons\glyphicons_116_text_bigger.png" />
+    <Resource Include="Assets\icons\glyphicons_117_embed.png" />
+    <Resource Include="Assets\icons\glyphicons_118_embed_close.png" />
+    <Resource Include="Assets\icons\glyphicons_119_adjust.png" />
+    <Resource Include="Assets\icons\glyphicons_120_message_full.png" />
+    <Resource Include="Assets\icons\glyphicons_121_message_empty.png" />
+    <Resource Include="Assets\icons\glyphicons_122_message_in.png" />
+    <Resource Include="Assets\icons\glyphicons_123_message_out.png" />
+    <Resource Include="Assets\icons\glyphicons_124_message_plus.png" />
+    <Resource Include="Assets\icons\glyphicons_125_message_minus.png" />
+    <Resource Include="Assets\icons\glyphicons_126_message_ban.png" />
+    <Resource Include="Assets\icons\glyphicons_127_message_flag.png" />
+    <Resource Include="Assets\icons\glyphicons_128_message_lock.png" />
+    <Resource Include="Assets\icons\glyphicons_129_message_new.png" />
+    <Resource Include="Assets\icons\glyphicons_130_inbox.png" />
+    <Resource Include="Assets\icons\glyphicons_131_inbox_plus.png" />
+    <Resource Include="Assets\icons\glyphicons_132_inbox_minus.png" />
+    <Resource Include="Assets\icons\glyphicons_133_inbox_lock.png" />
+    <Resource Include="Assets\icons\glyphicons_134_inbox_in.png" />
+    <Resource Include="Assets\icons\glyphicons_135_inbox_out.png" />
+    <Resource Include="Assets\icons\glyphicons_136_computer_locked.png" />
+    <Resource Include="Assets\icons\glyphicons_137_computer_service.png" />
+    <Resource Include="Assets\icons\glyphicons_138_computer_proces.png" />
+    <Resource Include="Assets\icons\glyphicons_139_phone.png" />
+    <Resource Include="Assets\icons\glyphicons_140_database_lock.png" />
+    <Resource Include="Assets\icons\glyphicons_141_database_plus.png" />
+    <Resource Include="Assets\icons\glyphicons_142_database_minus.png" />
+    <Resource Include="Assets\icons\glyphicons_143_database_ban.png" />
+    <Resource Include="Assets\icons\glyphicons_144_folder_open.png" />
+    <Resource Include="Assets\icons\glyphicons_145_folder_plus.png" />
+    <Resource Include="Assets\icons\glyphicons_146_folder_minus.png" />
+    <Resource Include="Assets\icons\glyphicons_147_folder_lock.png" />
+    <Resource Include="Assets\icons\glyphicons_148_folder_flag.png" />
+    <Resource Include="Assets\icons\glyphicons_149_folder_new.png" />
+    <Resource Include="Assets\icons\glyphicons_150_check.png" />
+    <Resource Include="Assets\icons\glyphicons_151_edit.png" />
+    <Resource Include="Assets\icons\glyphicons_152_new_window.png" />
+    <Resource Include="Assets\icons\glyphicons_153_more_windows.png" />
+    <Resource Include="Assets\icons\glyphicons_154_show_big_thumbnails.png" />
+    <Resource Include="Assets\icons\glyphicons_155_show_thumbnails.png" />
+    <Resource Include="Assets\icons\glyphicons_156_show_thumbnails_with_lines.png" />
+    <Resource Include="Assets\icons\glyphicons_157_show_lines.png" />
+    <Resource Include="Assets\icons\glyphicons_158_playlist.png" />
+    <Resource Include="Assets\icons\glyphicons_159_picture.png" />
+    <Resource Include="Assets\icons\glyphicons_160_imac.png" />
+    <Resource Include="Assets\icons\glyphicons_161_macbook.png" />
+    <Resource Include="Assets\icons\glyphicons_162_ipad.png" />
+    <Resource Include="Assets\icons\glyphicons_163_iphone.png" />
+    <Resource Include="Assets\icons\glyphicons_164_iphone_transfer.png" />
+    <Resource Include="Assets\icons\glyphicons_165_iphone_exchange.png" />
+    <Resource Include="Assets\icons\glyphicons_166_ipod.png" />
+    <Resource Include="Assets\icons\glyphicons_167_ipod_shuffle.png" />
+    <Resource Include="Assets\icons\glyphicons_168_ear_plugs.png" />
+    <Resource Include="Assets\icons\glyphicons_169_albums.png" />
+    <Resource Include="Assets\icons\glyphicons_170_step_backward.png" />
+    <Resource Include="Assets\icons\glyphicons_171_fast_backward.png" />
+    <Resource Include="Assets\icons\glyphicons_172_rewind.png" />
+    <Resource Include="Assets\icons\glyphicons_173_play.png" />
+    <Resource Include="Assets\icons\glyphicons_174_pause.png" />
+    <Resource Include="Assets\icons\glyphicons_175_stop.png" />
+    <Resource Include="Assets\icons\glyphicons_176_forward.png" />
+    <Resource Include="Assets\icons\glyphicons_177_fast_forward.png" />
+    <Resource Include="Assets\icons\glyphicons_178_step_forward.png" />
+    <Resource Include="Assets\icons\glyphicons_179_eject.png" />
+    <Resource Include="Assets\icons\glyphicons_180_facetime_video.png" />
+    <Resource Include="Assets\icons\glyphicons_181_download_alt.png" />
+    <Resource Include="Assets\icons\glyphicons_182_mute.png" />
+    <Resource Include="Assets\icons\glyphicons_183_volume_down.png" />
+    <Resource Include="Assets\icons\glyphicons_184_volume_up.png" />
+    <Resource Include="Assets\icons\glyphicons_185_screenshot.png" />
+    <Resource Include="Assets\icons\glyphicons_186_move.png" />
+    <Resource Include="Assets\icons\glyphicons_187_more.png" />
+    <Resource Include="Assets\icons\glyphicons_188_brightness_reduce.png" />
+    <Resource Include="Assets\icons\glyphicons_189_brightness_increase.png" />
+    <Resource Include="Assets\icons\glyphicons_190_circle_plus.png" />
+    <Resource Include="Assets\icons\glyphicons_191_circle_minus.png" />
+    <Resource Include="Assets\icons\glyphicons_192_circle_remove.png" />
+    <Resource Include="Assets\icons\glyphicons_193_circle_ok.png" />
+    <Resource Include="Assets\icons\glyphicons_194_circle_question_mark.png" />
+    <Resource Include="Assets\icons\glyphicons_195_circle_info.png" />
+    <Resource Include="Assets\icons\glyphicons_196_circle_exclamation_mark.png" />
+    <Resource Include="Assets\icons\glyphicons_197_remove.png" />
+    <Resource Include="Assets\icons\glyphicons_198_ok.png" />
+    <Resource Include="Assets\icons\glyphicons_199_ban.png" />
+    <Resource Include="Assets\icons\glyphicons_200_download.png" />
+    <Resource Include="Assets\icons\glyphicons_201_upload.png" />
+    <Resource Include="Assets\icons\glyphicons_202_shopping_cart.png" />
+    <Resource Include="Assets\icons\glyphicons_203_lock.png" />
+    <Resource Include="Assets\icons\glyphicons_204_unlock.png" />
+    <Resource Include="Assets\icons\glyphicons_205_electricity.png" />
+    <Resource Include="Assets\icons\glyphicons_206_ok_2.png" />
+    <Resource Include="Assets\icons\glyphicons_207_remove_2.png" />
+    <Resource Include="Assets\icons\glyphicons_208_cart_out.png" />
+    <Resource Include="Assets\icons\glyphicons_209_cart_in.png" />
+    <Resource Include="Assets\icons\glyphicons_210_left_arrow.png" />
+    <Resource Include="Assets\icons\glyphicons_211_right_arrow.png" />
+    <Resource Include="Assets\icons\glyphicons_212_down_arrow.png" />
+    <Resource Include="Assets\icons\glyphicons_213_up_arrow.png" />
+    <Resource Include="Assets\icons\glyphicons_214_resize_small.png" />
+    <Resource Include="Assets\icons\glyphicons_215_resize_full.png" />
+    <Resource Include="Assets\icons\glyphicons_216_circle_arrow_left.png" />
+    <Resource Include="Assets\icons\glyphicons_217_circle_arrow_right.png" />
+    <Resource Include="Assets\icons\glyphicons_218_circle_arrow_top.png" />
+    <Resource Include="Assets\icons\glyphicons_219_circle_arrow_down.png" />
+    <Resource Include="Assets\icons\glyphicons_220_play_button.png" />
+    <Resource Include="Assets\icons\glyphicons_221_unshare.png" />
+    <Resource Include="Assets\icons\glyphicons_222_share.png" />
+    <Resource Include="Assets\icons\glyphicons_223_thin_right_arrow.png" />
+    <Resource Include="Assets\icons\glyphicons_224_thin_arrow_left.png" />
+    <Resource Include="Assets\icons\glyphicons_225_bluetooth.png" />
+    <Resource Include="Assets\icons\glyphicons_226_euro.png" />
+    <Resource Include="Assets\icons\glyphicons_227_usd.png" />
+    <Resource Include="Assets\icons\glyphicons_228_bp.png" />
+    <Resource Include="Assets\icons\glyphicons_229_retweet_2.png" />
+    <Resource Include="Assets\icons\glyphicons_230_moon.png" />
+    <Resource Include="Assets\icons\glyphicons_231_sun.png" />
+    <Resource Include="Assets\icons\glyphicons_232_cloud.png" />
+    <Resource Include="Assets\icons\glyphicons_233_direction.png" />
+    <Resource Include="Assets\icons\glyphicons_234_brush.png" />
+    <Resource Include="Assets\icons\glyphicons_235_pen.png" />
+    <Resource Include="Assets\icons\glyphicons_236_zoom_in.png" />
+    <Resource Include="Assets\icons\glyphicons_237_zoom_out.png" />
+    <Resource Include="Assets\icons\glyphicons_238_pin.png" />
+    <Resource Include="Assets\icons\glyphicons_239_riflescope.png" />
+    <Resource Include="Assets\icons\glyphicons_240_rotation_lock.png" />
+    <Resource Include="Assets\icons\glyphicons_241_flash.png" />
+    <Resource Include="Assets\icons\glyphicons_242_google_maps.png" />
+    <Resource Include="Assets\icons\glyphicons_243_anchor.png" />
+    <Resource Include="Assets\icons\glyphicons_244_conversation.png" />
+    <Resource Include="Assets\icons\glyphicons_245_chat.png" />
+    <Resource Include="Assets\icons\glyphicons_246_male.png" />
+    <Resource Include="Assets\icons\glyphicons_247_female.png" />
+    <Resource Include="Assets\icons\glyphicons_248_asterisk.png" />
+    <Resource Include="Assets\icons\glyphicons_249_divide.png" />
+    <Resource Include="Assets\icons\glyphicons_250_snorkel_diving.png" />
+    <Resource Include="Assets\icons\glyphicons_251_scuba_diving.png" />
+    <Resource Include="Assets\icons\glyphicons_252_oxygen_bottle.png" />
+    <Resource Include="Assets\icons\glyphicons_253_fins.png" />
+    <Resource Include="Assets\icons\glyphicons_254_fishes.png" />
+    <Resource Include="Assets\icons\glyphicons_255_boat.png" />
+    <Resource Include="Assets\icons\glyphicons_256_delete_point.png" />
+    <Resource Include="Assets\icons\glyphicons_257_sheriffs_-star.png" />
+    <Resource Include="Assets\icons\glyphicons_258_qrcode.png" />
+    <Resource Include="Assets\icons\glyphicons_259_barcode.png" />
+    <Resource Include="Assets\icons\glyphicons_260_pool.png" />
+    <Resource Include="Assets\icons\glyphicons_261_buoy.png" />
+    <Resource Include="Assets\icons\glyphicons_262_spade.png" />
+    <Resource Include="Assets\icons\glyphicons_263_bank.png" />
+    <Resource Include="Assets\icons\glyphicons_264_vcard.png" />
+    <Resource Include="Assets\icons\glyphicons_265_electrical_plug.png" />
+    <Resource Include="Assets\icons\glyphicons_266_flag.png" />
+    <Resource Include="Assets\icons\glyphicons_267_credit_card.png" />
+    <Resource Include="Assets\icons\glyphicons_268_keyboard_wireless.png" />
+    <Resource Include="Assets\icons\glyphicons_269_keyboard_wired.png" />
+    <Resource Include="Assets\icons\glyphicons_270_shield.png" />
+    <Resource Include="Assets\icons\glyphicons_271_ring.png" />
+    <Resource Include="Assets\icons\glyphicons_272_cake.png" />
+    <Resource Include="Assets\icons\glyphicons_273_drink.png" />
+    <Resource Include="Assets\icons\glyphicons_274_beer.png" />
+    <Resource Include="Assets\icons\glyphicons_275_fast_food.png" />
+    <Resource Include="Assets\icons\glyphicons_276_cutlery.png" />
+    <Resource Include="Assets\icons\glyphicons_277_pizza.png" />
+    <Resource Include="Assets\icons\glyphicons_278_birthday_cake.png" />
+    <Resource Include="Assets\icons\glyphicons_279_tablet.png" />
+    <Resource Include="Assets\icons\glyphicons_280_settings.png" />
+    <Resource Include="Assets\icons\glyphicons_281_bullets.png" />
+    <Resource Include="Assets\icons\glyphicons_282_cardio.png" />
+    <Resource Include="Assets\icons\glyphicons_283_t-shirt.png" />
+    <Resource Include="Assets\icons\glyphicons_284_pants.png" />
+    <Resource Include="Assets\icons\glyphicons_285_sweater.png" />
+    <Resource Include="Assets\icons\glyphicons_286_fabric.png" />
+    <Resource Include="Assets\icons\glyphicons_287_leather.png" />
+    <Resource Include="Assets\icons\glyphicons_288_scissors.png" />
+    <Resource Include="Assets\icons\glyphicons_289_podium.png" />
+    <Resource Include="Assets\icons\glyphicons_290_skull.png" />
+    <Resource Include="Assets\icons\glyphicons_291_celebration.png" />
+    <Resource Include="Assets\icons\glyphicons_292_tea_kettle.png" />
+    <Resource Include="Assets\icons\glyphicons_293_french_press.png" />
+    <Resource Include="Assets\icons\glyphicons_294_coffe_cup.png" />
+    <Resource Include="Assets\icons\glyphicons_295_pot.png" />
+    <Resource Include="Assets\icons\glyphicons_296_grater.png" />
+    <Resource Include="Assets\icons\glyphicons_297_kettle.png" />
+    <Resource Include="Assets\icons\glyphicons_298_hospital.png" />
+    <Resource Include="Assets\icons\glyphicons_299_hospital_h.png" />
+    <Resource Include="Assets\icons\glyphicons_300_microphone.png" />
+    <Resource Include="Assets\icons\glyphicons_301_webcam.png" />
+    <Resource Include="Assets\icons\glyphicons_302_temple_christianity_church.png" />
+    <Resource Include="Assets\icons\glyphicons_303_temple_islam.png" />
+    <Resource Include="Assets\icons\glyphicons_304_temple_hindu.png" />
+    <Resource Include="Assets\icons\glyphicons_305_temple_buddhist.png" />
+    <Resource Include="Assets\icons\glyphicons_306_electrical_socket_eu.png" />
+    <Resource Include="Assets\icons\glyphicons_307_electrical_socket_us.png" />
+    <Resource Include="Assets\icons\glyphicons_308_bomb.png" />
+    <Resource Include="Assets\icons\glyphicons_309_comments.png" />
+    <Resource Include="Assets\icons\glyphicons_310_flower.png" />
+    <Resource Include="Assets\icons\glyphicons_311_baseball.png" />
+    <Resource Include="Assets\icons\glyphicons_312_rugby.png" />
+    <Resource Include="Assets\icons\glyphicons_313_ax.png" />
+    <Resource Include="Assets\icons\glyphicons_314_table_tennis.png" />
+    <Resource Include="Assets\icons\glyphicons_315_bowling.png" />
+    <Resource Include="Assets\icons\glyphicons_316_tree_conifer.png" />
+    <Resource Include="Assets\icons\glyphicons_317_tree_deciduous.png" />
+    <Resource Include="Assets\icons\glyphicons_318_more-items.png" />
+    <Resource Include="Assets\icons\glyphicons_319_sort.png" />
+    <Resource Include="Assets\icons\glyphicons_320_filter.png" />
+    <Resource Include="Assets\icons\glyphicons_321_gamepad.png" />
+    <Resource Include="Assets\icons\glyphicons_322_playing_dices.png" />
+    <Resource Include="Assets\icons\glyphicons_323_calculator.png" />
+    <Resource Include="Assets\icons\glyphicons_324_tie.png" />
+    <Resource Include="Assets\icons\glyphicons_325_wallet.png" />
+    <Resource Include="Assets\icons\glyphicons_326_share.png" />
+    <Resource Include="Assets\icons\glyphicons_327_sampler.png" />
+    <Resource Include="Assets\icons\glyphicons_328_piano.png" />
+    <Resource Include="Assets\icons\glyphicons_329_web_browser.png" />
+    <Resource Include="Assets\icons\glyphicons_330_blog.png" />
+    <Resource Include="Assets\icons\glyphicons_331_dashboard.png" />
+    <Resource Include="Assets\icons\glyphicons_332_certificate.png" />
+    <Resource Include="Assets\icons\glyphicons_333_bell.png" />
+    <Resource Include="Assets\icons\glyphicons_334_candle.png" />
+    <Resource Include="Assets\icons\glyphicons_335_pin_classic.png" />
+    <Resource Include="Assets\icons\glyphicons_336_iphone_shake.png" />
+    <Resource Include="Assets\icons\glyphicons_337_pin_flag.png" />
+    <Resource Include="Assets\icons\glyphicons_338_turtle.png" />
+    <Resource Include="Assets\icons\glyphicons_339_rabbit.png" />
+    <Resource Include="Assets\icons\glyphicons_340_globe.png" />
+    <Resource Include="Assets\icons\glyphicons_341_briefcase.png" />
+    <Resource Include="Assets\icons\glyphicons_342_hdd.png" />
+    <Resource Include="Assets\icons\glyphicons_343_thumbs_up.png" />
+    <Resource Include="Assets\icons\glyphicons_344_thumbs_down.png" />
+    <Resource Include="Assets\icons\glyphicons_345_hand_right.png" />
+    <Resource Include="Assets\icons\glyphicons_346_hand_left.png" />
+    <Resource Include="Assets\icons\glyphicons_347_hand_up.png" />
+    <Resource Include="Assets\icons\glyphicons_348_hand_down.png" />
+    <Resource Include="Assets\icons\glyphicons_349_fullscreen.png" />
+    <Resource Include="Assets\icons\glyphicons_350_shopping_bag.png" />
+    <Resource Include="Assets\icons\glyphicons_351_book_open.png" />
+    <Resource Include="Assets\icons\glyphicons_352_nameplate.png" />
+    <Resource Include="Assets\icons\glyphicons_353_nameplate_alt.png" />
+    <Resource Include="Assets\icons\glyphicons_354_vases.png" />
+    <Resource Include="Assets\icons\glyphicons_355_announcement.png" />
+    <Resource Include="Assets\icons\glyphicons_356_dumbbell.png" />
+    <Resource Include="Assets\icons\glyphicons_357_suitcase.png" />
+    <Resource Include="Assets\icons\glyphicons_358_file_import.png" />
+    <Resource Include="Assets\icons\glyphicons_359_file_export.png" />
+    <Resource Include="Assets\icons\glyphicons_360_pinterest.png" />
+    <Resource Include="Assets\icons\glyphicons_361_dropbox.png" />
+    <Resource Include="Assets\icons\glyphicons_362_google+_alt.png" />
+    <Resource Include="Assets\icons\glyphicons_363_jolicloud.png" />
+    <Resource Include="Assets\icons\glyphicons_364_yahoo.png" />
+    <Resource Include="Assets\icons\glyphicons_365_blogger.png" />
+    <Resource Include="Assets\icons\glyphicons_366_picasa.png" />
+    <Resource Include="Assets\icons\glyphicons_367_amazon.png" />
+    <Resource Include="Assets\icons\glyphicons_368_tumblr.png" />
+    <Resource Include="Assets\icons\glyphicons_369_wordpress.png" />
+    <Resource Include="Assets\icons\glyphicons_370_instapaper.png" />
+    <Resource Include="Assets\icons\glyphicons_371_evernote.png" />
+    <Resource Include="Assets\icons\glyphicons_372_xing.png" />
+    <Resource Include="Assets\icons\glyphicons_373_zootool.png" />
+    <Resource Include="Assets\icons\glyphicons_374_dribbble.png" />
+    <Resource Include="Assets\icons\glyphicons_375_deviantart.png" />
+    <Resource Include="Assets\icons\glyphicons_376_read_it_later.png" />
+    <Resource Include="Assets\icons\glyphicons_377_linked_in.png" />
+    <Resource Include="Assets\icons\glyphicons_378_forrst.png" />
+    <Resource Include="Assets\icons\glyphicons_379_pinboard.png" />
+    <Resource Include="Assets\icons\glyphicons_380_behance.png" />
+    <Resource Include="Assets\icons\glyphicons_381_github.png" />
+    <Resource Include="Assets\icons\glyphicons_382_youtube.png" />
+    <Resource Include="Assets\icons\glyphicons_383_skitch.png" />
+    <Resource Include="Assets\icons\glyphicons_384_4square.png" />
+    <Resource Include="Assets\icons\glyphicons_385_quora.png" />
+    <Resource Include="Assets\icons\glyphicons_386_google_plus.png" />
+    <Resource Include="Assets\icons\glyphicons_387_spootify.png" />
+    <Resource Include="Assets\icons\glyphicons_388_stumbleupon.png" />
+    <Resource Include="Assets\icons\glyphicons_389_readability.png" />
+    <Resource Include="Assets\icons\glyphicons_390_facebook.png" />
+    <Resource Include="Assets\icons\glyphicons_391_twitter_t.png" />
+    <Resource Include="Assets\icons\glyphicons_392_twitter.png" />
+    <Resource Include="Assets\icons\glyphicons_393_buzz.png" />
+    <Resource Include="Assets\icons\glyphicons_394_vimeo.png" />
+    <Resource Include="Assets\icons\glyphicons_395_flickr.png" />
+    <Resource Include="Assets\icons\glyphicons_396_last_fm.png" />
+    <Resource Include="Assets\icons\glyphicons_397_rss.png" />
+    <Resource Include="Assets\icons\glyphicons_398_skype.png" />
+    <Resource Include="Assets\icons\glyphicons_399_e-mail.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath32)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
