@@ -10,67 +10,75 @@
 	x:Name="Window"
 	Title="MainWindow"
 	Width="800" Height="600" AllowsTransparency="True" WindowStyle="None" Background="#00000000">
-    <Grid x:Name="LayoutRoot" Grid.Row="3">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Border CornerRadius="6,6,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown">
-        	<Border.Background>
-        		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.65">
-        			<GradientStop Color="#FF3E9FDE" Offset="0"/>
-        			<GradientStop Color="#FF0F659B" Offset="1"/>
-        		</LinearGradientBrush>
-        	</Border.Background>
-    		<Grid Margin="6,0">
-    			<Grid.ColumnDefinitions>
-    				<ColumnDefinition Width="Auto"/>
-    				<ColumnDefinition MinWidth="20" />
-    			</Grid.ColumnDefinitions>
-        		<ItemsControl ItemsSource="{Binding AllTabs}">
-        			<ItemsControl.ItemsPanel>
-        				<ItemsPanelTemplate>
-        					<StackPanel IsItemsHost="True" Orientation="Horizontal"/>
-        				</ItemsPanelTemplate>
-        			</ItemsControl.ItemsPanel>
-        			<ItemsControl.ItemTemplate>
-        				<DataTemplate>
-        					<RadioButton GroupName="navTabs" IsChecked="{Binding IsSelected}" Style="{DynamicResource NavTabStyle}" Width="150">
-        						<Grid>
-        							<Image Source="{Binding Icon}" Width="16" Height="16" HorizontalAlignment="Left" Margin="4,0,0,0" />
-        							<Border HorizontalAlignment="Left" VerticalAlignment="Center" Width="16" Height="16" Margin="4,0,0,0" BorderThickness="1" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" >
-        								<Border.BorderBrush>
-        									<SolidColorBrush Color="White" Opacity="0.35"/>
-        								</Border.BorderBrush>
-        								<Border.Background>
-        									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-        										<GradientStop Color="#FF2AE424" Offset="0"/>
-        										<GradientStop Color="#FF0E950A" Offset="1"/>
-        									</LinearGradientBrush>
-        								</Border.Background>
-        							</Border>
-        							<TextBlock Text="{Binding Title}" ToolTip="{Binding Title}" TextTrimming="CharacterEllipsis" HorizontalAlignment="Stretch" d:LayoutOverrides="Height" Margin="24,0,4,0" VerticalAlignment="Center" /> 					
-        						</Grid> 					
-							</RadioButton>
-        				</DataTemplate>
-        			</ItemsControl.ItemTemplate>
-        		</ItemsControl>
-				<Button Width="25" Height="25" Grid.Column="1" HorizontalAlignment="Left" Command="{Binding OpenUrlCommand}" Style="{DynamicResource NavButtonStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0" >
-					<Image Source="Assets/icons/glyphicons_190_circle_plus.png"/>
-				</Button>
-        	</Grid>
-    	</Border>
-        <Border Grid.Row="1" CornerRadius="0,0,6,6" >
-        	<Border.Background>
-        		<SolidColorBrush Color="White" Opacity="0.3"/>
-        	</Border.Background>
-        	<ItemsControl ItemsSource="{Binding AllTabs}">
-        		<ItemsControl.ItemsPanel>
-        			<ItemsPanelTemplate>
-        				<Grid IsItemsHost="True"/>
-        			</ItemsPanelTemplate>
-        		</ItemsControl.ItemsPanel>
-        	</ItemsControl>
-        </Border>
-    </Grid>
+    <Border BorderThickness="3" CornerRadius="7">
+    	<Border.BorderBrush>
+    		<SolidColorBrush Color="#FF68DAF7" Opacity="0.8"/>
+    	</Border.BorderBrush>
+    	<Border.Effect>
+    		<DropShadowEffect ShadowDepth="10" Direction="270" BlurRadius="10"/>
+    	</Border.Effect>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<Border CornerRadius="6,6,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+				<Border.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.65">
+						<GradientStop Color="#FF3E9FDE" Offset="0"/>
+						<GradientStop Color="#FF0F659B" Offset="1"/>
+					</LinearGradientBrush>
+				</Border.Background>
+				<Grid Margin="6,0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition MinWidth="20" />
+					</Grid.ColumnDefinitions>
+					<ItemsControl ItemsSource="{Binding AllTabs}">
+						<ItemsControl.ItemsPanel>
+							<ItemsPanelTemplate>
+								<StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+							</ItemsPanelTemplate>
+						</ItemsControl.ItemsPanel>
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<RadioButton GroupName="navTabs" IsChecked="{Binding IsSelected}" Style="{DynamicResource NavTabStyle}" Width="150">
+									<Grid>
+										<Image Source="{Binding Icon}" Width="16" Height="16" HorizontalAlignment="Left" Margin="4,0,0,0" />
+										<Border HorizontalAlignment="Left" VerticalAlignment="Center" Width="16" Height="16" Margin="4,0,0,0" BorderThickness="1" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" >
+											<Border.BorderBrush>
+												<SolidColorBrush Color="White" Opacity="0.35"/>
+											</Border.BorderBrush>
+											<Border.Background>
+												<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+													<GradientStop Color="#FF2AE424" Offset="0"/>
+													<GradientStop Color="#FF0E950A" Offset="1"/>
+												</LinearGradientBrush>
+											</Border.Background>
+										</Border>
+										<TextBlock Text="{Binding Title}" ToolTip="{Binding Title}" TextTrimming="CharacterEllipsis" HorizontalAlignment="Stretch" d:LayoutOverrides="Height" Margin="24,0,4,0" VerticalAlignment="Center" /> 					
+									</Grid> 					
+								</RadioButton>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+					<Button Width="25" Height="25" Grid.Column="1" HorizontalAlignment="Left" Command="{Binding OpenUrlCommand}" Style="{DynamicResource NavButtonStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0" >
+						<Image Source="Assets/icons/glyphicons_190_circle_plus.png"/>
+					</Button>
+				</Grid>
+			</Border>
+			<Border Grid.Row="1" CornerRadius="0,0,6,6" >
+				<Border.Background>
+					<SolidColorBrush Color="White" Opacity="0.3"/>
+				</Border.Background>
+				<ItemsControl ItemsSource="{Binding AllTabs}" Margin="0,0,0,6">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<Grid IsItemsHost="True"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+				</ItemsControl>
+			</Border>
+		</Grid>
+	</Border>
 </Window>
