@@ -49,7 +49,7 @@
 				</StackPanel>
 			</Grid>
 		</Border>
-		<awe:WebControl x:Name="webControl" Grid.Row="1" />
+		<awe:WebControl x:Name="webControl" Grid.Row="1" Source="{Binding Source}" />
 		<GridSplitter HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Center" Height="5" Background="#FFE0E0E0"/>
 		<WebWizard:ControlPanel d:LayoutOverrides="Height" Grid.Row="3"/>
 	</Grid>

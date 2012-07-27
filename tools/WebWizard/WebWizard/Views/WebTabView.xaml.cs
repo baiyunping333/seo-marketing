@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WebWizard.ViewModels;
 
 namespace WebWizard.Views
 {
@@ -28,10 +29,18 @@ namespace WebWizard.Views
             set { SetValue(TitleProperty, value); }
         }
 
+        public static readonly DependencyProperty IsLoadingProperty =
+            DependencyProperty.Register("IsLoading", typeof(bool), typeof(WebTabView), new UIPropertyMetadata(false));
+
+        public bool IsLoading
+        {
+            get { return (bool)GetValue(IsLoadingProperty); }
+            set { SetValue(IsLoadingProperty, value); }
+        }
+
         public WebTabView()
         {
             InitializeComponent();
-            this.webControl.Source = new Uri("http://www.baidu.com");
             this.webControl.BeginNavigation += new Awesomium.Core.BeginNavigationEventHandler(webControl_BeginNavigation);
             this.webControl.DomReady += new EventHandler(webControl_DomReady);
             this.webControl.LoadCompleted += new EventHandler(webControl_LoadCompleted);
@@ -70,6 +79,7 @@ namespace WebWizard.Views
         {
             this.RefreshButtonStatus();
             this.Title = e.Url.ToString();
+            this.IsLoading = true;
         }
 
         private void webControl_DomReady(object sender, EventArgs e)
@@ -82,11 +92,12 @@ namespace WebWizard.Views
         {
             this.RefreshButtonStatus();
             this.Title = this.webControl.Title;
+            this.IsLoading = false;
         }
 
         private void webControl_OpenExternalLink(object sender, Awesomium.Core.OpenExternalLinkEventArgs e)
         {
-            this.webControl.Source = new Uri(e.Url);
+            ApplicationViewModel.Instance.OpenUrlCommand.Execute(e.Url);
         }
 
         private void tbAddress_KeyDown(object sender, KeyEventArgs e)

@@ -4,25 +4,13 @@ using System.Linq;
 using System.Text;
 using Microsoft.Practices.Prism.ViewModel;
 using System.Windows.Input;
+using Awesomium.Core;
+using System.Windows.Media.Imaging;
 
 namespace WebWizard.ViewModels
 {
-    public class WebTabViewModel : NotificationObject
+    public class WebTabViewModel : TabViewModel
     {
-        private string _title;
-        public string Title
-        {
-            get { return this._title; }
-            set
-            {
-                if (this._title != value)
-                {
-                    this._title = value;
-                    this.RaisePropertyChanged("Title");
-                }
-            }
-        }
-
         private Uri _source;
         public Uri Source
         {
@@ -65,6 +53,16 @@ namespace WebWizard.ViewModels
             }
         }
 
-        //public bool
+        public WebTabViewModel()
+        {
+            this.Source = new Uri(WebCore.HomeURL);
+            this.Icon = new BitmapImage(new Uri("/WebWizard;component/Assets/icons/glyphicons_340_globe.png", UriKind.RelativeOrAbsolute));
+        }
+
+        public WebTabViewModel(string url)
+        {
+            this.Source = new Uri(string.IsNullOrEmpty(url) ? WebCore.HomeURL : url);
+            this.Icon = new BitmapImage(new Uri("/WebWizard;component/Assets/icons/glyphicons_340_globe.png", UriKind.RelativeOrAbsolute));
+        }
     }
 }
