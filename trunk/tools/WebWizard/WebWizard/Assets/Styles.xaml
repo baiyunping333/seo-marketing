@@ -154,7 +154,10 @@
 								<VisualState x:Name="Indeterminate"/>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
-						<Border x:Name="border" CornerRadius="5,5,0,0" BorderBrush="#FF4B4B4B" BorderThickness="1,1,1,0" >
+						<Border x:Name="border" CornerRadius="5,5,0,0" BorderBrush="#FF4B4B4B" BorderThickness="0" >
+							<Border.Effect>
+								<DropShadowEffect ShadowDepth="0" Opacity="0.65"/>
+							</Border.Effect>
 							<Border.Background>
 								<SolidColorBrush Color="#FFF6F6F6" Opacity="0.65"/>
 							</Border.Background>

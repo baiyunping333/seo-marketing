@@ -12,9 +12,9 @@
 			<RowDefinition Height="Auto" />
 			<RowDefinition />
 			<RowDefinition Height="Auto" />
-			<RowDefinition Height="200" />
+			<RowDefinition Height="0" />
 		</Grid.RowDefinitions>
-		<Border BorderThickness="0,0,0,1" BorderBrush="#FFBCBCBC">
+		<Border BorderThickness="0,0,0,1" BorderBrush="#FFBCBCBC" CornerRadius="6,6,0,0">
 			<Border.Background>
 				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 					<GradientStop Color="#FFF6F6F6" Offset="0"/>
