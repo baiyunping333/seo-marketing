@@ -7,9 +7,10 @@
 		<!-- Resources scoped at the Application level should be defined here. -->
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="Assets/Styles.xaml"/>
-				<ResourceDictionary Source="Assets/Brushes.xaml"/>
+                <ResourceDictionary Source="Assets/Converters.xaml"/>
+                <ResourceDictionary Source="Assets/Brushes.xaml"/>
 				<ResourceDictionary Source="Assets/DataTemplates.xaml"/>
+                <ResourceDictionary Source="Assets/Styles.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>

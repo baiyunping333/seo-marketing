@@ -10,6 +10,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WebWizard.ViewModels;
+using WebWizard.Views;
+using Awesomium.Windows.Controls;
+using Awesomium.Core;
 
 namespace WebWizard
 {
@@ -21,7 +24,14 @@ namespace WebWizard
 		public MainWindow()
 		{
 			this.InitializeComponent();
-            this.DataContext = new MainWindowViewModel();
+            WebCore.Initialize(WebCoreConfig.Default, true);
+            WebCore.HomeURL = "http://www.baidu.com";
+            this.DataContext = ApplicationViewModel.Instance;
+		}
+
+		private void Border_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			this.DragMove();
 		}
 	}
 }
