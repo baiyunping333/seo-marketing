@@ -55,8 +55,8 @@
 								<DataTemplate>
 									<RadioButton GroupName="navTabs" IsChecked="{Binding IsSelected}" Style="{DynamicResource NavTabStyle}" Margin="0,0,3,0" MaxWidth="150" Width="Auto">
 										<Grid>
-											<Image Source="{Binding Icon}" Width="16" Height="16" HorizontalAlignment="Left" Margin="4,0,0,0" />
-											<Border HorizontalAlignment="Left" VerticalAlignment="Center" Width="16" Height="16" Margin="4,0,0,0" BorderThickness="1" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" >
+                                            <Image Source="{Binding Icon}" Width="16" Height="16" HorizontalAlignment="Left" Margin="4,0,0,0" Visibility="{Binding IsLoading, Converter={StaticResource InversableBooleanToVisibilityConverter}, ConverterParameter=true}" />
+                                            <Border HorizontalAlignment="Left" VerticalAlignment="Center" Width="16" Height="16" Margin="4,0,0,0" BorderThickness="1" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" >
 												<Border.BorderBrush>
 													<SolidColorBrush Color="White" Opacity="0.35"/>
 												</Border.BorderBrush>

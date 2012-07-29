@@ -1,5 +1,7 @@
 ﻿<ResourceDictionary
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cvts="clr-namespace:WebWizard.Converters">
 	<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    <cvts:InversableBooleanToVisibilityConverter x:Key="InversableBooleanToVisibilityConverter" />
 </ResourceDictionary>

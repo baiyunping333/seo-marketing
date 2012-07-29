@@ -13,6 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WebWizard.ViewModels;
 using Awesomium.Core;
+using Awesomium.Windows.Controls;
+using System.Collections.Specialized;
 
 namespace WebWizard.Views
 {
@@ -52,7 +54,10 @@ namespace WebWizard.Views
         {
             InitializeComponent();
             this.Unloaded += new RoutedEventHandler(WebTabView_Unloaded);
+            this.webControl.CreateObject("wizard");
+            this.webControl.SetObjectCallback("wizard", "scriptCallback", new JSCallback(HandleScriptCallback));
             this.webControl.BeginNavigation += new Awesomium.Core.BeginNavigationEventHandler(webControl_BeginNavigation);
+            this.webControl.TitleReceived += new TitleReceivedEventHandler(webControl_TitleReceived);
             this.webControl.DomReady += new EventHandler(webControl_DomReady);
             this.webControl.LoadCompleted += new EventHandler(webControl_LoadCompleted);
             this.webControl.OpenExternalLink += new Awesomium.Core.OpenExternalLinkEventHandler(webControl_OpenExternalLink);
@@ -86,31 +91,64 @@ namespace WebWizard.Views
             this.btnStop.Visibility = this.webControl.IsLoadingPage ? Visibility.Visible : Visibility.Collapsed;
         }
 
+        private void RefreshCookie()
+        {
+            string cookie = "" + WebCore.GetCookies(this.webControl.Source.ToString(), false);
+            string[] entries = cookie.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+
+            foreach (string entry in entries)
+            {
+                string[] pair = entry.Split('=');
+                dictionary.Add(pair[0], pair[1]);
+            }
+
+            this.listCookie.ItemsSource = dictionary;
+        }
+
+        private void HandleScriptCallback(object sender, JSCallbackEventArgs e)
+        {
+            this.tbScriptResult.Text = e.Arguments[0].ToString();
+        }
+
         private void WebTabView_Unloaded(object sender, RoutedEventArgs e)
         {
             this.webControl.Close();
         }
 
-        private void webControl_BeginNavigation(object sender, Awesomium.Core.BeginNavigationEventArgs e)
+        private void webControl_BeginNavigation(object sender, BeginNavigationEventArgs e)
         {
             this.RefreshButtonStatus();
             this.Title = e.Url.ToString();
             this.IsLoading = true;
+            if (string.IsNullOrEmpty(e.FrameName))
+            {
+                this.webSourceControl.Source = new Uri(e.Url);
+            }
+        }
+
+
+        private void webControl_TitleReceived(object sender, ReceiveTitleEventArgs e)
+        {
+            if (string.IsNullOrEmpty(e.FrameName))
+            {
+                this.Title = e.Title;
+            }
         }
 
         private void webControl_DomReady(object sender, EventArgs e)
         {
             this.RefreshButtonStatus();
             this.tbAddress.Text = this.webControl.Source.ToString();
-            string cookie = "" + WebCore.GetCookies(this.webControl.Source.ToString(), false);
-            this.tbCookie.Text = cookie.Replace(";", ";\r\n").Replace(" ", "");
+            this.RefreshCookie();
         }
 
         private void webControl_LoadCompleted(object sender, EventArgs e)
         {
             this.RefreshButtonStatus();
-            this.Title = this.webControl.Title;
             this.IsLoading = false;
+
+            this.RefreshCookie();
         }
 
         private void webControl_OpenExternalLink(object sender, Awesomium.Core.OpenExternalLinkEventArgs e)
@@ -149,6 +187,12 @@ namespace WebWizard.Views
         private void btnConfig_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             // TODO: Add event handler implementation here.
+        }
+
+        private void btnExecuteScript_Click(object sender, RoutedEventArgs e)
+        {
+            string script = string.Format("wizard.scriptCallback(eval('{0}'))", this.tbScriptText.Text);
+            this.webControl.ExecuteJavascript(script);
         }
     }
 }
