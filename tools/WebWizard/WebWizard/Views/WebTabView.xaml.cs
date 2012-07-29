@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WebWizard.ViewModels;
+using Awesomium.Core;
 
 namespace WebWizard.Views
 {
@@ -38,9 +39,19 @@ namespace WebWizard.Views
             set { SetValue(IsLoadingProperty, value); }
         }
 
+        public static readonly DependencyProperty CookieProperty =
+            DependencyProperty.Register("Cookie", typeof(string), typeof(WebTabView), new UIPropertyMetadata(string.Empty));
+
+        public string Cookie
+        {
+            get { return (string)GetValue(CookieProperty); }
+            set { SetValue(CookieProperty, value); }
+        }
+
         public WebTabView()
         {
             InitializeComponent();
+            this.Unloaded += new RoutedEventHandler(WebTabView_Unloaded);
             this.webControl.BeginNavigation += new Awesomium.Core.BeginNavigationEventHandler(webControl_BeginNavigation);
             this.webControl.DomReady += new EventHandler(webControl_DomReady);
             this.webControl.LoadCompleted += new EventHandler(webControl_LoadCompleted);
@@ -75,6 +86,11 @@ namespace WebWizard.Views
             this.btnStop.Visibility = this.webControl.IsLoadingPage ? Visibility.Visible : Visibility.Collapsed;
         }
 
+        private void WebTabView_Unloaded(object sender, RoutedEventArgs e)
+        {
+            this.webControl.Close();
+        }
+
         private void webControl_BeginNavigation(object sender, Awesomium.Core.BeginNavigationEventArgs e)
         {
             this.RefreshButtonStatus();
@@ -86,6 +102,8 @@ namespace WebWizard.Views
         {
             this.RefreshButtonStatus();
             this.tbAddress.Text = this.webControl.Source.ToString();
+            string cookie = "" + WebCore.GetCookies(this.webControl.Source.ToString(), false);
+            this.tbCookie.Text = cookie.Replace(";", ";\r\n").Replace(" ", "");
         }
 
         private void webControl_LoadCompleted(object sender, EventArgs e)
@@ -130,7 +148,7 @@ namespace WebWizard.Views
 
         private void btnConfig_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-        	// TODO: Add event handler implementation here.
+            // TODO: Add event handler implementation here.
         }
     }
 }

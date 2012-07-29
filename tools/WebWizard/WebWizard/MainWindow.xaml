@@ -4,24 +4,24 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:awe="http://schemas.awesomium.com/winfx"
-    xmlns:my="clr-namespace:WebWizard.Views" xmlns:local="clr-namespace:WebWizard"
+    xmlns:views="clr-namespace:WebWizard.Views" 
+    xmlns:local="clr-namespace:WebWizard"
+    xmlns:vms="clr-namespace:WebWizard.ViewModels"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
     mc:Ignorable="d"
 	x:Class="WebWizard.MainWindow"
 	x:Name="Window"
 	Title="MainWindow"
-	Width="800" Height="600" AllowsTransparency="True" WindowStyle="None" Background="#00000000">
+	Width="800" Height="600" AllowsTransparency="True" WindowStyle="None" Background="#00000000" ResizeMode="CanResizeWithGrip">
     <Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition />
 		</Grid.RowDefinitions>
-		<Border BorderThickness="1" CornerRadius="6" Grid.RowSpan="2" Margin="10">
+		<Border BorderThickness="1" CornerRadius="6" Grid.RowSpan="2" Margin="10" BorderBrush="White">
 			<Border.Background>
 				<SolidColorBrush Color="White" Opacity="0.5"/>
 			</Border.Background>
-			<Border.BorderBrush>
-				<SolidColorBrush Color="White"/>
-			</Border.BorderBrush>
 			<Border.Effect>
 				<DropShadowEffect ShadowDepth="0" Direction="270" BlurRadius="10"/>
 			</Border.Effect>
@@ -29,20 +29,31 @@
 		<Border Grid.RowSpan="2" Margin="16">
 			<Grid>
 				<Border CornerRadius="6,6,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown" Height="25" VerticalAlignment="Top" Background="#00000000">
-					<Grid Margin="6,0">
+					<Grid>
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto"/>
-							<ColumnDefinition MinWidth="20" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="80" />
 						</Grid.ColumnDefinitions>
-						<ItemsControl ItemsSource="{Binding AllTabs}">
+						<ItemsControl ItemsSource="{Binding AllTabs}" HorizontalAlignment="Left">
 							<ItemsControl.ItemsPanel>
 								<ItemsPanelTemplate>
-									<StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+									<UniformGrid IsItemsHost="True" Rows="1" MinWidth="150" >
+										<i:Interaction.Behaviors>
+											<ei:FluidMoveBehavior AppliesTo="Children" Duration="0:0:0.3">
+												<ei:FluidMoveBehavior.EaseY>
+													<CircleEase EasingMode="EaseOut"/>
+												</ei:FluidMoveBehavior.EaseY>
+												<ei:FluidMoveBehavior.EaseX>
+													<CircleEase EasingMode="EaseOut"/>
+												</ei:FluidMoveBehavior.EaseX>
+											</ei:FluidMoveBehavior>
+										</i:Interaction.Behaviors>
+									</UniformGrid>
 								</ItemsPanelTemplate>
 							</ItemsControl.ItemsPanel>
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
-									<RadioButton GroupName="navTabs" IsChecked="{Binding IsSelected}" Style="{DynamicResource NavTabStyle}" Width="150" Margin="2,0">
+									<RadioButton GroupName="navTabs" IsChecked="{Binding IsSelected}" Style="{DynamicResource NavTabStyle}" Margin="0,0,3,0" MaxWidth="150" Width="Auto">
 										<Grid>
 											<Image Source="{Binding Icon}" Width="16" Height="16" HorizontalAlignment="Left" Margin="4,0,0,0" />
 											<Border HorizontalAlignment="Left" VerticalAlignment="Center" Width="16" Height="16" Margin="4,0,0,0" BorderThickness="1" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" >
@@ -56,7 +67,8 @@
 													</LinearGradientBrush>
 												</Border.Background>
 											</Border>
-											<TextBlock Text="{Binding Title}" ToolTip="{Binding Title}" TextTrimming="CharacterEllipsis" HorizontalAlignment="Stretch" d:LayoutOverrides="Height" Margin="24,0,4,0" VerticalAlignment="Center" /> 					
+											<TextBlock Text="{Binding Title}" ToolTip="{Binding Title}" TextTrimming="CharacterEllipsis" HorizontalAlignment="Stretch" d:LayoutOverrides="Height" Margin="24,0" VerticalAlignment="Center" />
+                                            <Button Content="X" HorizontalAlignment="Right" Width="20" VerticalAlignment="Center" Margin="0,0,4,0" Height="20" Command="{Binding CloseTabCommand, Source={x:Static vms:ApplicationViewModel.Instance}}" CommandParameter="{Binding}" Visibility="{Binding CanClose, Converter={StaticResource BooleanToVisibilityConverter}}" /> 					
 										</Grid> 					
 									</RadioButton>
 								</DataTemplate>
@@ -68,10 +80,7 @@
 					</Grid>
 				</Border>
 				<Border Margin="0,25,0,0" >
-					<Border.Background>
-						<SolidColorBrush Color="White"/>
-					</Border.Background>
-					<ItemsControl ItemsSource="{Binding AllTabs}" Margin="0,0,0,6">
+					<ItemsControl ItemsSource="{Binding AllTabs}">
 						<ItemsControl.ItemsPanel>
 							<ItemsPanelTemplate>
 								<Grid IsItemsHost="True"/>
@@ -80,6 +89,13 @@
 					</ItemsControl>
 				</Border>
 			</Grid>
+		</Border>
+		<Border Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,13,0">
+			<StackPanel Orientation="Horizontal">
+				<Button Content="-" Height="15" FontSize="8" FontFamily="Arial" Width="20" Click="Button_Click" />
+				<Button Content="+" Height="15" FontSize="8" FontFamily="Arial" Width="20" Click="Button_Click_1"/>
+				<Button Content="X" Height="15" FontSize="8" FontFamily="Arial" Width="20" Click="Button_Click_2"/>
+			</StackPanel>
 		</Border>
 	</Grid>
 </Window>

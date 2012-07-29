@@ -25,42 +25,30 @@ namespace WebWizard.ViewModels
             }
         }
 
-        private bool _canGoBack;
-        public bool CanGoBack
+        private string _cookie;
+        public string Cookie
         {
-            get { return this._canGoBack; }
+            get { return this._cookie; }
             set
             {
-                if (this._canGoBack != value)
+                if (this._cookie != value)
                 {
-                    this._canGoBack = value;
-                    this.RaisePropertyChanged("CanGoBack");
-                }
-            }
-        }
-
-        private bool _canGoForward;
-        public bool CanGoForward
-        {
-            get { return this._canGoForward; }
-            set
-            {
-                if (this._canGoForward != value)
-                {
-                    this._canGoForward = value;
-                    this.RaisePropertyChanged("CanGoForward");
+                    this._cookie = value;
+                    this.RaisePropertyChanged("Cookie");
                 }
             }
         }
 
         public WebTabViewModel()
         {
+            this.CanClose = true;
             this.Source = new Uri(WebCore.HomeURL);
             this.Icon = new BitmapImage(new Uri("/WebWizard;component/Assets/icons/glyphicons_340_globe.png", UriKind.RelativeOrAbsolute));
         }
 
         public WebTabViewModel(string url)
         {
+            this.CanClose = true;
             this.Source = new Uri(string.IsNullOrEmpty(url) ? WebCore.HomeURL : url);
             this.Icon = new BitmapImage(new Uri("/WebWizard;component/Assets/icons/glyphicons_340_globe.png", UriKind.RelativeOrAbsolute));
         }

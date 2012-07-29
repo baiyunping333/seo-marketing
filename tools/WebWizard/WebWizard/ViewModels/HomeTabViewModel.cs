@@ -18,6 +18,7 @@ namespace WebWizard.ViewModels
         private HomeTabViewModel()
         {
             this.Title = "Home";
+            this.CanClose = false;
             this.Icon = new BitmapImage(new Uri("/WebWizard;component/Assets/icons/glyphicons_009_magic.png", UriKind.RelativeOrAbsolute));
         }
     }

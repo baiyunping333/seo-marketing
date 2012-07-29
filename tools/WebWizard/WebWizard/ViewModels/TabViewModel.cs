@@ -51,6 +51,20 @@ namespace WebWizard.ViewModels
             }
         }
 
+        private bool _canClose;
+        public bool CanClose
+        {
+            get { return this._canClose; }
+            set
+            {
+                if (this._canClose != value)
+                {
+                    this._canClose = value;
+                    this.RaisePropertyChanged("CanClose");
+                }
+            }
+        }
+
         private ImageSource _icon;
         public ImageSource Icon
         {
