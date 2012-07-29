@@ -12,9 +12,9 @@
 			<RowDefinition Height="Auto" />
 			<RowDefinition />
 			<RowDefinition Height="Auto" />
-			<RowDefinition Height="0" />
+			<RowDefinition Height="200" />
 		</Grid.RowDefinitions>
-		<Border BorderThickness="0,0,0,1" BorderBrush="#FFBCBCBC" CornerRadius="6,6,0,0">
+		<Border BorderThickness="0,0,0,1" BorderBrush="#FFBCBCBC">
 			<Border.Background>
 				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 					<GradientStop Color="#FFF6F6F6" Offset="0"/>
@@ -51,6 +51,35 @@
 		</Border>
 		<awe:WebControl x:Name="webControl" Grid.Row="1" Source="{Binding Source}" />
 		<GridSplitter HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Center" Height="5" Background="#FFE0E0E0"/>
-		<WebWizard:ControlPanel d:LayoutOverrides="Height" Grid.Row="3"/>
-	</Grid>
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Border Background="#FFE0E0E0" BorderThickness="0,1">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="{DynamicResource CommonBorderColor}"/>
+                </Border.BorderBrush>
+                <Grid>
+                    <StackPanel Height="30"></StackPanel>
+                </Grid>
+            </Border>
+            <TextBox Name="tbCookie" Grid.Row="1" AcceptsReturn="True" />
+            <Border Grid.Row="2" BorderThickness="0,1,0,0" >
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="{DynamicResource CommonBorderColor}"/>
+                </Border.BorderBrush>
+                <StatusBar Height="20" >
+                    <StatusBarItem Content="Console"/>
+                    <Separator>
+                        <Separator.Background>
+                            <SolidColorBrush Color="{DynamicResource CommonBorderColor}"/>
+                        </Separator.Background>
+                    </Separator>
+                    <StatusBarItem Content="Inspector"/>
+                </StatusBar>
+            </Border>
+        </Grid>
+    </Grid>
 </UserControl>

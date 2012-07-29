@@ -22,6 +22,7 @@
 				<StackPanel Height="30"></StackPanel>
 			</Grid>
 		</Border>
+        <TextBox Grid.Row="1" AcceptsReturn="True" Text="{Binding Cookie}" />
 		<Border Grid.Row="2" BorderThickness="0,1,0,0" >
 			<Border.BorderBrush>
 				<SolidColorBrush Color="{DynamicResource CommonBorderColor}"/>

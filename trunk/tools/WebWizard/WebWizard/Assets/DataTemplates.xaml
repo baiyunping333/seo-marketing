@@ -4,9 +4,9 @@
                     xmlns:vms="clr-namespace:WebWizard.ViewModels">
 
     <DataTemplate DataType="{x:Type vms:WebTabViewModel}">
-        <views:WebTabView Title="{Binding Title, Mode=OneWayToSource}" IsLoading="{Binding IsLoading, Mode=OneWayToSource}" Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <views:WebTabView Title="{Binding Title, Mode=OneWayToSource}" IsLoading="{Binding IsLoading, Mode=OneWayToSource}" Cookie="{Binding Cookie, Mode=OneWayToSource}" Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </DataTemplate>
     <DataTemplate DataType="{x:Type vms:HomeTabViewModel}">
-        <views:HomeTabView />
+        <views:HomeTabView Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </DataTemplate>
 </ResourceDictionary>

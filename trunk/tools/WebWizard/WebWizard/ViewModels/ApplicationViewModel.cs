@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Data;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Awesomium.Core;
 
 namespace WebWizard.ViewModels
 {
@@ -17,6 +18,7 @@ namespace WebWizard.ViewModels
         public ObservableCollection<WebTabViewModel> WebTabs { get; set; }
         public CompositeCollection AllTabs { get; set; }
         public ICommand OpenUrlCommand { get; private set; }
+        public ICommand CloseTabCommand { get; private set; }
 
         static ApplicationViewModel()
         {
@@ -37,6 +39,23 @@ namespace WebWizard.ViewModels
                 var webTab = new WebTabViewModel(url);
                 webTab.IsSelected = true;
                 this.WebTabs.Add(webTab);
+            });
+
+            this.CloseTabCommand = new DelegateCommand<WebTabViewModel>((tab) =>
+            {
+                if (tab != null)
+                {
+                    this.WebTabs.Remove(tab);
+                    var lastTab = this.WebTabs.LastOrDefault();
+                    if (lastTab != null)
+                    {
+                        lastTab.IsSelected = true;
+                    }
+                    else
+                    {
+                        this.HomeTab.IsSelected = true;
+                    }
+                }
             });
         }
     }
