@@ -53,19 +53,47 @@
 		<GridSplitter HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Center" Height="5" Background="#FFE0E0E0"/>
         <Grid Grid.Row="3">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition />
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Border Background="#FFE0E0E0" BorderThickness="0,1">
-                <Border.BorderBrush>
-                    <SolidColorBrush Color="{DynamicResource CommonBorderColor}"/>
-                </Border.BorderBrush>
-                <Grid>
-                    <StackPanel Height="30"></StackPanel>
-                </Grid>
-            </Border>
-            <TextBox Name="tbCookie" Grid.Row="1" AcceptsReturn="True" />
+            <TabControl>
+            	<TabItem Header="Source">
+            		<Grid Background="#FFE5E5E5">
+                        <awe:WebSourceControl x:Name="webSourceControl"/>
+            		</Grid>
+            	</TabItem>
+            	<TabItem Header="Script">
+            		<Grid Background="#FFE5E5E5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Execute"  Name="btnExecuteScript" Click="btnExecuteScript_Click" />
+                        </StackPanel>
+                        <TextBox Name="tbScriptText" Grid.Row="1" />
+                        <GridSplitter Grid.Column="2" Grid.Row="1" />
+                        <TextBox Name="tbScriptResult" Grid.Column="2" Grid.Row="1" />
+                    </Grid>
+            	</TabItem>
+                <TabItem Header="Cookie">
+                    <Grid Background="#FFE5E5E5">
+                        <ListView x:Name="listCookie">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="Key" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="Value" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </TabItem>
+            </TabControl>
             <Border Grid.Row="2" BorderThickness="0,1,0,0" >
                 <Border.BorderBrush>
                     <SolidColorBrush Color="{DynamicResource CommonBorderColor}"/>
