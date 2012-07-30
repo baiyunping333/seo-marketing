@@ -85,7 +85,7 @@ namespace WebWizard.Views
 
         private void RefreshButtonStatus()
         {
-            this.btnBack.IsEnabled = this.webControl.HistoryBackCount > 0;
+            this.btnBack.IsEnabled = this.webControl.HistoryBackCount > 1;
             this.btnForward.IsEnabled = this.webControl.HistoryForwardCount > 0;
             this.btnRefresh.Visibility = this.webControl.IsLoadingPage ? Visibility.Collapsed : Visibility.Visible;
             this.btnStop.Visibility = this.webControl.IsLoadingPage ? Visibility.Visible : Visibility.Collapsed;
@@ -118,37 +118,48 @@ namespace WebWizard.Views
 
         private void webControl_BeginNavigation(object sender, BeginNavigationEventArgs e)
         {
-            this.RefreshButtonStatus();
-            this.Title = e.Url.ToString();
-            this.IsLoading = true;
-            if (string.IsNullOrEmpty(e.FrameName))
+            if (webControl.Source.Scheme != "about")
             {
-                this.webSourceControl.Source = new Uri(e.Url);
+                this.RefreshButtonStatus();
+                this.Title = e.Url.ToString();
+                this.IsLoading = true;
+                if (string.IsNullOrEmpty(e.FrameName))
+                {
+                    this.webSourceControl.Source = new Uri(e.Url);
+                }
             }
         }
 
 
         private void webControl_TitleReceived(object sender, ReceiveTitleEventArgs e)
         {
-            if (string.IsNullOrEmpty(e.FrameName))
+            if (webControl.Source.Scheme != "about")
             {
-                this.Title = e.Title;
+                if (string.IsNullOrEmpty(e.FrameName))
+                {
+                    this.Title = e.Title;
+                }
             }
         }
 
         private void webControl_DomReady(object sender, EventArgs e)
         {
-            this.RefreshButtonStatus();
-            this.tbAddress.Text = this.webControl.Source.ToString();
-            this.RefreshCookie();
+            if (webControl.Source.Scheme != "about")
+            {
+                this.RefreshButtonStatus();
+                this.tbAddress.Text = this.webControl.Source.ToString();
+                this.RefreshCookie();
+            }
         }
 
         private void webControl_LoadCompleted(object sender, EventArgs e)
         {
-            this.RefreshButtonStatus();
-            this.IsLoading = false;
-
-            this.RefreshCookie();
+            if (webControl.Source.Scheme != "about")
+            {
+                this.RefreshButtonStatus();
+                this.IsLoading = false;
+                this.RefreshCookie();
+            }
         }
 
         private void webControl_OpenExternalLink(object sender, Awesomium.Core.OpenExternalLinkEventArgs e)

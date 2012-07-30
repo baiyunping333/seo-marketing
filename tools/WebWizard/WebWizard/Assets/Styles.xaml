@@ -82,7 +82,7 @@
 		<GradientStop Color="#E2E3EA" Offset="0.07"/>
 		<GradientStop Color="#E3E9EF" Offset="1"/>
 	</LinearGradientBrush>
-	<Style x:Key="searchBoxStyle" BasedOn="{x:Null}" TargetType="{x:Type TextBox}">
+	<Style x:Key="SearchBoxStyle" BasedOn="{x:Null}" TargetType="{x:Type TextBox}">
 		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
 		<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
 		<Setter Property="BorderBrush" Value="{StaticResource TextBoxBorder}"/>
@@ -165,6 +165,61 @@
 							</Border.Background>
 							<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
 						</Border>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+		<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="Width" Value="14"/>
+		<Setter Property="Height" Value="14"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Grid Background="Transparent">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualStateGroup.Transitions>
+									<VisualTransition GeneratedDuration="0:0:0.3">
+										<VisualTransition.GeneratedEasingFunction>
+											<CircleEase EasingMode="EaseOut"/>
+										</VisualTransition.GeneratedEasingFunction>
+									</VisualTransition>
+								</VisualStateGroup.Transitions>
+								<VisualState x:Name="Normal"/>
+								<VisualState x:Name="MouseOver">
+									<Storyboard>
+										<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipse">
+											<EasingColorKeyFrame KeyTime="0" Value="White"/>
+										</ColorAnimationUsingKeyFrames>
+										<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+											<EasingColorKeyFrame KeyTime="0" Value="#FFD30000"/>
+										</ColorAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<Storyboard>
+										<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipse">
+											<EasingColorKeyFrame KeyTime="0" Value="#FFCCCCCC"/>
+										</ColorAnimationUsingKeyFrames>
+										<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+											<EasingColorKeyFrame KeyTime="0" Value="#FFD30000"/>
+										</ColorAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Disabled"/>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Ellipse x:Name="ellipse" Fill="Transparent" HorizontalAlignment="Center" Width="14" Height="14" VerticalAlignment="Center"/>
+						<Path x:Name="path" Stretch="Fill" Fill="#FFACACAC" Data="F1 M 127.243,41.3285L 127.243,41.3286L 125.828,42.7427L 123,39.9143L 120.172,42.7427L 118.757,41.3286L 121.586,38.5001L 118.757,35.6717L 118.757,35.6716L 120.172,34.2574L 123,37.0859L 125.828,34.2574L 127.243,35.6717L 124.414,38.5001L 127.243,41.3285 Z " HorizontalAlignment="Center" Height="7" VerticalAlignment="Center" Width="7"/>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
