@@ -12,14 +12,6 @@
     		<ColumnDefinition />
     		<ColumnDefinition Width="200"/>
     	</Grid.ColumnDefinitions>
-    	<TreeView Margin="5">
-    		<TreeViewItem Header="TreeViewItem" IsExpanded="True">
-    			<TreeViewItem Header="TreeViewItem"/>
-    			<TreeViewItem Header="TreeViewItem"/>
-    		</TreeViewItem>
-    		<TreeViewItem Header="TreeViewItem"/>
-    		<TreeViewItem Header="TreeViewItem"/>
-    	</TreeView>
     	<DataGrid Grid.Column="1" Margin="0,5"/>
             
     	<WrapPanel Grid.Column="2">

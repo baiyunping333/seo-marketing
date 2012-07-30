@@ -41,7 +41,7 @@
 						<Image Source="/WebWizard;component/Assets/icons/glyphicons_207_remove_2.png"/>
 					</Button>
 				</StackPanel>
-				<TextBox x:Name="tbAddress" KeyDown="tbAddress_KeyDown" Grid.Column="1" Style="{DynamicResource searchBoxStyle}" />
+				<TextBox x:Name="tbAddress" KeyDown="tbAddress_KeyDown" Grid.Column="1" Style="{DynamicResource SearchBoxStyle}" />
 				<StackPanel Orientation="Horizontal" Grid.Column="2" Margin="3,0,0,0">
 					<Button x:Name="btnConfig" Style="{DynamicResource NavButtonStyle}" Click="btnConfig_Click">
 						<Image Source="/WebWizard;component/Assets/icons/glyphicons_280_settings.png"/>
@@ -86,8 +86,8 @@
                         <ListView x:Name="listCookie">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="Key" />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="Value" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="Key" Width="100" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="Value" Width="300" />
                                 </GridView>
                             </ListView.View>
                         </ListView>

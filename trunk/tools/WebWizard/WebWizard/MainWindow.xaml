@@ -8,11 +8,12 @@
     xmlns:local="clr-namespace:WebWizard"
     xmlns:vms="clr-namespace:WebWizard.ViewModels"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
     mc:Ignorable="d"
 	x:Class="WebWizard.MainWindow"
 	x:Name="Window"
 	Title="MainWindow"
-	Width="800" Height="600" AllowsTransparency="True" WindowStyle="None" Background="#00000000" ResizeMode="CanResizeWithGrip">
+	Width="800" Height="600" AllowsTransparency="True" WindowStyle="None" Background="#00000000" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen">
     <Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -55,20 +56,37 @@
 								<DataTemplate>
 									<RadioButton GroupName="navTabs" IsChecked="{Binding IsSelected}" Style="{DynamicResource NavTabStyle}" Margin="0,0,3,0" MaxWidth="150" Width="Auto">
 										<Grid>
-                                            <Image Source="{Binding Icon}" Width="16" Height="16" HorizontalAlignment="Left" Margin="4,0,0,0" Visibility="{Binding IsLoading, Converter={StaticResource InversableBooleanToVisibilityConverter}, ConverterParameter=true}" />
-                                            <Border HorizontalAlignment="Left" VerticalAlignment="Center" Width="16" Height="16" Margin="4,0,0,0" BorderThickness="1" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" >
+											<Grid.Resources>
+												<Storyboard x:Key="Loading" RepeatBehavior="Forever">
+													<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="arc">
+														<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+														<EasingDoubleKeyFrame KeyTime="0:0:1" Value="360"/>
+													</DoubleAnimationUsingKeyFrames>
+												</Storyboard>
+											</Grid.Resources>
+                                            <Image Source="{Binding Icon}" Width="16" Height="16" HorizontalAlignment="Left" Margin="4,0,0,0" Visibility="{Binding IsLoading, ConverterParameter=true, Converter={StaticResource InversableBooleanToVisibilityConverter}}" />
+                                            <Border x:Name="border" HorizontalAlignment="Left" VerticalAlignment="Center" Width="16" Height="16" Margin="4,0,0,0" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" >
+                                            	<i:Interaction.Triggers>
+                                            		<i:EventTrigger>
+                                            			<ei:ControlStoryboardAction Storyboard="{StaticResource Loading}"/>
+                                            		</i:EventTrigger>
+                                            	</i:Interaction.Triggers>
 												<Border.BorderBrush>
 													<SolidColorBrush Color="White" Opacity="0.35"/>
 												</Border.BorderBrush>
-												<Border.Background>
-													<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-														<GradientStop Color="#FF2AE424" Offset="0"/>
-														<GradientStop Color="#FF0E950A" Offset="1"/>
-													</LinearGradientBrush>
-												</Border.Background>
+                                            	<ed:Arc x:Name="arc" ArcThickness="0" ArcThicknessUnit="Pixel" EndAngle="120" Height="Auto" Stretch="None" Stroke="#FF265DE4" StrokeThickness="2" StartAngle="0" Width="Auto" RenderTransformOrigin="0.5,0.5">
+                                            		<ed:Arc.RenderTransform>
+                                            			<TransformGroup>
+                                            				<ScaleTransform/>
+                                            				<SkewTransform/>
+                                            				<RotateTransform/>
+                                            				<TranslateTransform/>
+                                            			</TransformGroup>
+                                            		</ed:Arc.RenderTransform>
+                                            	</ed:Arc>
 											</Border>
 											<TextBlock Text="{Binding Title}" ToolTip="{Binding Title}" TextTrimming="CharacterEllipsis" HorizontalAlignment="Stretch" d:LayoutOverrides="Height" Margin="24,0" VerticalAlignment="Center" />
-                                            <Button Content="X" HorizontalAlignment="Right" Width="20" VerticalAlignment="Center" Margin="0,0,4,0" Height="20" Command="{Binding CloseTabCommand, Source={x:Static vms:ApplicationViewModel.Instance}}" CommandParameter="{Binding}" Visibility="{Binding CanClose, Converter={StaticResource BooleanToVisibilityConverter}}" /> 					
+                                            <Button HorizontalAlignment="Right" Width="20" VerticalAlignment="Center" Margin="0,0,4,0" Height="20" Command="{Binding CloseTabCommand, Source={x:Static vms:ApplicationViewModel.Instance}}" CommandParameter="{Binding}" Visibility="{Binding CanClose, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{DynamicResource CloseButtonStyle}" /> 					
 										</Grid> 					
 									</RadioButton>
 								</DataTemplate>
