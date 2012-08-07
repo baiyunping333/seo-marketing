@@ -1,0 +1,20 @@
+@import url('reset.css');
+.wrap{ padding:10px 20px;}
+.wrap h1{ font-size:14px; height:22px; line-height: 22px; padding-left: 20px; background:url(s01.jpg) no-repeat left center;}
+.funcList li.ml10{ margin-left: 15px;background:url(arrow02.jpg) no-repeat left center;}
+.funcList{ padding:10px 10px 10px 0;}
+.funcList li{ line-height:25px; padding-left:10px; background:url(arrow01.jpg) no-repeat left center;}
+.funcList li a{ line-height:25px;}
+.funcList li a:hover{ background-color:#eee;}
+
+/*framev1*/
+.framev1{ padding:10px 20px;}
+
+
+.g_a{display:inline-block; border-width:1px 0; border-color:#bbbbbb; border-style:solid; vertical-align:middle; }
+.g_b{float:left; background:#e3e3e3; border-width:0 1px; border-color:#bbbbbb; border-style:solid; margin:0 -1px; position:relative;}
+.g_c{display:block; line-height:0.6em; background:#f9f9f9; border-bottom:2px solid #eeeeee;}
+.g_d{display:block; padding:0.2em 0.6em; margin-top:-0.6em; cursor:pointer;}
+
+.g_a_hover:hover{border-color:#999999;}
+.g_a_hover:hover .g_b{border-color:#999999;}
