@@ -6,9 +6,9 @@
  * Time: 下午11:40
  * To change this template use File | Settings | File Templates.
  */
-class Common extends Config{
+class Common {
     function __construct(){
-        global $initCfg,$config,$z7Cfg,$krCfg,$fDir,$file,$seoCfg,$wpCfg,$wpOptsCfg,$wpdb;
+        global $initCfg;
         $this->initCfg=$initCfg;
         $this->config=$config;
         $this->z7Cfg=$z7Cfg;
