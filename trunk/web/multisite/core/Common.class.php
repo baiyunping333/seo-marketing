@@ -9,15 +9,6 @@
 class Common {
     function __construct(){
         global $initCfg;
-
-        //repeat config.
-        $this->siteUrl=$this->getSiteUrl();
-
-
-        //wordpress常用
-        $this->wpCateIds=get_all_category_ids();
-        $this->wpCates=get_categories();
-        $this->wpTags=get_tags();
     }
 
     /**
