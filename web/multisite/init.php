@@ -26,7 +26,10 @@ define('AFEIOS_LIBS', AFEIOS_PATH . '/libs');
 define('WP_PATH', 'D:/wamp/www/wordpress');
 define('CHARSET', 'UTF-8');
 define('TIMEAREA', 'Asia/shanghai');
-
+define('DB_HOST',"localhost");
+define('DB_USER',"root");
+define('DB_PASSWORD',"");
+define('DB_NAME',"test");
 
 /**
  * 自己的常用类库及函数
