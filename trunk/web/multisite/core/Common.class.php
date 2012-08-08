@@ -9,16 +9,6 @@
 class Common {
     function __construct(){
         global $initCfg;
-        $this->initCfg=$initCfg;
-        $this->config=$config;
-        $this->z7Cfg=$z7Cfg;
-        $this->krCfg=$krCfg;
-        $this->fDir=$fDir;
-        $this->file=$file;
-        $this->seoCfg=$seoCfg;
-        $this->wpCfg=$wpCfg;
-        $this->wpOptsCfg=$wpOptsCfg;
-        $this->wpdb=$wpdb;
 
         //repeat config.
         $this->siteUrl=$this->getSiteUrl();

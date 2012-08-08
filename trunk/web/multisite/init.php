@@ -20,28 +20,26 @@ ini_set('memory_limit', '128M');
  * 常用常量定义
  */
 define('AFEIOS_PATH', str_replace('\\', '/', dirname(__FILE__)));
-define('AFEIOS_CORE',AFEIOS_PATH.'/core');
-define('AFEIOS_LIBS',AFEIOS_PATH.'/libs');
+define('AFEIOS_CORE', AFEIOS_PATH . '/core');
+define('AFEIOS_LIBS', AFEIOS_PATH . '/libs');
 
-define('WP_PATH','D:/wamp/www/wordpress');
-define('CHARSET','UTF-8');
-define('TIMEAREA','Asia/shanghai');
-
+define('WP_PATH', 'D:/wamp/www/wordpress');
+define('CHARSET', 'UTF-8');
+define('TIMEAREA', 'Asia/shanghai');
 
 
 /**
  * 自己的常用类库及函数
  */
-include_once(AFEIOS_LIBS.'/Mysql.class.php');
-include_once(AFEIOS_LIBS.'/MyFile.class.php');
-include_once(AFEIOS_LIBS.'/PinYin.php');
-include_once(AFEIOS_LIBS.'/JS.php');
-
+include_once(AFEIOS_LIBS . '/Mysql.class.php');
+include_once(AFEIOS_LIBS . '/MyFile.class.php');
+include_once(AFEIOS_LIBS . '/PinYin.php');
+include_once(AFEIOS_LIBS . '/JS.php');
 
 
 /**
  *常用类的Init初始化
  */
-$file=new MyFile();
-$fDir=new MyDir();
-$db=new Mysql(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+$file = new MyFile();
+$fDir = new MyDir();
+$db = new Mysql(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
