@@ -2,12 +2,7 @@
 include_once('init.php');
 include_once('config.php');
 include_once(AFEIOS_CORE.'/Common.class.php');
-include_once(AFEIOS_CORE.'/Krcj.class.php');
-include_once(AFEIOS_CORE.'/Seo.class.php');
-include_once(AFEIOS_CORE.'/WpCore.class.php');
-include_once(AFEIOS_CORE.'/MultiSite.class.php');
-include_once(AFEIOS_CORE.'/WpSetting.class.php');
-include_once(AFEIOS_CORE.'/Exec.class.php');
+
 
 $action=isset($_REQUEST['action'])?$_REQUEST['action']:'index';
 

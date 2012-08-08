@@ -21,14 +21,12 @@ ini_set('memory_limit', '128M');
  */
 define('AFEIOS_PATH', str_replace('\\', '/', dirname(__FILE__)));
 define('AFEIOS_CORE',AFEIOS_PATH.'/core');
-define('AFEIOS_DATA',AFEIOS_PATH.'/data');
 define('AFEIOS_LIBS',AFEIOS_PATH.'/libs');
 
 define('WP_PATH','D:/wamp/www/wordpress');
 define('CHARSET','UTF-8');
 define('TIMEAREA','Asia/shanghai');
 
-define('OUT_FILES',AFEIOS_PATH.'/outfiles');
 
 
 /**
