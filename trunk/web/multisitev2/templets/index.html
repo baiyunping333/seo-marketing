@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" >
+<head profile="http://gmpg.org/xfn/11">
+	<title>{title}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="正在寻找{key}吗？{key}的网站打不开了吗？这里有关于{key}的最新最全的资讯哦亲～" />
+	<meta name="keywords" content="{key},{keys}" />
+	<meta http-equiv="content-type" content="text/html; charset=gb2312" />
+	<link rel="stylesheet" type="text/css" href="/templets/style.css" />
+	<script language="JavaScript" src="/templets/head.js" type="text/JavaScript"></script>
+</head>
+
+<body class="home blog">
+	<div id="wrapper" class="hfeed">
+		<p><table width="20" height="3" border="0" cellspacing="0" cellpadding="0"></table></p>
+
+
+
+		<div id="main">
+
+			<div id="container">
+				<div id="content">
+					<div id="post-516" class="post-516 post type-post status-publish format-standard hentry category-design category-fusee category-production tag-little-caesars">
+						<h2 class="entry-title"><a title="" class="STYLE1" rel="bookmark">{key}最新资讯</a></h2>
+						<div class="entry-content">
+							<p><div class="alignnone size-full wp-image-522"></div></p>
+							<div class="pages">
+								<ul>
+                                    {baidu:}
+									<li><a href="{url}">{title}</a><p class='intro'>{description}</p></li>
+                                    {/baidu}
+                                    {randarticle:}
+									<li><a href="{url}">{title}</a><p class='intro'>{description}</p></li>
+                                    {/randarticle}
+								</ul>	
+							</div>
+						</div>
+						<div class="entry-utility-prep">
+							<div>相关内容：</div>
+							<ul>
+								{keyslink}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div><!-- #container -->
+
+			<div id="primary" class="widget-area">
+				<ul class="xoxo">
+					<li id="spacer-4" class="widget-container widget_About"><h2 class="widget-title"><img src="/templets/spacer.png" width="247" height="22" /></h2><div id="Line_wrap"></div></li >
+
+					<li id="tag_cloud-6" class="widget-container widget_tag_cloud">
+						<h2 class="widget-title"><img src="/templets/tags.jpg" width="229" height="30" /></h2>
+						<div class="fla">
+							<ul>
+								{taglink}
+							</ul>
+						</div>
+					</li >
+				</ul>
+			</div><!-- #primary .widget-area -->
+		</div><!-- #main -->
+		<div id="footer">
+			<div id="colophon">
+				<div id="site-info">
+					<div style="height:50px"></div>
+					<table width="622" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td>&copy; 2011-2012. <span class="copyright">{key}官方网站版权所有 </span>| All rights reserved. <script language="JavaScript" src="/templets/cnzz.js" type="text/JavaScript"></script> </td>
+						</tr>
+					</table>
+				</div><!-- #site-info -->
+			</div><!-- #colophon -->
+		</div><!-- #footer -->
+
+	</div><!-- #wrapper -->
+</body>
+</html>
