@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript">
+	var counterA=0;
+	</script>
+</head>
+<body>
+	<div class="links">
+	<a href="#">TestLink</a>
+	<a href="#">TestLink</a>
+	<a href="#">TestLink</a>
+	<a href="#">TestLink</a>
+	<a href="#">TestLink</a>
+	</div>
+
+	<script type="text/javascript">
+	function $(id){
+		return document.getElementById(id);
+	}
+	window.onload=function(){
+		document.attachEvent('onclick',function(){
+			var event=window.event;
+			if(/a/i.test(event.srcElement.tagName)){
+				counterA++
+			};
+		});
+		
+		
+	}
+	
+	window.onunload=function(){
+		if(counterA>0){
+			alert("不退弹！");
+		}else{
+			alert("退弹代码！");
+		}
+	}
+	
+	</script>
+</body>
+</html>
