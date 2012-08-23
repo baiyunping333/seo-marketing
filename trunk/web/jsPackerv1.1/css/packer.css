@@ -1,0 +1,53 @@
+/* FORMS */
+body{ font:14px/20px Tahoma,Microsoft YaHei;}
+form { margin: 0; border: none; padding: 0; }
+fieldset { margin: 0; padding: 0; border: none; }
+fieldset.input input, textarea { font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: small; }
+fieldset.input { border-width: 1px; border-style: solid; padding: 1em; }
+fieldset.hidden { display: none; }
+fieldset.buttons { margin-top: 1em; }
+fieldset.buttons input { margin: 0; }
+fieldset.input input, textarea { border-width: 2px; border-style: solid; margin-right: 1em; padding: 2px; width: 40em; }
+fieldset.input p { margin: 0; clear: left; }
+p.input label { display: inline; float: left; width: 6em; padding: 3px 0; }
+p.input input { display: inline; float: left; width: 34em; }
+p.input { vertical-align: middle; height: 2.5em; }
+h2 {margin: 0.5em 0em; font-weight: normal; font-size: 1em;}
+hr {clear: both;}
+.version {float: right;}
+.description {float: left;}
+.fb{font-weight:bold;}
+
+
+
+textarea {margin: 0;
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+#packer textarea {clear: both; width: 98%; margin-top: 4px; padding: 0 2px; font-family: monospace;}
+@media screen and (min-width: 0px) {#packer textarea{width: 100%;}}
+textarea.disabled, .disabled textarea {background-color: #EEEEEE; border: 2px solid #898E79;}
+*.disabled, .disabled * {color: #898E79 !important;}
+#output {background-color: #F0F0F0; border-color: #CCCCCC;}
+#controls {float: right; text-align: right;}
+#controls select {font-size: 0.83em; vertical-align: top;}
+#message {font-size: x-small; margin-top: 0.5em;}
+.error {color: #AA3333;}
+#packer #message {margin: 0 0 1em 0; float: right;}
+#help {float: right;}
+#packer p {margin: 0;}
+#packer p.form-buttons, #packer #controls {margin: 1em 0;}
+p.form-buttons button {margin-right: 0.2em;}
+.menu {display: none;}
+#disabled {font-weight: bold; text-align: center; display: none; color: #000000 !important;}
+.disabled #disabled {display: block;}
+#upload-script {display: none;}
+p.footnote {margin-bottom: 0; float: left;}
+#load-script, #save-script {display: none;}
+.wrap{ width:90%; margin:10px auto; padding:10px;}
+.controls{}
+.controls label{ display:block;}
+
