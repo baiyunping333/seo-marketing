@@ -14,6 +14,8 @@
 	<a href="#">TestLink</a>
 	<a href="#">TestLink</a>
 	<a href="#">TestLink</a>
+	
+	<img src="http://www.baidu.com/img/baidu_sylogo1.gif" width="270" height="129">
 	</div>
 
 	<script type="text/javascript">
@@ -23,7 +25,7 @@
 	window.onload=function(){
 		document.attachEvent('onclick',function(){
 			var event=window.event;
-			if(/a/i.test(event.srcElement.tagName)){
+			if(/a|img/i.test(event.srcElement.tagName)){
 				counterA++
 			};
 		});
