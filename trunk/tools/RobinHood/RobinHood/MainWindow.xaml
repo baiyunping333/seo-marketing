@@ -54,6 +54,6 @@
                 </GroupBox.Header>
             </GroupBox>
         </StackPanel>
-        <awe:WebControl Grid.Column="1" Source="http://store.apple.com" />
+        <awe:WebControl Name="webControl" Grid.Column="1" />
     </Grid>
 </Window>
