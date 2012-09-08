@@ -1,0 +1,12 @@
+http://store.apple.com/us/configure/MD234LL/A?add-to-cart=add-to-cart&cppart=UNLOCKED%2FUS
+
+BLACK 16G MD234LL
+BLACK 32G MD241LL
+BLACK 64G MD257LL
+WHITE 16G MD237LL
+WHITE 32G MD244LL
+WHITE 64G MD260LL
+
+Sizzle('#login-appleId')[0].value = 'angely0111@gmail.com';
+Sizzle('#login-password')[0].value = 'woaiBAMA870111';
+Sizzle('#sign-in')[0].click();
