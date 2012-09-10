@@ -1,0 +1,9 @@
+C:\MyFiles\Work\005-c#\sendMailForResume\sendMailForResume\bin\Debug\sendMailForResume.exe
+C:\MyFiles\Work\005-c#\sendMailForResume\sendMailForResume\bin\Debug\sendMailForResume.pdb
+C:\MyFiles\Work\005-c#\sendMailForResume\sendMailForResume\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\MyFiles\Work\005-c#\sendMailForResume\sendMailForResume\obj\x86\Debug\sendMailForResume.MainFrm.resources
+C:\MyFiles\Work\005-c#\sendMailForResume\sendMailForResume\obj\x86\Debug\sendMailForResume.Properties.Resources.resources
+C:\MyFiles\Work\005-c#\sendMailForResume\sendMailForResume\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\MyFiles\Work\005-c#\sendMailForResume\sendMailForResume\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\MyFiles\Work\005-c#\sendMailForResume\sendMailForResume\obj\x86\Debug\sendMailForResume.exe
+C:\MyFiles\Work\005-c#\sendMailForResume\sendMailForResume\obj\x86\Debug\sendMailForResume.pdb
