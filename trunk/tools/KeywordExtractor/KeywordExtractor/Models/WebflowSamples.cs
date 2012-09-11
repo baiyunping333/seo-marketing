@@ -5,6 +5,8 @@ using System.Text;
 using Webflow;
 using Webflow.Operations;
 using Webflow.Triggers;
+using System.Web;
+using System.Windows;
 
 namespace KeywordExtractor
 {
@@ -15,16 +17,38 @@ namespace KeywordExtractor
             get
             {
                 DocumentWebflow webflow = new DocumentWebflow();
-                UrlTrigger trigger = new UrlTrigger("note.sdo.com");
+                UrlTrigger trigger = new UrlTrigger("note.sdo.com/$");
 
                 trigger.Operations.Add(new ExecuteScriptOperation(@"
-                    $('#username').val('wbxfire@gmail.com');
-                    $('#password').val('123456ab');
+                    //$('#username').val('wbxfire@gmail.com');
+                    //$('#password').val('123456ab');
+                    $('#username').val('afei_test001@163.com');
+                    $('#password').val('happy123');
                     $('#loginbtn').click();
                 ", 1500));
+                StringBuilder postString = new StringBuilder();
+                string title = HttpUtility.UrlEncode("titlecontent!");
+                string categoryid = HttpUtility.UrlEncode("pYyDa~jZDtUVnM2Mo002oM");
+                string notecontent = HttpUtility.UrlEncode("<p>ccc</p>");
+                postString.Append("noteid=&");
+                postString.Append("importance=0&");
+                postString.Append("title=" + title + "&");
+                postString.Append("categoryid=" + categoryid + "&");
+                postString.Append("tags=&");
+                postString.Append("sourceurl=&");
+                postString.Append("notecontent=" + notecontent);
+
+                //MessageBox.Show(postString);
+                //MessageBox.Show(postString.ToString());
 
                 webflow.Triggers.Add(trigger);
 
+                trigger = new UrlTrigger("https://note.sdo.com/my#!note/list");
+                trigger.Operations.Add(new HttpRequestOperation(
+                        postString.ToString(),
+                        "https://note.sdo.com/note/save", 
+                        "POST", 
+                        true));
                 return webflow;
             }
         }
@@ -39,8 +63,8 @@ namespace KeywordExtractor
                 UrlTrigger trigger = new UrlTrigger("mail.qq.com");
 
                 trigger.Operations.Add(new ExecuteScriptOperation(@"
-                    $('#uin').val('2269928675');
-                    $('#p').val('yanche704640');
+                    $('#uin').val('2271137761');
+                    $('#p').val('zhanla568629');
                     $('#btlogin').click();
                 ", 1500));
 
@@ -60,9 +84,10 @@ namespace KeywordExtractor
                     },2500);
                     setTimeout(function(){
                         var mainDoc = window.frames['mainFrame'].document;
-                        $('#bottle_send textarea',mainDoc).text(data.ReadFile('c:\\abc.txt'));
+                        $('#bottle_send textarea',mainDoc).text(data.ReadFile('data/content.txt'));
                         $('#bottle_send .send_bottom a[ck=send]',mainDoc).click();
                     },3000);
+                    location.href='http://m43.mail.qq.com/cgi-bin/frame_html';
                 "));
 
                 webflow.Triggers.Add(trigger);

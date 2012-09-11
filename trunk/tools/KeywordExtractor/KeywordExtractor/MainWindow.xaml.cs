@@ -29,7 +29,7 @@ namespace KeywordExtractor
             webBrowser.DomReady += new EventHandler(webBrowser_DomReady);
             webBrowser.LoadCompleted += new EventHandler(webBrowser_LoadCompleted);
 
-            webflow = WebflowSamples.BlueHost as DocumentWebflow;
+            webflow = WebflowSamples.Maiku as DocumentWebflow;
             webflow.Logger = new TextBoxLogger(this.tbLog);
         }
 

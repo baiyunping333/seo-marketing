@@ -102,6 +102,11 @@ namespace SharpPoster
             //BlueHost.CSDNLogin();
         }
 
+        private void button5_Click(object sender, RoutedEventArgs e)
+        {
+            BlueHost.TaoBaoLogin();
+        }
+
 
 
     }
