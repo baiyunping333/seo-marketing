@@ -46,6 +46,8 @@ namespace RobinHood
         private void webControl_LoadCompleted(object sender, EventArgs e)
         {
             this.RunScript("core.js");
+            this.RunScript("checkout.js");
+            this.RunScript("signin.js");
         }
 
         private void webControl_DomReady(object sender, EventArgs e)

@@ -1,6 +1,8 @@
 ﻿(function () {
     rh.ready(function () {
-        var inputId = jQuery('#login-appleId');
+        var inputFirstName = jQuery('#shipping-user-firstName');
+        var inputLastName = jQuery('#shipping-user-firstName');
+        var areaCode = jQuery('#shipping-user-firstName');
         var inputPwd = jQuery('#login-password');
         var btnSignin = jQuery('#sign-in');
         if (inputId.length > 0 && inputPwd.length > 0) {
