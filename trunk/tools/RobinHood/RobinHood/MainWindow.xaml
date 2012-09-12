@@ -1,7 +1,7 @@
 ﻿<Window x:Class="RobinHood.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="600" Width="800" xmlns:awe="http://schemas.awesomium.com/winfx">
+        Title="MainWindow" Height="600" Width="800" xmlns:awe="http://schemas.awesomium.com/winfx" WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
@@ -15,27 +15,22 @@
                 <StackPanel>
                     <GroupBox Header="Color">
                         <StackPanel Orientation="Horizontal">
-                            <RadioButton Content="Black" Margin="0,0,10,0" />
-                            <RadioButton Content="White" />
+                            <RadioButton Name="colorBlack" Content="Black" Margin="0,0,10,0" IsChecked="True" />
+                            <RadioButton Name="colorWhite" Content="White" />
                         </StackPanel>
                     </GroupBox>
                     <GroupBox Header="Model">
                         <StackPanel Orientation="Horizontal">
-                            <RadioButton Content="16GB" Margin="0,0,10,0" />
-                            <RadioButton Content="32GB" Margin="0,0,10,0" />
-                            <RadioButton Content="64GB" Margin="0,0,10,0" />
+                            <RadioButton Name="model16" Content="16GB" Margin="0,0,10,0" IsChecked="True" />
+                            <RadioButton Name="model32" Content="32GB" Margin="0,0,10,0" />
+                            <RadioButton Name="model64" Content="64GB" Margin="0,0,10,0" />
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>
             </GroupBox>
             <GroupBox>
                 <GroupBox.Header>
-                    <TextBlock Text="Fill address" FontSize="14" FontWeight="DemiBold" />
-                </GroupBox.Header>
-            </GroupBox>
-            <GroupBox>
-                <GroupBox.Header>
-                    <TextBlock Text="Sign in" FontSize="14" FontWeight="DemiBold" />
+                    <TextBlock Text="Account" FontSize="14" FontWeight="DemiBold" />
                 </GroupBox.Header>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -45,13 +40,16 @@
                     <Label Content="Apple ID" Foreground="#4A000000" Visibility="Collapsed" />
                     <TextBox Name="tbAppleId" Margin="0,2" Background="Transparent" />
                     <Label Content="Password" Grid.Row="1" Foreground="#4A000000"  Visibility="Collapsed" />
-                    <TextBox Name="tbPassword" Grid.Row="1" Margin="0,2" Background="Transparent" />
+                    <TextBox Name="tbPassword" Grid.Row="1" Margin="0,2" Background="Transparent" Text="R0binhood" />
                 </Grid>
             </GroupBox>
+            
+            <Button Content="Shoot !!!" Margin="5" Click="Button_Click" />
             <GroupBox>
                 <GroupBox.Header>
-                    <TextBlock Text="Payment" FontSize="14" FontWeight="DemiBold" />
+                    <TextBlock Text="Status" FontSize="14" FontWeight="DemiBold" />
                 </GroupBox.Header>
+                <TextBlock Name="tStatus" Height="200" />
             </GroupBox>
         </StackPanel>
         <awe:WebControl Name="webControl" Grid.Column="1" />

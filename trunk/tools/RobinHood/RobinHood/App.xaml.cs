@@ -22,7 +22,6 @@ namespace RobinHood
             config.UserDataPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
             WebCore.Initialize(config, true);
-            WebCore.ClearCookies();
         }
     }
 }
