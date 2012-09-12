@@ -4,12 +4,11 @@
         var btnCheck = jQuery('#checkout-now');
 
         if (inputQuantity.length > 0) {
-            inputQuantity.fillText('2');
+            //inputQuantity.fillText('2');
         }
 
         if (btnCheck.is(':visible')) {
-            console.log('btnCheck');
-            btnCheck[0].click();
+            btnCheck.domClick();
         }
     });
 })();

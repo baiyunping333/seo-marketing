@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.IO;
 using Awesomium.Windows.Controls;
 using System.Reflection;
+using Awesomium.Core;
 
 namespace RobinHood
 {
@@ -26,9 +27,14 @@ namespace RobinHood
         public MainWindow()
         {
             InitializeComponent();
-            webControl.Source =  new Uri("http://store.apple.com/us/configure/MD234LL/A?add-to-cart=add-to-cart&cppart=UNLOCKED%2FUS");
+            
             webControl.DomReady += new EventHandler(webControl_DomReady);
             webControl.LoadCompleted += new EventHandler(webControl_LoadCompleted);
+            webControl.CreateObject("awe");
+            webControl.SetObjectCallback("awe", "statusChanged", (sender, e) =>
+            {
+                tStatus.Text = e.Arguments[0].ToString();
+            });
         }
 
         private void RunScript(string filename)
@@ -48,12 +54,77 @@ namespace RobinHood
             this.RunScript("core.js");
             this.RunScript("checkout.js");
             this.RunScript("signin.js");
+            this.RunScript("data.js");
+            this.RunScript("payment.js");
         }
 
         private void webControl_DomReady(object sender, EventArgs e)
         {
-            
             //throw new NotImplementedException();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            WebCore.ClearCookies();
+            string url = string.Empty;
+
+            if (string.IsNullOrEmpty(tbAppleId.Text))
+            {
+                MessageBox.Show("Please input email address.");
+                tbAppleId.Focus();
+                return;
+            }
+            else
+            {
+                webControl.SetObjectProperty("awe", "email", new JSValue(tbAppleId.Text));
+            }
+
+            if (string.IsNullOrEmpty(tbPassword.Text))
+            {
+                MessageBox.Show("Please input password.");
+                tbPassword.Focus();
+                return;
+            }
+            else
+            {
+                webControl.SetObjectProperty("awe", "password", new JSValue(tbPassword.Text));
+            }
+
+            if (colorBlack.IsChecked == true)
+            {
+                if (model16.IsChecked == true)
+                {
+                    url = "http://store.apple.com/us/configure/MD234LL/A?add-to-cart=add-to-cart&cppart=UNLOCKED%2FUS";
+                }
+                else if (model32.IsChecked == true)
+                {
+                    url = "http://store.apple.com/us/configure/MD241LL/A?add-to-cart=add-to-cart&cppart=UNLOCKED%2FUS";
+                }
+                else if (model64.IsChecked == true)
+                {
+                    url = "http://store.apple.com/us/configure/MD257LL/A?add-to-cart=add-to-cart&cppart=UNLOCKED%2FUS";
+                }
+            }
+            else if (colorWhite.IsChecked == true)
+            {
+                if (model16.IsChecked == true)
+                {
+                    url = "http://store.apple.com/us/configure/MD237LL/A?add-to-cart=add-to-cart&cppart=UNLOCKED%2FUS";
+                }
+                else if (model32.IsChecked == true)
+                {
+                    url = "http://store.apple.com/us/configure/MD244LL/A?add-to-cart=add-to-cart&cppart=UNLOCKED%2FUS";
+                }
+                else if (model64.IsChecked == true)
+                {
+                    url = "http://store.apple.com/us/configure/MD260LL/A?add-to-cart=add-to-cart&cppart=UNLOCKED%2FUS";
+                }
+            }
+
+            if (!string.IsNullOrEmpty(url))
+            {
+                webControl.Source = new Uri(url);
+            }
         }
     }
 }
