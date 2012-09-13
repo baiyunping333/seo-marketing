@@ -1,0 +1,9 @@
+C:\MyFiles\Work\005-c#\seo-marketing\MailRegisterV2\MailRegisterV2\bin\Debug\MailRegisterV2.exe
+C:\MyFiles\Work\005-c#\seo-marketing\MailRegisterV2\MailRegisterV2\bin\Debug\MailRegisterV2.pdb
+C:\MyFiles\Work\005-c#\seo-marketing\MailRegisterV2\MailRegisterV2\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\MyFiles\Work\005-c#\seo-marketing\MailRegisterV2\MailRegisterV2\obj\x86\Debug\MailRegisterV2.MainFrm.resources
+C:\MyFiles\Work\005-c#\seo-marketing\MailRegisterV2\MailRegisterV2\obj\x86\Debug\MailRegisterV2.Properties.Resources.resources
+C:\MyFiles\Work\005-c#\seo-marketing\MailRegisterV2\MailRegisterV2\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\MyFiles\Work\005-c#\seo-marketing\MailRegisterV2\MailRegisterV2\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\MyFiles\Work\005-c#\seo-marketing\MailRegisterV2\MailRegisterV2\obj\x86\Debug\MailRegisterV2.exe
+C:\MyFiles\Work\005-c#\seo-marketing\MailRegisterV2\MailRegisterV2\obj\x86\Debug\MailRegisterV2.pdb
