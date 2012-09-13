@@ -55,10 +55,10 @@ var billing = [{
 }];
 
 var creditCard = {
-    cardNumber: '4897340026577898',
-    securityCode: '673',
-    expirationMonth: '12',
-    expirationYear: '2016'
+    cardNumber: awe.cardNumber,
+    securityCode: awe.securityCode,
+    expirationMonth: awe.expirationMonth,
+    expirationYear: awe.expirationYear
 };
 
 var account = [{
