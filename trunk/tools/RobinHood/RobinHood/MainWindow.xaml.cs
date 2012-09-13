@@ -14,6 +14,7 @@ using System.IO;
 using Awesomium.Windows.Controls;
 using System.Reflection;
 using Awesomium.Core;
+using RobinHood.Models;
 
 namespace RobinHood
 {
@@ -27,7 +28,9 @@ namespace RobinHood
         public MainWindow()
         {
             InitializeComponent();
-            
+
+            InitCreditCards();
+
             webControl.DomReady += new EventHandler(webControl_DomReady);
             webControl.LoadCompleted += new EventHandler(webControl_LoadCompleted);
             webControl.CreateObject("awe");
@@ -35,6 +38,84 @@ namespace RobinHood
             {
                 tStatus.Text = e.Arguments[0].ToString();
             });
+        }
+
+        private void InitCreditCards()
+        {
+            List<CreditCard> cards = new List<CreditCard>();
+            cards.Add(new CreditCard
+            {
+                Name = "LiZhuoYa_GF",
+                CardNumber = "5203821352104098",
+                SecurityCode = "002",
+                ExpirationMonth = "11",
+                ExpirationYear = "16"
+            });
+
+            cards.Add(new CreditCard
+            {
+                Name = "LiZhuoYa_ZS",
+                CardNumber = "4392258324306382",
+                SecurityCode = "468",
+                ExpirationMonth = "12",
+                ExpirationYear = "14"
+            });
+
+            cards.Add(new CreditCard
+            {
+                Name = "Abu_ZS",
+                CardNumber = "5187100014554564",
+                SecurityCode = "029",
+                ExpirationMonth = "01",
+                ExpirationYear = "15"
+            });
+
+            cards.Add(new CreditCard
+            {
+                Name = "QianWei_GS",
+                CardNumber = "4897340026577898",
+                SecurityCode = "673",
+                ExpirationMonth = "12",
+                ExpirationYear = "16"
+            });
+
+            cards.Add(new CreditCard
+            {
+                Name = "Shelly_PF",
+                CardNumber = "4047390007305024",
+                SecurityCode = "517",
+                ExpirationMonth = "10",
+                ExpirationYear = "13"
+            });
+
+            cards.Add(new CreditCard
+            {
+                Name = "Shelly_SH",
+                CardNumber = "4026741253120449",
+                SecurityCode = "204",
+                ExpirationMonth = "02",
+                ExpirationYear = "15"
+            });
+
+            cards.Add(new CreditCard
+            {
+                Name = "Shelly_ZS",
+                CardNumber = "5187100011522523",
+                SecurityCode = "475",
+                ExpirationMonth = "05",
+                ExpirationYear = "13"
+            });
+
+            cards.Add(new CreditCard
+            {
+                Name = "XuZhiQi_ZS",
+                CardNumber = "4392258319390581",
+                SecurityCode = "498",
+                ExpirationMonth = "03",
+                ExpirationYear = "13"
+            });
+
+            cbCreditCard.ItemsSource = cards;
         }
 
         private void RunScript(string filename)
@@ -63,31 +144,37 @@ namespace RobinHood
             //throw new NotImplementedException();
         }
 
+        private bool ProcessTextBox(TextBox tb, string propName)
+        {
+            if (string.IsNullOrEmpty(tb.Text))
+            {
+                tb.Focus();
+                return false;
+            }
+            else
+            {
+                webControl.SetObjectProperty("awe", propName, new JSValue(tb.Text));
+                return true;
+            }
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             WebCore.ClearCookies();
             string url = string.Empty;
+            bool result = true;
 
-            if (string.IsNullOrEmpty(tbAppleId.Text))
-            {
-                MessageBox.Show("Please input email address.");
-                tbAppleId.Focus();
-                return;
-            }
-            else
-            {
-                webControl.SetObjectProperty("awe", "email", new JSValue(tbAppleId.Text));
-            }
+            result = result && ProcessTextBox(tbAppleId, "email");
+            result = result && ProcessTextBox(tbPassword, "password");
+            result = result && ProcessTextBox(tbCardNumber, "cardNumber");
+            result = result && ProcessTextBox(tbSecurityCode, "securityCode");
+            result = result && ProcessTextBox(tbExpirationMonth, "expirationMonth");
+            result = result && ProcessTextBox(tbExpirationYear, "expirationYear");
 
-            if (string.IsNullOrEmpty(tbPassword.Text))
+            if (!result)
             {
-                MessageBox.Show("Please input password.");
-                tbPassword.Focus();
+                MessageBox.Show("Please fill all boxes ");
                 return;
-            }
-            else
-            {
-                webControl.SetObjectProperty("awe", "password", new JSValue(tbPassword.Text));
             }
 
             if (colorBlack.IsChecked == true)

@@ -37,13 +37,35 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <Label Content="Apple ID" Foreground="#4A000000" Visibility="Collapsed" />
-                    <TextBox Name="tbAppleId" Margin="0,2" Background="Transparent" />
-                    <Label Content="Password" Grid.Row="1" Foreground="#4A000000"  Visibility="Collapsed" />
+                    <Label Content="Apple ID" Foreground="#4A000000" HorizontalAlignment="Right"  />
+                    <TextBox Name="tbAppleId" Margin="0,2" Background="Transparent" Text="afei_test001@163.com" />
+                    <Label Content="Password" Grid.Row="1" Foreground="#4A000000"  HorizontalAlignment="Right"  />
                     <TextBox Name="tbPassword" Grid.Row="1" Margin="0,2" Background="Transparent" Text="R0binhood" />
                 </Grid>
             </GroupBox>
-            
+            <GroupBox>
+                <GroupBox.Header>
+                    <TextBlock Text="Credit Card" FontSize="14" FontWeight="DemiBold" />
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ComboBox Name="cbCreditCard" DisplayMemberPath="Name" SelectedIndex="0" />
+                    <Label Content="Card Number" Grid.Row="1" Foreground="#4A000000" HorizontalAlignment="Right" />
+                    <TextBox Name="tbCardNumber" Grid.Row="1" Margin="0,2" Background="Transparent" Text="{Binding ElementName=cbCreditCard, Path=SelectedItem.CardNumber}" />
+                    <Label Content="Security Code" Grid.Row="2" Foreground="#4A000000" HorizontalAlignment="Right" />
+                    <TextBox Name="tbSecurityCode" Grid.Row="2" Margin="0,2" Background="Transparent" Text="{Binding ElementName=cbCreditCard, Path=SelectedItem.SecurityCode}"  />
+                    <Label Content="Expiration Month" Grid.Row="3" Foreground="#4A000000" HorizontalAlignment="Right" />
+                    <TextBox Name="tbExpirationMonth" Grid.Row="3" Margin="0,2" Background="Transparent" Text="{Binding ElementName=cbCreditCard, Path=SelectedItem.ExpirationMonth}"  />
+                    <Label Content="Expiration Year" Grid.Row="4" Foreground="#4A000000" HorizontalAlignment="Right" />
+                    <TextBox Name="tbExpirationYear" Grid.Row="4" Margin="0,2" Background="Transparent" Text="{Binding ElementName=cbCreditCard, Path=SelectedItem.ExpirationYear}"  />
+                </Grid>
+            </GroupBox>
             <Button Content="Shoot !!!" Margin="5" Click="Button_Click" />
             <GroupBox>
                 <GroupBox.Header>
