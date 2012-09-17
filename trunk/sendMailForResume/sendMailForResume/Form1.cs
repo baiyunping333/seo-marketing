@@ -28,22 +28,15 @@ namespace sendMailForResume
         }
 
         public void initConfig() {
-
-            
-            
-
-            SmtpClient.Host = "xchcasha.cisco.com";
+            SmtpClient.Host = "smtp.qq.com";
             SmtpClient.Port = 25;
             SmtpClient.UseDefaultCredentials = false;
-            SmtpClient.SendCompleted += new SendCompletedEventHandler(SmtpClient_SendCompleted);
+            //SmtpClient.SendCompleted += new SendCompletedEventHandler(SmtpClient_SendCompleted);
         }
 
         public void SendMailBySmtp(string mail_from,string mail_fromPwd,string mail_to,string mail_subject,string mail_body,string attachment=null) {
 
-            info.From = mail_from;
-            info.To = mail_to;                     
-            info.Title = mail_subject;
-            info.Body = mail_body;
+            
 
             SmtpClient.Credentials = new NetworkCredential(mail_from, mail_fromPwd);
             SmtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -65,28 +58,69 @@ namespace sendMailForResume
         }
 
 
-        public void SaveXmlTeplate() { 
+        public void SaveXmlTeplate(string filepath) {
+            info.From = tb_from.Text;
+            info.To = tb_to.Text.Split('\n');
+            info.Cc = tb_cc.Text.Split('\n');
+            info.Subject = tb_Subject.Text;
+            info.Body = rb_mailBody.Text;
+            XmlSerializer ser = new XmlSerializer(typeof(MailInfo));
+
+            using (Stream s = File.OpenWrite(filepath))
+            {
+                ser.Serialize(s, info);
+                //s.Close();
+            }
+        }
+
+        public void FillXmlTeplate(string filepath) { 
             
         }
 
-        void SmtpClient_SendCompleted(object sender, AsyncCompletedEventArgs e)
+        private void tb_SaveXml_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("OK!发送完成！");
+            //SaveXmlTeplate();
+            OpenSaveDialog();
         }
 
 
-        private void sendMail_Click(object sender, EventArgs e)
-        {
-            this.SendMailBySmtp("feizheng@cisco.com", "SK_123.com", "88603982@qq.com", "test2", "好吧测试一下<b>NiuBi</b>!!!");
+        public void OpenSaveDialog() {
+            SaveFileDialog dlg = new SaveFileDialog();
+            //dlg.InitialDirectory = "c://";
+            dlg.InitialDirectory = "d://";
+            dlg.Filter = "XML模板文件|*.xml|所有文件|*.*";
+            dlg.FilterIndex = 1;
+            dlg.RestoreDirectory = true;
 
-            XmlSerializer ser = new XmlSerializer(typeof(MailInfo));
-
-            using(Stream s = File.OpenWrite("c:\\abc.xml"))
-            {
-                ser.Serialize(s, info);
+            if(dlg.ShowDialog()==DialogResult.OK){
+                SaveXmlTeplate(dlg.FileName);
             }
-            //this.SendMailBySmtp("feizheng@cisco.com","SK_123.com","88603982@qq.com","test2","好吧测试一下<b>NiuBi</b>!!!");
         }
+
+        public void OpenLoadDialog() {
+            OpenFileDialog dlg = new OpenFileDialog();
+            //dlg.InitialDirectory = "c://";
+            dlg.InitialDirectory = "d://";
+            dlg.Filter = "XML模板文件|*.xml|所有文件|*.*";
+            dlg.FilterIndex = 1;
+            dlg.RestoreDirectory = true;
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                //SaveXmlTeplate(dlg.FileName);
+            }
+        }
+
+
+        private void btn_LoadXml_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
+        
 
 
         

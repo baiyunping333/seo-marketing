@@ -16,3 +16,12 @@ C:\MyFiles\Work\005-c#\seo-marketing\sendMailForResume\sendMailForResume\obj\x86
 C:\MyFiles\Work\005-c#\seo-marketing\sendMailForResume\sendMailForResume\obj\x86\Debug\sendMailForResume.Properties.Resources.resources
 C:\MyFiles\Work\005-c#\seo-marketing\sendMailForResume\sendMailForResume\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\MyFiles\Work\005-c#\seo-marketing\sendMailForResume\sendMailForResume\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\seo-marketing\sendMailForResume\sendMailForResume\obj\x86\Debug\sendMailForResume.exe
+F:\seo-marketing\sendMailForResume\sendMailForResume\obj\x86\Debug\sendMailForResume.pdb
+F:\seo-marketing\sendMailForResume\sendMailForResume\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\seo-marketing\sendMailForResume\sendMailForResume\obj\x86\Debug\sendMailForResume.MainFrm.resources
+F:\seo-marketing\sendMailForResume\sendMailForResume\obj\x86\Debug\sendMailForResume.Properties.Resources.resources
+F:\seo-marketing\sendMailForResume\sendMailForResume\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\seo-marketing\sendMailForResume\sendMailForResume\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\seo-marketing\sendMailForResume\sendMailForResume\bin\Debug\sendMailForResume.exe
+F:\seo-marketing\sendMailForResume\sendMailForResume\bin\Debug\sendMailForResume.pdb
