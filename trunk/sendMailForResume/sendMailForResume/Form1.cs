@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Windows.Forms;
 using System.Net.Mail;
@@ -34,7 +35,7 @@ namespace sendMailForResume
             //SmtpClient.SendCompleted += new SendCompletedEventHandler(SmtpClient_SendCompleted);
         }
 
-        public void SendMailBySmtp(string mail_from,string mail_fromPwd,string mail_to,string mail_subject,string mail_body,string attachment=null) {
+        public void SendMailBySmtp(string mail_from,string mail_fromPwd,string[] mail_to,string[] mail_cc,string mail_subject,string mail_body,string attachment=null) {
 
             
 
@@ -42,12 +43,42 @@ namespace sendMailForResume
             SmtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             Byte[] b = Encoding.Default.GetBytes(mail_body);
             string strBody = Encoding.GetEncoding("gb2312").GetString(b).ToString();
-            MailMessage message = new MailMessage(mail_from, mail_to, mail_subject, strBody);
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(mail_from);
+            
+            //message.CC.Add(mail_cc);
+            //MailMessage message = new MailMessage();
             //message.From.Address = mail_from;
             //message.From.Address = (String)mail_from; 
+            //message.From.Address = mail_from; 
+            //mail_to.Select<string, MailAddress>(x => {
+            //    MailAddress address = new MailAddress(x);
+            //    message.To.Add(address);
+            //    return address;
+            //});
+            //mail_cc.Select<string, MailAddress>(x => {
+            //    MailAddress address = new MailAddress(x);
+            //    message.CC.Add(address);
+            //    return address;
+            //});
 
+            //mail_to.ToList<string>().ForEach(x =>
+            //{
+            //    message.To.Add(new MailAddress(x));
+            //});
+
+            message.Subject = tb_Subject.Text;
+            message.Body = rb_mailBody.Text;
             
+            //mail_to.Where(x=>x.StartsWith("z")).OrderBy(x=>x).Select<string, MailAddress>(x => {
+            //    MailAddress address = new MailAddress(x);
+            //    message.To.Add(address);
+            //    return address;
+            //});
 
+            int xx = 1;
+            xx.GreatThan(2);
+            
 
             message.BodyEncoding = Encoding.UTF8;
             message.IsBodyHtml = true;
