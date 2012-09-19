@@ -56,16 +56,18 @@ namespace sendMailForResume
             //    message.To.Add(address);
             //    return address;
             //});
-            //mail_cc.Select<string, MailAddress>(x => {
-            //    MailAddress address = new MailAddress(x);
-            //    message.CC.Add(address);
-            //    return address;
-            //});
+            mail_cc.Select<string, MailAddress>(x =>
+            {
+                MailAddress address = new MailAddress(x);
+                message.CC.Add(address);
+                return address;
+            });
 
-            //mail_to.ToList<string>().ForEach(x =>
-            //{
-            //    message.To.Add(new MailAddress(x));
-            //});
+            mail_to.ToList<string>().ForEach(x =>
+            {
+                message.To.Add(new MailAddress(x));
+            });
+           
 
             message.Subject = tb_Subject.Text;
             message.Body = rb_mailBody.Text;
@@ -76,8 +78,8 @@ namespace sendMailForResume
             //    return address;
             //});
 
-            int xx = 1;
-            xx.GreatThan(2);
+            //int xx = 1;
+            //xx.GreatThan(2);
             
 
             message.BodyEncoding = Encoding.UTF8;
@@ -167,7 +169,8 @@ namespace sendMailForResume
 
         private void btn_SendEmail_Click(object sender, EventArgs e)
         {
-            SendMailBySmtp(tb_from.Text,"SK_123.com",tb_to.Text,tb_Subject.Text,rb_mailBody.Text);
+            string[] strs={"\r\n"};
+            SendMailBySmtp(tb_from.Text, "SK_123.com", tb_to.Text.Split(strs, 100, System.StringSplitOptions.RemoveEmptyEntries), tb_cc.Text.Split(strs, 100, System.StringSplitOptions.RemoveEmptyEntries), tb_Subject.Text, rb_mailBody.Text);
         }
 
 
