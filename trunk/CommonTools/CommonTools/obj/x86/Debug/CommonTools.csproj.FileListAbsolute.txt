@@ -1,0 +1,5 @@
+C:\MyFiles\Work\005-c#\seo-marketing\CommonTools\CommonTools\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\MyFiles\Work\005-c#\seo-marketing\CommonTools\CommonTools\bin\Debug\CommonTools.exe
+C:\MyFiles\Work\005-c#\seo-marketing\CommonTools\CommonTools\bin\Debug\CommonTools.pdb
+C:\MyFiles\Work\005-c#\seo-marketing\CommonTools\CommonTools\obj\x86\Debug\CommonTools.exe
+C:\MyFiles\Work\005-c#\seo-marketing\CommonTools\CommonTools\obj\x86\Debug\CommonTools.pdb
