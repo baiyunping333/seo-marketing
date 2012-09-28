@@ -1,0 +1,9 @@
+C:\MyFiles\Work\005-c#\seo-marketing\TestSqlite\TestSqlite\bin\Debug\TestSqlite.exe
+C:\MyFiles\Work\005-c#\seo-marketing\TestSqlite\TestSqlite\bin\Debug\TestSqlite.pdb
+C:\MyFiles\Work\005-c#\seo-marketing\TestSqlite\TestSqlite\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\MyFiles\Work\005-c#\seo-marketing\TestSqlite\TestSqlite\obj\x86\Debug\TestSqlite.Form1.resources
+C:\MyFiles\Work\005-c#\seo-marketing\TestSqlite\TestSqlite\obj\x86\Debug\TestSqlite.Properties.Resources.resources
+C:\MyFiles\Work\005-c#\seo-marketing\TestSqlite\TestSqlite\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\MyFiles\Work\005-c#\seo-marketing\TestSqlite\TestSqlite\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\MyFiles\Work\005-c#\seo-marketing\TestSqlite\TestSqlite\obj\x86\Debug\TestSqlite.exe
+C:\MyFiles\Work\005-c#\seo-marketing\TestSqlite\TestSqlite\obj\x86\Debug\TestSqlite.pdb
